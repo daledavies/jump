@@ -1,7 +1,7 @@
 
 # Jump
 
-Jump is yet another self-hosted startpage for your server, designed to be simple to set up and deploy.
+Jump is yet another self-hosted startpage for your server, stylistically similar to a web browser start page and designed to be simple use/deploy.
 
 
 ## Installation
