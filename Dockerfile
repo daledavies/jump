@@ -1,7 +1,7 @@
 # Start with the official composer image, copy application files and install
 # dependencies.
-FROM composer AS composer
-COPY web/ /app
+FROM composer AS builder
+COPY jumpapp/ /app
 RUN composer install --no-dev \
   --optimize-autoloader \
   --no-interaction \
@@ -9,7 +9,7 @@ RUN composer install --no-dev \
 
 # Switch to trafex/php-nginx image and copy application files into it.
 FROM trafex/php-nginx
-COPY --chown=nginx --from=composer /app /var/www/html
+COPY --chown=nginx --from=builder /app /var/www/html
 
 # The trafex/php-nginx image runs as "nobody" user so we need to switch to root
 # so we can make changes inside the container.
