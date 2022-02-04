@@ -1,0 +1,16 @@
+{
+    "name": "daledavies/jump",
+    "description": "A startpage for stuff",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Jump\\": "classes/"
+        }
+    },
+    "require": {
+        "mustache/mustache": "~2.5",
+        "arthurhoaro/favicon": "~1.0",
+        "nette/caching": "^3.1",
+        "phlak/config": "^7.0"
+    }
+}

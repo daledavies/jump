@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Bitwarden",
+        "url" : "https://bitwarden.leannedale.co.uk",
+        "nofollow": true,
+        "icon": "bitwarden.png"
+    },
+    {
+        "name": "Gitea",
+        "url" : "https://git.leannedale.co.uk",
+        "nofollow": true,
+        "icon": "gitea.png"
+    },
+    {
+        "name": "Nextcloud",
+        "url" : "https://cloud.leannedale.co.uk",
+        "nofollow": true,
+        "icon": "nextcloud.png"
+    },
+    {
+        "name": "Paperless",
+        "url" : "https://paperless.leannedale.co.uk",
+        "nofollow": true,
+        "icon": "paperless.jpg"
+    },
+    {
+        "name": "Google",
+        "url" : "https://www.google.com"
+    }
+]
