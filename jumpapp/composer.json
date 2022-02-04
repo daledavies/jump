@@ -1,6 +1,6 @@
 {
     "name": "daledavies/jump",
-    "description": "A startpage for stuff",
+    "description": "A self-hosted startpage for your stuff",
     "type": "project",
     "autoload": {
         "psr-4": {
