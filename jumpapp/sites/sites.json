@@ -1,25 +1,25 @@
 [
     {
         "name": "Bitwarden",
-        "url" : "https://bitwarden.leannedale.co.uk",
+        "url" : "https://bitwarden.example.com",
         "nofollow": true,
         "icon": "bitwarden.png"
     },
     {
         "name": "Gitea",
-        "url" : "https://git.leannedale.co.uk",
+        "url" : "https://git.example.com",
         "nofollow": true,
         "icon": "gitea.png"
     },
     {
         "name": "Nextcloud",
-        "url" : "https://cloud.leannedale.co.uk",
+        "url" : "https://cloud.example.com",
         "nofollow": true,
         "icon": "nextcloud.png"
     },
     {
         "name": "Paperless",
-        "url" : "https://paperless.leannedale.co.uk",
+        "url" : "https://paperless.example.com",
         "nofollow": true,
         "icon": "paperless.jpg"
     },
