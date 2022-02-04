@@ -4,6 +4,16 @@ namespace Jump;
 
 use Exception;
 
+/**
+ * Load, parse and enumerate all configuration paramaters requires throughout
+ * the application. Validates the config.php on load to ensure required params
+ * are all present.
+ *
+ * Provides a simple interface for retriving config paramaters once initialised.
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @license MIT
+ */
 class Config {
 
     private \PHLAK\Config\Config $config;

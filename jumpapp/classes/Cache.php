@@ -4,6 +4,13 @@ namespace Jump;
 
 use Nette\Caching;
 
+/**
+ * Defines caches to be used throughout the site and provides a wrapper around
+ * the Nette\Caching library.
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @license MIT
+ */
 class Cache {
 
     private Caching\Storages\FileStorage $storage;

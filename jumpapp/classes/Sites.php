@@ -5,9 +5,11 @@ namespace Jump;
 use Exception;
 
 /**
- * Represents the sites defined in sites.json
+ * Loads, validates and caches the site data defined in sites.json
+ * into an array of Site objects.
  *
- * @author Dale Davies {@link https://www.daledavies.co.uk}
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @license MIT
  */
 class Sites {
 
@@ -70,7 +72,7 @@ class Sites {
      * Given a URL, does that site exist in our list of sites?
      *
      * @param string $url The URL to search for.
-     * @return Site|null
+     * @return Site
      */
     public function get_site_by_url(string $url): Site {
         $found = array_search($url, array_column($this->get_sites(), 'url'));

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Generate dynamic CSS for randomising the background image.
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @license MIT
+ */
+
 // Provided by composer for psr-4 style autoloading.
 require __DIR__ .'/vendor/autoload.php';
 

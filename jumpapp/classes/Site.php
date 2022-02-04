@@ -2,6 +2,13 @@
 
 namespace Jump;
 
+/**
+ * Parse the data required to represent a site and provide method for generating
+ * and/or retrieving the site's icon.
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @license MIT
+ */
 class Site {
 
     public string $name;

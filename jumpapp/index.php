@@ -1,4 +1,11 @@
 <?php
+/**
+ * Initialise the application and generate index page content.
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @license MIT
+ */
+
 // Provided by composer for psr-4 style autoloading.
 require __DIR__ .'/vendor/autoload.php';
 

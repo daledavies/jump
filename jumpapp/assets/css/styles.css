@@ -1,3 +1,10 @@
+/**
+ * Some CSS because Jump would look pretty ugly without it.
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @license MIT
+ */
+
 * {
     box-sizing: border-box;
 }
