@@ -10,7 +10,7 @@ Jump is yet another self-hosted startpage for your server, stylistically similar
 
 You can pull the daledavies/jump image direct from Docker Hub and use docker cli to run but my personal preference is docker-compose.
 
-The following will start Jump servinge on http://localhost:8123 with a custom site name, mapping the backgrounds and sites directory locally...
+The following will start Jump and serve the start page at http://localhost:8123 with a custom site name, mapping the backgrounds and sites directory locally...
 
 ```yaml
 version: '3'
@@ -35,7 +35,7 @@ You can use the following environment variables to customise configure Jump...
 
 ### Without Docker
 
-Clone the repo and copy everything within the `jumpapp` directory to your server, edit `config.php` accordingly.
+Clone this git repo and copy everything within the `jumpapp` directory to your server, edit `config.php` accordingly.
 
 Then from within the web root directory on your server, install dependencies via composer...
 
@@ -49,7 +49,7 @@ Make sure you have created a cache directory and given the web user permission t
 
 ### Sites
 
-Edit the `/sites/sites.json` file to include your own services on the startpage...
+Edit the `/sites/sites.json` file to include your own sites on the startpage...
 
 ```json
 [
@@ -77,7 +77,7 @@ Edit the `/sites/sites.json` file to include your own services on the startpage.
 ]
 ```
 
-Although `name` and `url` are mandatory, you do not need to provide `nofollow` and `icon`...
+Although `name` and `url` are mandatory, you do not need to provide `nofollow` and `icon`.
 
 #### Icons
 
@@ -85,8 +85,8 @@ You can provide custom icons for your sites by placing them in the `/sites/icons
 
 #### nofollow
 
-Use the `nofollow` option to specify if site links should include `rel="nofollow"`.
+Use the `nofollow` option to include `rel="nofollow"` on specific site links.
 
 ### Background Images
 
-To use your own background images just copy them to the `/assets/backgrounds/` directory.
+To use your own background images just copy them to the `/assets/backgrounds/` directory, Jump will pick up on them automatically.
