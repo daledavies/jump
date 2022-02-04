@@ -1,14 +1,12 @@
 {{# hassites}}
 <ul class="sites">
     {{# sites}}
-    <li>
-        <a {{# nofollow}}rel="nofollow"{{/ nofollow}} href="{{url}}">
-            <span class="icon">
-                <img src="{{icon}}">
-            </span>
-            <span class="name">{{name}}</span>
-        </a>
-    </li>
+    <li title="{{name}}"><a {{# nofollow}}rel="nofollow"{{/ nofollow}} href="{{url}}">
+        <span class="icon">
+            <img src="{{icon}}">
+        </span>
+        <span class="name">{{name}}</span>
+    </a></li>
     {{/ sites}}
 </ul>
 {{/ hassites}}

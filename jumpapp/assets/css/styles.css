@@ -28,7 +28,7 @@ body {
 }
 
 .background {
-    filter: brightness(0.55) blur(13px);
+    filter: brightness(0.65) blur(13px);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -44,9 +44,10 @@ body::after {
     right:0;
     bottom:0;
     background-image: url(../images/overlay.png);
-    opacity: 0.6;
+    opacity: 0.5;
     z-index: 2;
 }
+
 .content {
     z-index: 10;
     display: flex;
@@ -68,9 +69,19 @@ body::after {
     font-weight: 300;
     font-size: 14px;
 }
+
+.sites {
+    width: 100%;
+    max-width: 650px;
+    margin:0 auto;
+}
     .sites li {
         display: inline-block;
-        margin-bottom:20px;
+        padding: 15px;
+        border-radius: 8px
+    }
+    .sites li:hover {
+        background-color: #ffffff10;
     }
     .sites li a {
         color: inherit;
@@ -80,13 +91,13 @@ body::after {
     .sites .icon {
         display: block;
         background-color: #fff;
-        width: 75px;
-        height: 75px;
-        border-radius: 10px;
+        width: 80px;
+        height: 80px;
+        border-radius: 8px;
         border: .2em solid #fff;
         box-shadow: 0 1px 5px rgba(0,0,0,.3);
-        margin: 0 11px 7px 11px;
         padding: 15px;
+        margin-bottom: 7px;
     }
         .sites .icon:hover {
             border-color: #007aff;
@@ -99,9 +110,12 @@ body::after {
 
     .sites .name {
         display: block;
-        width: 100%;
+        width: 80px;
         max-height: 3.3em;
         overflow: hidden;
         word-wrap: break-word;
-        text-shadow: 1px 1px 2px #000000
+        text-shadow: 1px 1px 2px #000000;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
