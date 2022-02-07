@@ -1,0 +1,24 @@
+{
+  "name": "jump",
+  "version": "1.0.0",
+  "description": "Jump is yet another self-hosted startpage for your server, stylistically similar to a web browser start page and designed to be simple use/deploy.",
+  "scripts": {
+    "dev": "webpack --mode=development --devtool=inline-source-map --watch",
+    "build": "webpack"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daledavies/jump.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daledavies/jump/issues"
+  },
+  "homepage": "https://github.com/daledavies/jump#readme",
+  "devDependencies": {
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
