@@ -10,11 +10,10 @@
 }
 
 body {
+    font-family: sans-serif;
     margin: 0;
     padding: 0;
     color: #fff;
-    font-family: -apple-system,system-ui,Ubuntu,Roboto,"Open Sans","Segoe UI","Helvetica Neue";
-    font-size: 1em;
     text-align: center;
     background: #000;
 }
@@ -44,7 +43,7 @@ body::after {
     right:0;
     bottom:0;
     background-image: url(../images/overlay.png);
-    opacity: 0.5;
+    opacity: 0.4;
     z-index: 2;
 }
 
@@ -53,14 +52,48 @@ body::after {
     display: flex;
     flex-direction: column;
     justify-content:center;
+    width: 100%;
+    max-width: 650px;
+    margin:0 auto;
 }
 
 .greeting {
-    font-size: 2.5em;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.3em;
+    font-weight: 200;
     text-transform: capitalize;
     text-shadow: 1px 2px 14px #000000;
-    margin-bottom: 30px;
+    margin-bottom: 13px;
 }
+
+.time-weather {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 200;
+    display: block;
+    position: absolute;
+    z-index: 100;
+    right: 15px;
+    bottom: 10px;
+    color: inherit;
+    text-decoration: none;
+    padding:5px 10px;
+    border-radius: 7px;
+}
+    .time-weather:hover {
+        background-color: #ffffff15;
+        transition: background-color .1s;
+    }
+
+    .time {
+        font-size: 2.4em;
+        margin-right:10px;
+    }
+
+    .weather {
+        font-size: 1.9em;
+        position: relative;
+        top: -1px;
+    }
 
 .sites, .sites li {
     padding: 0;
@@ -70,23 +103,22 @@ body::after {
     font-size: 14px;
 }
 
-.sites {
-    width: 100%;
-    max-width: 650px;
-    margin:0 auto;
-}
     .sites li {
         display: inline-block;
-        padding: 15px;
-        border-radius: 8px
     }
-    .sites li:hover {
-        background-color: #ffffff10;
-    }
-    .sites li a {
-        color: inherit;
-        text-decoration: none;
-    }
+
+        .sites li a {
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 7px
+        }
+
+        .sites li a:hover {
+            background-color: #ffffff15;
+            transition: background-color .1s;
+        }
 
     .sites .icon {
         display: block;
@@ -97,12 +129,8 @@ body::after {
         border: .2em solid #fff;
         box-shadow: 0 1px 5px rgba(0,0,0,.3);
         padding: 15px;
-        margin-bottom: 7px;
+        margin-bottom: 8px;
     }
-        .sites .icon:hover {
-            border-color: #007aff;
-            transition: border-color .1s;
-        }
 
         .sites .icon img {
             width:100%;

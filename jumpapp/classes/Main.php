@@ -25,6 +25,8 @@ class Main {
         return $template->render([
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'sitename' => $this->config->get('sitename'),
+            'latlong' => $this->config->get('latlong'),
+            'owmapikey' => $this->config->get('owmapikey')
         ]);
     }
 

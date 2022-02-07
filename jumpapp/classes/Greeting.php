@@ -14,7 +14,7 @@ class Greeting {
 
     public function __construct() {
         $this->greetings = [
-            03 => 'morning',
+            0 => 'morning',
             12 => 'afternoon',
             16 => 'evening',
             19 => 'night'

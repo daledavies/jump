@@ -36,6 +36,8 @@ class Config {
         'cachebypass',
         'cachedir',
         'noindex',
+        'latlong',
+        'owmapikey'
     ];
 
     public function __construct() {
