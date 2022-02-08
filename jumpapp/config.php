@@ -17,8 +17,8 @@ return [
     'cachedir'    => getenv('CACHEDIR')    ?:  '/var/www/cache',
     // Include the robots noindex meta tag in site header.
     'noindex'     => getenv('NOINDEX')     ?:  true,
-    // Coordinates for weather location.
-    'latlong'     => getenv('LATLONG')     ?:  '51.509865,-0.118092',
+    // Coordinates for weather location. E.g. 51.509865,-0.118092
+    'latlong'     => getenv('LATLONG')     ?:  '',
     // Open Weather Map API key.
-    'owmapikey'   => getenv('OWMAPIKEY')   ?:  '01234567890ABCDEFG',
+    'owmapikey'   => getenv('OWMAPIKEY')   ?:  '',
 ];

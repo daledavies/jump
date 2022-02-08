@@ -35,9 +35,7 @@ class Config {
         'wwwroot',
         'cachebypass',
         'cachedir',
-        'noindex',
-        'latlong',
-        'owmapikey'
+        'noindex'
     ];
 
     public function __construct() {
@@ -69,22 +67,24 @@ class Config {
      */
     private function config_params_missing(): bool {
         return !!array_diff(
-            array_keys($this->config->toArray()),
             array_merge(
                 array_keys(self::BASE_APPLICATION_PATHS),
                 self::CONFIG_PARAMS
-            ));
+            ),
+            array_keys($this->config->toArray()),
+        );
     }
 
     /**
      * Retrieves the config parameter provided in $key, first checks for its
      * existence.
      *
-     * @param string $key The config parameter required.
+     * @param string $key The requested config parameter key.
+     * @param bool $strict Throw exception if requested param is not found, or return null.
      * @return mixed The selected value from the configuration array.
      */
-    public function get(string $key): mixed {
-        if (!$this->config->has($key)) {
+    public function get(string $key, $strict = true): mixed {
+        if (!$this->config->has($key) && $strict === true) {
             throw new Exception('Config key does not exist... ('.$key.')');
         }
         return $this->config->get($key);

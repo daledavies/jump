@@ -5,14 +5,12 @@ namespace Jump;
 class Main {
 
     private Cache $cache;
-    private Greeting $greeting;
     private \Mustache_Engine $mustache;
     private array $outputarray;
     private Sites $sites;
 
     public function __construct() {
         $this->config = new Config();
-        $this->greeting = new Greeting();
         $this->mustache = new \Mustache_Engine([
             'loader' => new \Mustache_Loader_FilesystemLoader($this->config->get('templatedir'))
         ]);
@@ -25,15 +23,8 @@ class Main {
         return $template->render([
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'sitename' => $this->config->get('sitename'),
-            'latlong' => $this->config->get('latlong'),
-            'owmapikey' => $this->config->get('owmapikey')
-        ]);
-    }
-
-    private function render_greeting(): string {
-        $template = $this->mustache->loadTemplate('greeting');
-        return $template->render([
-            'greeting' => $this->greeting->get_greeting(),
+            'latlong' => $this->config->get('latlong', false),
+            'owmapikey' => $this->config->get('owmapikey', false)
         ]);
     }
 
@@ -55,7 +46,6 @@ class Main {
     public function build_index_page(): void {
         $this->outputarray = [
             $this->render_header(),
-            $this->render_greeting(),
             $this->render_sites(),
             $this->render_footer(),
         ];
