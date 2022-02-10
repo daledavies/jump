@@ -30,10 +30,13 @@ RUN apk add --no-cache \
   curl \
   nginx \
   php8 \
+  php8-dom \
   php8-fileinfo \
   php8-fpm \
   php8-json \
   php8-opcache \
+  php8-openssl \
+  php8-xml \
   php8-zlib
 
 # Create symlink for anything expecting to use "php".
