@@ -1,7 +1,7 @@
 {
   "name": "jump",
   "version": "1.0.0",
-  "description": "Jump is yet another self-hosted startpage for your server, stylistically similar to a web browser start page and designed to be simple use/deploy.",
+  "description": "Jump is yet another self-hosted startpage for your server designed to be simple, stylish, fast and secure. ",
   "scripts": {
     "dev": "webpack --mode=development --devtool=inline-source-map --watch",
     "build": "webpack"
