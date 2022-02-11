@@ -10,7 +10,7 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 
 ### Docker
 
-Get the official container image from Docker Hub (https://hub.docker.com/r/daledavies/jump).
+Get the container image from Docker Hub (https://hub.docker.com/r/daledavies/jump).
 
 The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds" and "sites" directories to local directories on your machine...
 
