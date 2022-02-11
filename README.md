@@ -11,8 +11,8 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 ### Features
 - Fast, easy to deploy, secure
 - Custom sites and icons
-- Fetch favicon for sites without supplied icon
-- Custom bacground images
+- Fetch favicons for sites without custom icons
+- Custom background images
 - Open Weather Map integration
 
 
