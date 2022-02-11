@@ -1,9 +1,19 @@
 
 # Jump
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/daledavies/jump)
+![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.4-blue?style=flat)
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/daledavies/jump?sort=date)
 
 Jump is yet another self-hosted startpage for your server designed to be simple, stylish, fast and secure.
 
 ![screenshot](screenshot.png)
+
+### Features
+- Fast, easy to deploy, secure
+- Custom sites and icons
+- Fetch favicon for sites without supplied icon
+- Custom bacground images
+- Open Weather Map integration
 
 
 ## Installation
