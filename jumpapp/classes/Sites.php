@@ -24,7 +24,7 @@ class Sites {
     public function __construct(Config $config, Cache $cache) {
         $this->config = $config;
         $this->loadedsites = [];
-        $this->sitesfilelocation = $this->config->get('sitesfile');
+        $this->sitesfilelocation = $this->config->get('sitesdir').'/'.$this->config->get('sitesfile');
         $this->cache = $cache;
         $this->load_sites_from_json();
     }
@@ -53,7 +53,7 @@ class Sites {
                 throw new Exception('Provided sites json does not contain a top-level array');
             }
             foreach ($decodedjson as $array) {
-                $sites[] = new Site($array);
+                $sites[] = new Site($this->config, $array);
             }
             return $sites;
         });

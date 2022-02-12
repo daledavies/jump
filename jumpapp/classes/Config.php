@@ -23,7 +23,9 @@ class Config {
      */
     private const BASE_APPLICATION_PATHS = [
         'backgroundsdir' => '/assets/backgrounds',
-        'sitesfile' => '/sites/sites.json',
+        'defaulticonpath' => '/assets/images/default-icon.png',
+        'sitesdir' => '/sites',
+        'sitesfile' => 'sites.json',
         'templatedir' => '/templates',
     ];
 
