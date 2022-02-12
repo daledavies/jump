@@ -25,7 +25,7 @@ class Config {
         'backgroundsdir' => '/assets/backgrounds',
         'defaulticonpath' => '/assets/images/default-icon.png',
         'sitesdir' => '/sites',
-        'sitesfile' => 'sites.json',
+        'sitesfile' => '/sites/sites.json',
         'templatedir' => '/templates',
     ];
 

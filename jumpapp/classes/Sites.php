@@ -24,7 +24,7 @@ class Sites {
     public function __construct(Config $config, Cache $cache) {
         $this->config = $config;
         $this->loadedsites = [];
-        $this->sitesfilelocation = $this->config->get('sitesdir').'/'.$this->config->get('sitesfile');
+        $this->sitesfilelocation = $this->config->get('sitesfile');
         $this->cache = $cache;
         $this->load_sites_from_json();
     }
