@@ -32,7 +32,7 @@ class Site {
         if ($icon === null) {
             $favicon = new \Favicon\Favicon();
             $favicon->cache([
-                'dir' => $this->config->get('cachdir').'/icons/',
+                'dir' => $this->config->get('cachedir').'/icons/',
                 'timeout' => 86400
             ]);
             $rawimage = $favicon->get($this->url, \Favicon\FaviconDLType::RAW_IMAGE);
