@@ -62,3 +62,5 @@ RUN mkdir -p /var/www/cache/application \
 EXPOSE 8080
 
 ENTRYPOINT ["entrypoint.sh"]
+
+HEALTHCHECK --interval=5m --timeout=10s CMD curl --silent --fail http://127.0.0.1:8080/fpm-ping || exit 1
