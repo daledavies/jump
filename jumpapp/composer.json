@@ -1,8 +1,4 @@
 {
-    "name": "daledavies/jump",
-    "version": "1.0.1",
-    "description": "Jump is yet another self-hosted startpage for your server designed to be simple, stylish, fast and secure.",
-    "type": "project",
     "autoload": {
         "psr-4": {
             "Jump\\": "classes/"
