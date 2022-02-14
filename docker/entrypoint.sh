@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-if [ ! $DEVELOPMENT ]; then
+if [ -z "${DEVELOPMENT-}" ]; then
     echo >&2 "-------------------------------------------------------------"
 
     echo >&2 "- Repopulating web root with application files."
