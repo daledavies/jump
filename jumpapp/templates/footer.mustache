@@ -1,6 +1,10 @@
         </div>
         <a href="https://openweathermap.org/" class="time-weather hidden">
-            <span class="time"></span>
+            {{# showclock}}<span class="time"></span>{{/ showclock}}
+            <span class="weather-info">
+                <span class="desc"></span>
+                <span class="temp"></span>
+            </span>
             <i class="weather wi"></i>
         </a>
         <span class="useclientlocation"></span>

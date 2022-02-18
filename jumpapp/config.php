@@ -9,6 +9,10 @@
 return [
     // The site name is displayed in the browser tab.
     'sitename'    => getenv('SITENAME')    ?:  'Jump',
+    // Should the clock be displayed?
+    'showclock'   => getenv('SHOWCLOCK')   ?:  true,
+    // Temperature unit: True = metric / False = imperial.
+    'metrictemp'    => getenv('METRICTEMP')    ?:  true,
     // Where on the this code is located.
     'wwwroot'     => getenv('WWWROOT')     ?:  '/var/www/html',
     // Stop retrieving items from the cache, useful for testing.

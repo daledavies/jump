@@ -11,14 +11,16 @@ export default class Main {
         this.updatefrequency = 10000;
         this.contentintervalid = null;
         this.timezoneshift = 0;
+        this.metrictemp = JUMP.metrictemp;
 
         // Cache some DOM elements that we will access frequently.
         this.greetingelm = document.querySelector('.greeting .chosen');
         this.holderelm = document.querySelector('.time-weather');
+        this.tempelm = document.querySelector('.weather-info .temp');
+        this.weatherdescelm = document.querySelector('.weather-info .desc');
         this.timeelm = this.holderelm.querySelector('.time');
         this.weatherelm = this.holderelm.querySelector('.weather');
         this.clientlocationelm = document.querySelector('.useclientlocation');
-
 
         // See if we were provided a latlong and api key via the apps config.php.
         if (JUMP.latlong && JUMP.owmapikey) {
@@ -46,7 +48,7 @@ export default class Main {
         }
 
         // Retrieve weather and timezone data from Open Weather Map API.
-        new Weather(this.owmapikey, this.latlong).fetch_owm_data().then(owmdata => {
+        new Weather(this.owmapikey, this.latlong, this.metrictemp).fetch_owm_data().then(owmdata => {
 
             // Update the timezone shift from UTC to whatever it should be for the
             // requested location, then tell the greeting and clock to update.
@@ -55,9 +57,11 @@ export default class Main {
 
             // Display the weather icon, link to the requested location in OWM
             // and update location name element.
-            this.holderelm.href += 'city/' + owmdata.locationcode;
+            this.holderelm.href = 'https://openweathermap.org/city/' + owmdata.locationcode;
             this.weatherelm.classList.add(owmdata.iconclass);
             this.clientlocationelm.innerHTML = owmdata.locationname;
+            this.tempelm.innerHTML = owmdata.temp;
+            this.weatherdescelm.innerHTML = owmdata.description;
 
             // Should someone click on the location button then request their location
             // from the client and store it, then re run init() to update the page.
@@ -94,7 +98,9 @@ export default class Main {
     update_basic_content() {
         let clock = new Clock(this.timezoneshift);
         let greeting = new Greeting(clock);
-        this.timeelm.innerHTML = clock.get_formatted_time();
+        if (this.timeelm != null) {
+            this.timeelm.innerHTML = clock.get_formatted_time();
+        }
         this.greetingelm.innerHTML = greeting.get_greeting();
     }
 

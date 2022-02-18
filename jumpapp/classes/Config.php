@@ -34,6 +34,8 @@ class Config {
      */
     private const CONFIG_PARAMS = [
         'sitename',
+        'showclock',
+        'metrictemp',
         'wwwroot',
         'cachebypass',
         'cachedir',

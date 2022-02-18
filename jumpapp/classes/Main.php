@@ -24,7 +24,8 @@ class Main {
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'sitename' => $this->config->get('sitename'),
             'latlong' => $this->config->get('latlong', false),
-            'owmapikey' => $this->config->get('owmapikey', false)
+            'owmapikey' => $this->config->get('owmapikey', false),
+            'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
         ]);
     }
 
@@ -40,7 +41,9 @@ class Main {
 
     private function render_footer(): string {
         $template = $this->mustache->loadTemplate('footer');
-        return $template->render();
+        return $template->render([
+            'showclock' => $this->config->parse_bool($this->config->get('showclock'))
+        ]);
     }
 
     public function build_index_page(): void {
