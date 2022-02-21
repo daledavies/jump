@@ -80,41 +80,57 @@ You will also need to provide a default `LATLONG` string (e.g. "51.509865,-0.118
 Edit the `/sites/sites.json` file to include your own sites on the startpage...
 
 ```json
-[
-    {
-        "name": "Bitwarden",
-        "url" : "https://bitwarden.example.com",
+{
+    "default": {
         "nofollow": true,
-        "icon": "bitwarden.png"
+        "icon": "my-default-icon.png"
     },
-    {
-        "name": "Gitea",
-        "url" : "https://git.example.com"
-    },
-    {
-        "name": "Nextcloud",
-        "url" : "https://cloud.example.com",
-        "nofollow": true
-    },
-    {
-        "name": "Paperless",
-        "url" : "https://paperless.example.com",
-        "nofollow": true,
-        "icon": "paperless.jpg"
-    }
-]
+    "sites": [
+        {
+            "name": "Bitwarden",
+            "url" : "https://bitwarden.example.com",
+            "icon": "bitwarden.png"
+        },
+        {
+            "name": "Gitea",
+            "url" : "https://git.example.com",
+            "icon": "gitea.png"
+        },
+        {
+            "name": "Nextcloud",
+            "url" : "https://cloud.example.com",
+            "icon": "nextcloud.png"
+        },
+        {
+            "name": "Paperless",
+            "url" : "https://paperless.example.com",
+            "icon": "paperless.jpg"
+        },
+        {
+            "name": "Google",
+            "url" : "https://www.google.com",
+            "nofollow": false
+        }
+    ]
+}
 ```
 
 * `name` and `url` are mandatory.
 * `nofollow` and `icon` are optional.
 
+#### Default Options
+
+Jump has a built-in default icon for sites that do not specify their own although you can override this and specify your own as shown above in the `default` section.
+
+You can also override `nofollow` to be `true` for all sites.
+
 #### Icons
 
-You can provide custom icons for your sites by placing them in the `/sites/icons/` directory and referencing the filename in `sites.json` using the `icon` option.
+You can provide custom icons for your sites by placing them in the `/sites/icons/` directory and referencing the filename in `sites.json` using the `icon` option. If you do not provide a custom icon for a site then Jump will attempt to retrieve that site's favicon, if it can't find one then the default icon will be shown.
 
 #### nofollow
 
-Use the `nofollow` option to include `rel="nofollow"` on specific site links.
+On a per-site basis use `"nofollow": true` to include `rel="nofollow"` on specific site links, if this is set as a global default then `"nofollow": false` can be used to remove `rel="nofollow"` for individual sites.
 
 ### Background Images
 
