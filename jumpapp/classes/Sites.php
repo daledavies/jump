@@ -15,6 +15,7 @@ class Sites {
 
     private Cache $cache;
     private Config $config;
+    private array $default;
     private string $sitesfilelocation;
     private array $loadedsites;
 
@@ -26,6 +27,10 @@ class Sites {
         $this->loadedsites = [];
         $this->sitesfilelocation = $this->config->get('sitesfile');
         $this->cache = $cache;
+        $this->default = [
+            'icon' => null,
+            'nofollow' => false
+        ];
         $this->load_sites_from_json();
     }
 
@@ -48,13 +53,23 @@ class Sites {
             if ($rawjson === '') {
                 throw new Exception('The sites.json file is empty');
             }
-            $decodedjson = json_decode($rawjson, true);
-            if (!is_array($decodedjson)) {
-                throw new Exception('Provided sites json does not contain a top-level array');
+            // Do some checks to see if the JSON decodes into something
+            // like what we expect to see...
+            $decodedjson = json_decode($rawjson);
+            if (is_array($decodedjson)) {
+                $sites = $decodedjson;
             }
-            foreach ($decodedjson as $array) {
-                $sites[] = new Site($this->config, $array);
+            if (isset($decodedjson->sites) && is_array($decodedjson->sites)) {
+                $sites = $decodedjson->sites;
+                $this->default = (array) $decodedjson->default;
             }
+            // Walk over the sites array and instantiate an actual Site() object
+            // for each element.
+            array_walk($sites, function(&$item, $key, $default) {
+                $item = new Site($this->config, (array) $item, $default);
+            }, $this->default);
+            // Return the array of Site() objects, note we are in a callback
+            // so the return is not from the outer function.
             return $sites;
         });
     }
