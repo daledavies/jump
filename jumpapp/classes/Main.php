@@ -1,61 +1,45 @@
 <?php
 
+/**
+ * TO DO:
+ * - use CSRF token in weatherdata and icon api
+ *
+ */
+
 namespace Jump;
+
+use Nette\Routing\RouteList;
 
 class Main {
 
     private Cache $cache;
-    private \Mustache_Engine $mustache;
-    private array $outputarray;
-    private Sites $sites;
+    private Config $config;
 
     public function __construct() {
         $this->config = new Config();
-        $this->mustache = new \Mustache_Engine([
-            'loader' => new \Mustache_Loader_FilesystemLoader($this->config->get('templatedir'))
-        ]);
         $this->cache = new Cache($this->config);
-        $this->sites = new Sites($this->config, $this->cache);
+        $this->router = new RouteList;
+
+        // Set up the routes that Jump expects.
+        $this->router->addRoute('/tag/<param>', [
+			'class' => 'Jump\Pages\TagPage'
+		]);
     }
 
-    private function render_header(): string {
-        $template = $this->mustache->loadTemplate('header');
-        return $template->render([
-            'noindex' => $this->config->parse_bool($this->config->get('noindex')),
-            'sitename' => $this->config->get('sitename'),
-            'latlong' => $this->config->get('latlong', false),
-            'owmapikey' => $this->config->get('owmapikey', false),
-            'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
-        ]);
-    }
+    function init() {
+        // Try to match the correct route based on the HTTP request.
+        $matchedroute = $this->router->match(
+            (new \Nette\Http\RequestFactory)->fromGlobals()
+        );
 
-    private function render_sites(): string {
-        return $this->cache->load('templates/sites', function() {
-            $template = $this->mustache->loadTemplate('sites');
-            return $template->render([
-                'hassites' => !empty($this->sites->get_sites()),
-                'sites' => $this->sites->get_sites()
-            ]);
-        });
-    }
+        // If we do not have a matched route then just serve up the home page.
+        $pageclass = $matchedroute['class'] ?? 'Jump\Pages\HomePage';
+        $param = $matchedroute['param'] ?? null;
 
-    private function render_footer(): string {
-        $template = $this->mustache->loadTemplate('footer');
-        return $template->render([
-            'showclock' => $this->config->parse_bool($this->config->get('showclock'))
-        ]);
-    }
-
-    public function build_index_page(): void {
-        $this->outputarray = [
-            $this->render_header(),
-            $this->render_sites(),
-            $this->render_footer(),
-        ];
-    }
-
-    public function get_output(): string {
-        return implode('', $this->outputarray);
+        // Instantiate the correct class to build the requested page, get the
+        // content and return it.
+        $page = new $pageclass($this->config, $this->cache, $param ?? null);
+        return $page->get_output();
     }
 
 }

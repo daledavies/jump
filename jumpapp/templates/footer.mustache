@@ -1,14 +1,28 @@
         </div>
-        <a href="https://openweathermap.org/" class="time-weather hidden">
-            {{# showclock}}<span class="time"></span>{{/ showclock}}
-            <span class="weather-info">
-                <span class="desc"></span>
-                <span class="temp"></span>
-            </span>
-            <i class="weather wi"></i>
-        </a>
-        <span class="useclientlocation"></span>
+        <span class="time-weather hidden">
+            <a class="weather widget clickable" href="https://openweathermap.org/">
+                <span class="weather-info">
+                    <span class="desc"></span>
+                    <span class="temp"></span>
+                </span>
+                <i class="weather-icon wi"></i>
+            </a>
+            {{# showclock}}<span class="time widget"></span>{{/ showclock}}
+        </span>
+        <span class="useclientlocation widget clickable"></span>
+        <div class="header-bar">
+           {{# hastags }}<a href="#tags" class="show-tags"></a>{{/ hastags }}
+        </div>
+        {{# hastags}}
+        <div id="tags" class="tags">
+            <span class="header">Tags<span class="close"></span></span>
+            <ul>
+                <li><a href="/">home</a></li>
+                {{# tags}}<li><a href="/tag/{{.}}/">{{.}}</a></li>{{/ tags}}
+            </ul>
+        </div>
+        {{/ hastags}}
         <div class="background fixed"></div>
-        <script src="/assets/js/index.bundle.js"></script>
+        <script defer src="/assets/js/index.bundle.js"></script>
     </body>
 </html>

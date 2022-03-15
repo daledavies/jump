@@ -8,13 +8,12 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/assets/css/styles.css">
-        <link rel="stylesheet" href="background-css.php">
+        <link rel="stylesheet" href="/background-css.php">
         <link rel="stylesheet" href="/assets/css/weather-icons.min.css">
         <link rel="icon" type="image/png" href="/favicon.png">
-        <title>{{sitename}}</title>
+        <title>{{title}}</title>
         <script>
             const JUMP = {
-                latlong: '{{latlong}}',
                 owmapikey: '{{owmapikey}}',
                 metrictemp: '{{metrictemp}}'
             };
@@ -22,4 +21,7 @@
     </head>
     <body>
         <div class="content fixed hidden">
-            <div class="greeting">Good <span class="chosen"></span></div>
+            <div class="greeting">
+            {{# greeting}}<span class="tagname"><span>#</span>{{greeting}}</span>{{/ greeting}}
+            {{^ greeting}}Good <span class="chosen"></span>{{/ greeting}}
+            </div>

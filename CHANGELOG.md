@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New weather description and temperature display in bottom right of page.
 - Option to show/hide clock (SHOWCLOCK).
 - Option to switch between metric and imperial temperature (METRICTEMP).
-- Global defaults in dites.json for nofollow and icon.
+- Global defaults in sites.json for nofollow and icon.
 - Jump now has a favicon!
 
 ### Fixed

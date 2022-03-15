@@ -30,6 +30,7 @@ RUN apk add --no-cache \
   curl \
   nginx \
   php8 \
+  php8-curl \
   php8-dom \
   php8-fileinfo \
   php8-fpm \

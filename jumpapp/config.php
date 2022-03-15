@@ -8,21 +8,30 @@
 
 return [
     // The site name is displayed in the browser tab.
-    'sitename'    => getenv('SITENAME')    ?:  'Jump',
-    // Should the clock be displayed?
-    'showclock'   => getenv('SHOWCLOCK')   ?:  true,
-    // Temperature unit: True = metric / False = imperial.
-    'metrictemp'    => getenv('METRICTEMP')    ?:  true,
+    'sitename'       => getenv('SITENAME')       ?:   'Jump',
     // Where on the this code is located.
-    'wwwroot'     => getenv('WWWROOT')     ?:  '/var/www/html',
+    'wwwroot'        => getenv('WWWROOT')        ?:   '/var/www/html',
+
     // Stop retrieving items from the cache, useful for testing.
-    'cachebypass' => getenv('CACHEBYPASS') ?:  false,
+    'cachebypass'    => getenv('CACHEBYPASS')    ?:   false,
     // Where is the cache storage directory, should not be public.
-    'cachedir'    => getenv('CACHEDIR')    ?:  '/var/www/cache',
+    'cachedir'       => getenv('CACHEDIR')       ?:   '/var/www/cache',
+
     // Include the robots noindex meta tag in site header.
-    'noindex'     => getenv('NOINDEX')     ?:  true,
-    // Coordinates for weather location. E.g. 51.509865,-0.118092
-    'latlong'     => getenv('LATLONG')     ?:  '',
+    'noindex'        => getenv('NOINDEX')        ?:   true,
+    // Should the clock be displayed?
+    'showclock'      => getenv('SHOWCLOCK')      ?:   true,
+    // Show a friendly greeting message rather than "#home".
+    'showgreeting'   => getenv('SHOWGREETING')   ?:   true,
+    // Background blur percentage.
+    'bgblur'         => getenv('BGBLUR')         ?:   '70',
+    // Background brightness percentage.
+    'bgbright'       => getenv('BGBRIGHT')       ?:   '85',
+
     // Open Weather Map API key.
-    'owmapikey'   => getenv('OWMAPIKEY')   ?:  '',
+    'owmapikey'      => getenv('OWMAPIKEY')      ?:   '',
+    // Coordinates for weather location. E.g. 51.509865,-0.118092
+    'latlong'        => getenv('LATLONG')        ?:   '',
+    // Temperature unit: True = metric / False = imperial.
+    'metrictemp'     => getenv('METRICTEMP')     ?:   true,
 ];

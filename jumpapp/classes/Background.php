@@ -14,8 +14,7 @@ class Background {
     private string $backgroundsdirectory;
     private array $backgroundfiles;
 
-    public function __construct(Config $config) {
-        $this->config = $config;
+    public function __construct(private Config $config) {
         $this->backgroundsdirectory = $config->get('backgroundsdir');
         $this->webaccessibledir = str_replace($config->get('wwwroot'), '', $config->get('backgroundsdir'));
         $this->enumerate_files();

@@ -21,17 +21,20 @@ class Cache {
      * @var array Multidimensional array
      */
     private array $caches;
-    private Config $config;
 
     /**
      * Creates file storage for cache and initialises cache objects for each
      * name/type specified in $caches definition.
      */
-    public function __construct(Config $config) {
-        $this->config = $config;
+    public function __construct(private Config $config) {
         // Define the various caches used throughout the app.
         $this->caches = [
             'sites' => [
+                'cache' => null,
+                'expirationtype' => Caching\Cache::FILES,
+                'expirationparams' => $config->get('sitesfile')
+            ],
+            'tags' => [
                 'cache' => null,
                 'expirationtype' => Caching\Cache::FILES,
                 'expirationparams' => $config->get('sitesfile')
@@ -44,25 +47,34 @@ class Cache {
                     $config->get('sitesfile'),
                     $config->get('templatedir').'/sites.mustache'
                 ]
-            ]
+            ],
+            'templates/errorpage' => [
+                'cache' => null,
+                'expirationtype' => Caching\Cache::FILES,
+                'expirationparams' => [
+                    $config->get('templatedir').'/errorpage.mustache'
+                ]
+            ],
+            'weatherdata' => [
+                'cache' => null,
+                'expirationtype' => Caching\Cache::EXPIRE,
+                'expirationparams' => '5 minutes'
+            ],
         ];
         // Inititalise file storage for cache using cachedir path from config.
         $this->storage = new Caching\Storages\FileStorage($this->config->get('cachedir').'/application');
-        // Initialise a cache object for each cache name/type specified in caches array.
-        array_walk($this->caches, function(&$cachedef, $cachename) {
-            $cachedef['cache'] = new Caching\Cache($this->storage, $cachename);
-        });
     }
 
     /**
      * Read the specified item from the cache or generate it, mostly a wrapper
      * around Nette\Caching\Cache::load().
      *
-     * @param string $cachename The name of a cache type, must match a key in $caches definition.
+     * @param string $cachename The name of a cache, must match a key in $caches definition.
+     * @param string $key A key used to represent an object within a cache,
      * @param callable $callback The code from which the result should be stored in cache.
      * @return mixed The result of callback function retreieved from cache.
      */
-    public function load(string $cachename, callable $callback): mixed {
+    public function load(string $cachename, ?string $key = 'default', callable $callback): mixed {
         // If cachebypass has been set in config.php then just execute the callback.
         if ($this->config->parse_bool($this->config->get('cachebypass'))) {
             return $callback();
@@ -71,9 +83,13 @@ class Cache {
         if (!array_key_exists($cachename, $this->caches)) {
             throw new \Exception('Cache name not found ('.$cachename.')');
         }
+        // If a cache key has not been used then intialise a cache object for it.
+        if (!isset($this->caches[$cachename]['cache']) || !array_key_exists($key, $this->caches[$cachename]['cache'])) {
+            $this->caches[$cachename]['cache'][$key] = new Caching\Cache($this->storage, $cachename.'/'.$key);
+        }
         // Retrieve the initialised cache object from $caches, defines the caches expiry
         // and executes the callback.
-        return $this->caches[$cachename]['cache']->load($cachename,
+        return $this->caches[$cachename]['cache'][$key]->load($cachename.'/'.$key,
             function (&$dependencies) use ($callback, $cachename) {
                 $dependencies[$this->caches[$cachename]['expirationtype']] = $this->caches[$cachename]['expirationparams'];
                 return $callback();

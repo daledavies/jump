@@ -2,8 +2,8 @@ import Clock from "./Clock";
 
 export default class Greeting {
 
-    constructor(clock) {
-        this.hour = clock.get_hour();
+    constructor(hour) {
+        this.hour = hour;
         this.greetings = {
             0  : 'morning',
             12 : 'afternoon',

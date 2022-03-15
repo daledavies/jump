@@ -13,7 +13,13 @@ export default class Clock {
      *
      * @param number utcshift Number of seconds to shift time from UTC.
      */
-    constructor(utcshift = 0) {
+    constructor(eventemitter) {
+        this.set_utc_shift();
+        this.contentintervalid = null;
+        this.eventemitter = eventemitter;
+    }
+
+    set_utc_shift(utcshift = 0) {
         this.utcshift = utcshift*1000;
         this.shiftedtimestamp = new Date().getTime()+this.utcshift;
         this.shifteddate = new Date(this.shiftedtimestamp);
@@ -40,6 +46,29 @@ export default class Clock {
      */
     get_hour() {
         return this.shifteddate.getUTCHours();
+    }
+
+    update_time() {
+        this.set_utc_shift(this.utcshift);
+        this.eventemitter.emit('clock-updated', {
+            formatted_time: this.get_formatted_time(),
+            hour: this.get_hour(),
+            utcshift: this.utcshift
+        });
+    }
+
+    run(updatefrequency) {
+        // Clear any previously set intervals for updating content.
+        if (this.contentintervalid) {
+            clearInterval(this.contentintervalid);
+        }
+        // Set the clock and greeting text appropriately for the requested location.
+        this.update_time();
+        // Update the content periodically, we don't need to be too frequent as we are
+        // not displaying seconds on the clock.
+        this.contentintervalid = setInterval(() => {
+            this.update_time();
+        }, updatefrequency);
     }
 
 }
