@@ -1,5 +1,8 @@
 
 # Jump
+
+[![Join the chat at https://gitter.im/jump-startpage/community](https://badges.gitter.im/jump-startpage/community.svg)](https://gitter.im/jump-startpage/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/daledavies/jump)
 ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.4-blue?style=flat)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/daledavies/jump?sort=date)
