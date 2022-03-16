@@ -1,19 +1,20 @@
 
 # Jump
-
-[![Join the chat at https://gitter.im/jump-startpage/community](https://badges.gitter.im/jump-startpage/community.svg)](https://gitter.im/jump-startpage/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/daledavies/jump)
-![PHP Version](https://img.shields.io/badge/PHP-%3E%3D7.4-blue?style=flat)
+![PHP Version](https://img.shields.io/badge/PHP-%3E%3D8.0-blue?style=flat)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/daledavies/jump?sort=date)
 
 Jump is yet another self-hosted startpage for your server designed to be simple, stylish, fast and secure.
 
 ![screenshot](screenshot.png)
 
+<img src="screenshots/screenshot-tagselection.png" width="200" /> <img src="screenshots/screenshot-tagpage.png" width="200" />
+
 ### Features
+
 - Fast, easy to deploy, secure
 - Custom sites and icons
+- Categorise sites with tags
 - Fetch favicons for sites without custom icons
 - Custom background images
 - Open Weather Map integration
@@ -44,19 +45,22 @@ services:
 
 ```
 
-You can use the following optional environment variables to configure/customise Jump...
+You can use the following optional environment variables to configure/customise your Jump site...
 
 - `SITENAME` - Custom site name.
 - `SHOWCLOCK: 'true'` - Show/hide the clock.
-- `METRICTEMP: 'true'` - Metric (C) or imperial (F) temperature units.
+- `SHOWGREETING: 'true'` - Show a friendly greeting message rather than "#home".
+- `BGBLUR: 70` - Background image blur percentage.
+- `BGBRIGHT: 85` - Background image brightness percentage.
 - `NOINDEX: 'true'` - Include a robots noindex meta tag in site header
 - `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 - `OWMAPIKEY` - An API key for Open Weather Map, LATLONG (below) must also be defined.
 - `LATLONG` - A latitude and longitude for the default location (e.g. "51.509865,-0.118092").
+- `METRICTEMP: 'true'` - Metric (C) or imperial (F) temperature units.
 
 #### Volume Mapping
 
-You can map the "backgrounds" and "sites" directories as shown in the Docker Compose example above. Your host directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
+You can map the "backgrounds" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
 
 ### Without Docker
 
@@ -90,36 +94,51 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
     },
     "sites": [
         {
+            "name": "Github",
+            "url" : "https://github.com/daledavies/jump",
+            "nofollow": false
+        },
+        {
             "name": "Bitwarden",
             "url" : "https://bitwarden.example.com",
-            "icon": "bitwarden.png"
+            "icon": "bitwarden.png",
+            "tags": ["stuff"]
         },
         {
             "name": "Gitea",
             "url" : "https://git.example.com",
-            "icon": "gitea.png"
+            "icon": "gitea.png",
+            "tags": ["stuff"]
         },
         {
             "name": "Nextcloud",
             "url" : "https://cloud.example.com",
-            "icon": "nextcloud.png"
+            "icon": "nextcloud.png",
+            "tags": ["home", "stuff", "things"]
         },
         {
             "name": "Paperless",
             "url" : "https://paperless.example.com",
-            "icon": "paperless.jpg"
+            "icon": "paperless.jpg",
+            "tags": ["things", "home"]
         },
         {
             "name": "Google",
-            "url" : "https://www.google.com",
-            "nofollow": false
+            "url" : "https://www.google.com"
         }
     ]
 }
+
 ```
 
 * `name` and `url` are mandatory.
-* `nofollow` and `icon` are optional.
+* `tags`, `nofollow` and `icon` are optional.
+
+#### Tags
+
+Sites can be categorised using tags, so for each site in your `sites.json` file you can list multiple tags as shown in the example above. Sites that have no tags are included on the home screen, however when sites have multiple tags if you wish to also include them on the home screen you can do this by adding the "home" tag in the list.
+
+When you have sites that are tagged then the tag selector button will appear in the top right of the page, clicking thi will open a popup menu showing all the tags referenced in your `sites.json` file.
 
 #### Default Options
 
