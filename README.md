@@ -136,9 +136,9 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
 
 #### Tags
 
-Sites can be categorised using tags, so for each site in your `sites.json` file you can list multiple tags as shown in the example above. Sites that have no tags are included on the home screen, however when sites have multiple tags if you wish to also include them on the home screen you can do this by adding the "home" tag in the list.
+Sites can be categorised using tags, for each site in your `sites.json` file you can list multiple tags as shown in the example above. Sites that have no tags are included on the home screen, however for sites with multiple tags you can specify the "home" tag to include them on the home screen.
 
-When you have sites that are tagged then the tag selector button will appear in the top right of the page, clicking thi will open a popup menu showing all the tags referenced in your `sites.json` file.
+The tag selector button will only appear in the top right of the page if you have tagged sites, clicking this will open a popup menu showing all the tags referenced in your `sites.json` file.
 
 #### Default Options
 
