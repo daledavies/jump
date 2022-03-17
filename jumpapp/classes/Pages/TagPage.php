@@ -15,6 +15,7 @@ class TagPage extends AbstractPage {
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'title' => $title,
             'owmapikey' => !!$this->config->get('owmapikey', false),
+            'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
         ]);
     }
 

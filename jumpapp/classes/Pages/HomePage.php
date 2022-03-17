@@ -15,6 +15,7 @@ class HomePage extends AbstractPage {
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'title' => $this->config->get('sitename'),
             'owmapikey' => !!$this->config->get('owmapikey', false),
+            'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
         ]);
     }
 
