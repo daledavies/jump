@@ -23,4 +23,5 @@ class ErrorPage {
         http_response_code($this->httpcode);
         die($this->content);
     }
+
 }
