@@ -7,7 +7,7 @@ RUN composer install --no-dev \
   --no-interaction \
   --no-progress
 
-# Switch to trafex/php-nginx image and copy application files into it.
+# Switch to base alpine image so we can copy application files into it.
 FROM alpine:latest
 
 WORKDIR /var/www/html
