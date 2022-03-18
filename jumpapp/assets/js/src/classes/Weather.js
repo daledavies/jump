@@ -38,7 +38,7 @@ export default class Weather {
                 temp: Math.ceil(data.main.temp) + '&deg;' + (JUMP.metrictemp ? 'C' : 'F'),
                 description: data.weather[0].main,
                 iconclass: 'wi-owm-' + daynightvariant + '-' + data.weather[0].id,
-                timezoneshift: data.timezone
+                timezoneshift: data.timezone*1000,
             });
         })
     }

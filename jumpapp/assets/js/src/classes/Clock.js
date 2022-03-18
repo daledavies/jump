@@ -22,7 +22,7 @@ export default class Clock {
     }
 
     set_utc_shift(newutcshift = 0) {
-        this.utcshift = newutcshift*1000;
+        this.utcshift = newutcshift;
         this.shiftedtimestamp = new Date().getTime()+this.utcshift;
         this.shifteddate = new Date(this.shiftedtimestamp);
     }
