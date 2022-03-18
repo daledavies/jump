@@ -4,9 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.1] - 2022-03-17
+## [1.1.2] - 2022-03-17
 ### Added
-- Show alternative 12 hour clock format using "ampmclock" option.
+- Show alternative 12 hour clock format using the "ampmclock" option.
+
+### Fixed
+- Fix issue #15: Properly encode and escape URLs with query params.
+- Fix issue #16. UTC timezone shift was being multiplied by 1000 every 10 seconds.
 
 ## [1.1.1] - 2022-03-17
 ### Fixed
