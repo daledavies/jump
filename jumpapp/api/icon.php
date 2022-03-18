@@ -13,7 +13,7 @@ $config = new Jump\Config();
 $cache = new Jump\Cache($config);
 $sites = new Jump\Sites($config, $cache);
 
-$siteurl = isset($_GET['siteurl']) ? urldecode($_GET['siteurl']) : (throw new Exception('siteurl param not provided'));
+$siteurl = isset($_GET['siteurl']) ? filter_var($_GET['siteurl'], FILTER_SANITIZE_URL) : (throw new Exception('siteurl param not provided'));
 
 $site = $sites->get_site_by_url($siteurl);
 

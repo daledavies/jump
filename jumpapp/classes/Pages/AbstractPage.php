@@ -17,7 +17,11 @@ abstract class AbstractPage {
     public function __construct(protected \Jump\Config $config, protected \Jump\Cache $cache, protected ?string $param = null) {
         $this->hastags = false;
         $this->mustache = new \Mustache_Engine([
-            'loader' => new \Mustache_Loader_FilesystemLoader($this->config->get('templatedir'))
+            'loader' => new \Mustache_Loader_FilesystemLoader($this->config->get('templatedir')),
+            // Create a urlencodde helper for use in template. E.g. using siteurl in icon.php query param.
+            'helpers' => array('urlencode' => function($text, $renderer) {
+                return urlencode($renderer($text));
+            }),
         ]);
     }
 
