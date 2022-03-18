@@ -49,6 +49,7 @@ You can use the following optional environment variables to configure/customise 
 
 - `SITENAME` - Custom site name.
 - `SHOWCLOCK: 'true'` - Show/hide the clock.
+- `AMPMCLOCK: 'true'` - Show 12 hour clock format if true.
 - `SHOWGREETING: 'true'` - Show a friendly greeting message rather than "#home".
 - `BGBLUR: 70` - Background image blur percentage.
 - `BGBRIGHT: 85` - Background image brightness percentage.

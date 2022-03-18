@@ -16,6 +16,7 @@ class HomePage extends AbstractPage {
             'title' => $this->config->get('sitename'),
             'owmapikey' => !!$this->config->get('owmapikey', false),
             'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
+            'ampmclock' => $this->config->parse_bool($this->config->get('ampmclock', false)),
         ]);
     }
 

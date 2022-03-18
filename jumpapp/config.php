@@ -21,6 +21,8 @@ return [
     'noindex'        => getenv('NOINDEX')        ?:   true,
     // Should the clock be displayed?
     'showclock'      => getenv('SHOWCLOCK')      ?:   true,
+    // 12 hour clock format?
+    'ampmclock'      => getenv('AMPMCLOCK')      ?:   false,
     // Show a friendly greeting message rather than "#home".
     'showgreeting'   => getenv('SHOWGREETING')   ?:   true,
     // Background blur percentage.
