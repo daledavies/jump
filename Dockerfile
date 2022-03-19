@@ -1,6 +1,6 @@
 # Start with the official composer image, copy application files and install
 # dependencies.
-FROM composer AS builder
+FROM --platform=$BUILDPLATFORM composer AS builder
 COPY jumpapp/ /app
 RUN composer install --no-dev \
   --optimize-autoloader \
