@@ -2,7 +2,7 @@
     "default": {
         "nofollow": true,
         "icon": "my-default-icon.png",
-        "newtab": true
+        "newtab": false
     },
     "sites": [
         {
