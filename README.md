@@ -92,14 +92,14 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
     "default": {
         "nofollow": true,
         "icon": "my-default-icon.png",
-        "newtab": true
+        "newtab": false
     },
     "sites": [
         {
             "name": "Github",
             "url" : "https://github.com/daledavies/jump",
             "nofollow": false,
-            "newtab": false
+            "newtab": true
         },
         {
             "name": "Bitwarden",
