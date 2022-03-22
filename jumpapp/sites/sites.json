@@ -1,12 +1,15 @@
 {
     "default": {
         "nofollow": true,
-        "icon": "my-default-icon.png"
+        "icon": "my-default-icon.png",
+        "newtab": true
     },
     "sites": [
         {
             "name": "Github",
-            "url" : "https://github.com/daledavies/jump"
+            "url" : "https://github.com/daledavies/jump",
+            "nofollow": false,
+            "newtab": true
         },
         {
             "name": "Docker Hub",

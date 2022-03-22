@@ -34,6 +34,7 @@ class Site {
         $this->name = $sitearray['name'];
         $this->url = $sitearray['url'];
         $this->nofollow = isset($sitearray['nofollow']) ? $sitearray['nofollow'] : (isset($this->defaults['nofollow']) ? $this->defaults['nofollow'] : false);
+        $this->newtab = isset($sitearray['newtab']) ? $sitearray['newtab'] : (isset($this->defaults['newtab']) ? $this->defaults['newtab'] : false);
         $this->iconname = $sitearray['icon'] ?? null;
         $this->tags = $sitearray['tags'] ?? $this->tags;
     }

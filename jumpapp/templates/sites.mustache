@@ -1,7 +1,7 @@
 {{# hassites}}
 <ul class="sites">
     {{# sites}}
-    <li><a {{# nofollow}}rel="nofollow"{{/ nofollow}} title="{{name}}" href="{{url}}">
+    <li><a {{# newtab}}target="_blank"{{/ newtab}} rel="{{# nofollow}}nofollow {{/ nofollow}}{{# newtab}}noopener{{/ newtab}}" title="{{name}}" href="{{url}}">
         <span class="icon">
             <img src="/api/icon.php?siteurl={{#urlencode}}{{url}}{{/urlencode}}">
         </span>

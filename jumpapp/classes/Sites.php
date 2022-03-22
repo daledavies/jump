@@ -30,7 +30,8 @@ class Sites {
         $this->cache = $cache;
         $this->default = [
             'icon' => null,
-            'nofollow' => false
+            'nofollow' => false,
+            'newtab' => false,
         ];
         $this->tags = [];
 

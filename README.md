@@ -79,7 +79,7 @@ Make sure you have created a cache directory and given the web user permission t
 
 ### Open Weather Map
 
-You can configure Jump to get local time and weather updates by adding an Open Weather Map API key to `config.php` or passing the `OWPAPIKEY ` environment variable to the docker container (as described above).
+You can configure Jump to get local time and weather updates by adding an Open Weather Map API key to `config.php` or passing the `OWMAPIKEY ` environment variable to the docker container (as described above).
 
 You will also need to provide a default `LATLONG` string (e.g. "51.509865,-0.118092"), Jump will use this  until you press the location button and allow permission to get your location from the web browser.
 
@@ -91,13 +91,15 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
 {
     "default": {
         "nofollow": true,
-        "icon": "my-default-icon.png"
+        "icon": "my-default-icon.png",
+        "newtab": true
     },
     "sites": [
         {
             "name": "Github",
             "url" : "https://github.com/daledavies/jump",
-            "nofollow": false
+            "nofollow": false,
+            "newtab": false
         },
         {
             "name": "Bitwarden",
@@ -133,7 +135,7 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
 ```
 
 * `name` and `url` are mandatory.
-* `tags`, `nofollow` and `icon` are optional.
+* `tags`, `nofollow`, `newtab` and `icon` are optional.
 
 #### Tags
 
@@ -145,7 +147,7 @@ The tag selector button will only appear in the top right of the page if you hav
 
 Jump has a built-in default icon for sites that do not specify their own although you can override this and specify your own as shown above in the `default` section.
 
-You can also override `nofollow` to be `true` for all sites.
+You can also override `nofollow` and `newtab` to be `true` for all sites.
 
 #### Icons
 
@@ -154,6 +156,10 @@ You can provide custom icons for your sites by placing them in the `/sites/icons
 #### nofollow
 
 On a per-site basis use `"nofollow": true` to include `rel="nofollow"` on specific site links, if this is set as a global default then `"nofollow": false` can be used to remove `rel="nofollow"` for individual sites.
+
+#### newtab
+
+On a per-site basis use `"newtab": true` to open specific site links in a new browser tab.
 
 ### Background Images
 
