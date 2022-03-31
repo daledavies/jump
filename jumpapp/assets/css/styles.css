@@ -5,6 +5,15 @@
  * @license MIT
  */
 
+@font-face {
+    font-family: 'Quicksand';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../font/quicksand-v28-latin-regular.woff2') format('woff2'),
+         url('../font/quicksand-v28-latin-regular.woff') format('woff');
+}
+
 * {
     box-sizing: border-box;
 }
