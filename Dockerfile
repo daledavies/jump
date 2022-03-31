@@ -1,3 +1,11 @@
+# This dockerfile is intended to built using buildx to enable multi-platform
+# images...
+# https://docs.docker.com/desktop/multi-arch/
+# docker buildx create --name mybuilder
+# docker buildx use mybuilder
+# docker buildx inspect --bootstrap
+# docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t daledavies/jump:v1.1.3 --push .
+
 # Start with the official composer image, copy application files and install
 # dependencies.
 FROM --platform=$BUILDPLATFORM composer AS builder
