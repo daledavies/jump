@@ -24,8 +24,13 @@ export default class Weather {
         fetch(apiurl)
         .then(response => response.json())
         .then(data => {
+            if (data.error) {
+                console.error('JUMP ERROR: There was a problem contacting the OWM API');
+                return;
+            }
             if (data.cod === 401) {
-                alert('The OWM API key is invalid, check config.php');
+                console.error('JUMP ERROR: The OWM API key is invalid, check config.php');
+                return;
             }
             // Determine if we should use the day or night variant of our weather icon.
             var daynightvariant = 'night';
