@@ -35,6 +35,9 @@ $url =  $owmapiurlbase
         .'&lon=' . $latlong[1]
         .'&appid=' . $config->get('owmapikey', false);
 
+// Output header here so we can return early with a json response if there is a curl error.
+header('Content-Type: application/json; charset=utf-8');
+
 // Use the cache to store/retrieve data, make an md5 hash of latlong so it is not possible
 // to track location history form the stored cache.
 $weatherdata = $cache->load(cachename: 'weatherdata', key: md5(json_encode($latlong)), callback: function() use ($url) {
@@ -53,11 +56,10 @@ $weatherdata = $cache->load(cachename: 'weatherdata', key: md5(json_encode($latl
     curl_close($ch);
     // If we had an error then return the error message and exit, otherwise return the API response.
     if (isset($curlerror)) {
-        die($curlerror);
+        die(json_encode(['error' => $curlerror]));
     }
     return $response;
 });
 
 // We made it here so output the API response as json.
-header('Content-Type: application/json; charset=utf-8');
 echo $weatherdata;
