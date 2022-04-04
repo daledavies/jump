@@ -73,9 +73,9 @@ podman run -d --volume <path/to/backgrounds>:/backgrounds:Z \
 --env LATLONG='<lat, lon>' --name jump docker.io/daledavies/jump 
 ```
 This will start the service but you will have to run above command again in case of power cycle. To make this config more permanent do this
-1. Go to Systemd user director usually located in `~/.config/systemd/user/`
-2. Generate Systemd unit file using `podman generate systemd --new --name jump > jump.service`
-3. Use `--user` attribute to run the service as a user service `systemd --user start containe-jump.service`
+1. Go to Systemd user directory usually located in `~/.config/systemd/user/`
+2. Generate Systemd unit file using `podman generate systemd --new --name jump > container-jump.service`
+3. Use `--user` attribute to run the service as a user service `systemd --user start container-jump.service`
 
 
 ### Without Docker
