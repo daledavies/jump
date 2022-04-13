@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "097843a2f00f12e9786893c07a3ae8e3",
+    "content-hash": "860d4eabaa4ccb80ee0f7d501149c83d",
     "packages": [
         {
             "name": "arthurhoaro/favicon",

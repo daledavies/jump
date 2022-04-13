@@ -10,7 +10,9 @@ class HomePage extends AbstractPage {
         if (!$this->config->parse_bool($this->config->get('showgreeting'))) {
             $greeting = 'home';
         }
+        $csrfsection = $this->session->getSection('csrf');
         return $template->render([
+            'csrftoken' => $csrfsection->get('token'),
             'greeting' => $greeting,
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'title' => $this->config->get('sitename'),

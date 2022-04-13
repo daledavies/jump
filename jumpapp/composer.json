@@ -9,6 +9,7 @@
         "arthurhoaro/favicon": "~1.0",
         "nette/caching": "^3.1",
         "nette/routing": "^3.0.2",
-        "phlak/config": "^7.0"
+        "phlak/config": "^7.0",
+        "nette/http": "^3.1"
     }
 }

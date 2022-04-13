@@ -8,7 +8,8 @@ export default class Main {
     constructor() {
         this.latlong = [];
         this.storage = window.localStorage;
-        this.updatefrequency = 10000;
+        this.clockfrequency = 10000; // 10 seconds.
+        this.weatherfrequency = 300000; // 5 minutes.
         this.timezoneshift = 0;
         this.metrictemp = JUMP.metrictemp;
         // Cache some DOM elements that we will access frequently.
@@ -48,6 +49,9 @@ export default class Main {
         }
         // Retrieve weather and timezone data from Open Weather Map API.
         this.weather.fetch_owm_data(this.latlong);
+        setInterval(() => {
+            this.weather.fetch_owm_data(this.latlong);
+        }, this.weatherfrequency);
     }
 
     /**
@@ -126,7 +130,7 @@ export default class Main {
 
     set_clock() {
         this.clock.set_utc_shift(this.timezoneshift);
-        this.clock.run(this.updatefrequency);
+        this.clock.run(this.clockfrequency);
     }
 
 }
