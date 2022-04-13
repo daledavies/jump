@@ -42,9 +42,18 @@ class Config {
         'noindex'
     ];
 
+    /**
+     * Session config params.
+     */
+    private const CONFIG_SESSION = [
+        'sessionname' => 'JUMP',
+        'sessiontimeout' => '10 minutes'
+    ];
+
     public function __construct() {
         $this->config = new \PHLAK\Config\Config(__DIR__.'/../config.php');
         $this->add_wwwroot_to_base_paths();
+        $this->add_session_config();
         if ($this->config_params_missing()) {
             throw new Exception('Config.php must always contain... '.implode(', ', self::CONFIG_PARAMS));
         }
@@ -63,6 +72,11 @@ class Config {
         }
     }
 
+    private function add_session_config(): void {
+        foreach(self::CONFIG_SESSION as $key => $value) {
+            $this->config->set($key, $value);
+        }
+    }
     /**
      * Determine if any configuration params are missing in the list loaded
      * from the config.php.

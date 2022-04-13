@@ -16,16 +16,16 @@ export default class Weather {
     fetch_owm_data(latlong) {
         // If we are provided with a latlong then the user must have cliecked on the location
         // button at some point, so let's use this in the api url...
-        let apiurl = '/api/weatherdata.php';
+        let apiurl = '/api/weatherdata.php?token=' + JUMP.token;
         if (latlong.length) {
-            apiurl += ('?lat=' + latlong[0] + '&lon=' + latlong[1]);
+            apiurl += ('&lat=' + latlong[0] + '&lon=' + latlong[1]);
         }
         // Get some data from the weather api...
         fetch(apiurl)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
-                console.error('JUMP ERROR: There was a problem contacting the OWM API');
+                console.error('JUMP ERROR: There was an issue with the OWM API... ' + data.error);
                 return;
             }
             if (data.cod === 401) {

@@ -14,7 +14,12 @@ abstract class AbstractPage {
      * @param \Jump\Cache $cache
      * @param string|null $generic param, passed from router.
      */
-    public function __construct(protected \Jump\Config $config, protected \Jump\Cache $cache, protected ?string $param = null) {
+    public function __construct(
+        protected \Jump\Config $config,
+        protected \Jump\Cache $cache,
+        protected \Nette\Http\Session $session,
+        protected ?string $param = null
+    ){
         $this->hastags = false;
         $this->mustache = new \Mustache_Engine([
             'loader' => new \Mustache_Loader_FilesystemLoader($this->config->get('templatedir')),

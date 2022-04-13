@@ -10,7 +10,9 @@ class TagPage extends AbstractPage {
         $template = $this->mustache->loadTemplate('header');
         $greeting = $this->param;
         $title = 'Tag: '.$this->param;
+        $csrfsection = $this->session->getSection('csrf');
         return $template->render([
+            'csrftoken' => $csrfsection->get('token'),
             'greeting' => $greeting,
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'title' => $title,
