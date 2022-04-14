@@ -22,7 +22,7 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 
 ## Installation
 
-### Docker
+### Docker Compose
 
 Get the container image from Docker Hub (https://hub.docker.com/r/daledavies/jump).
 
@@ -63,19 +63,17 @@ You can use the following optional environment variables to configure/customise 
 
 You can map the "backgrounds" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
 
-### Podman
-The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds" and "sites" directories to local directories on your machine...
+#### Docker
+
+If you prefer `docker run` you can run the following command and that's it.
 
 ```
-podman run -d --volume <path/to/backgrounds>:/backgrounds:Z \
---volume <path/to/sites>:/sites:Z -p 8123:8080 \
+docker run -d --volume <path/to/backgrounds>:/backgrounds \
+--volume <path/to/sites>:/sites -p 8123:8080 \
 --env SITENAME='Welcome' --env OWMAPIKEY='<open weather api key>' \
 --env LATLONG='<lat, lon>' --name jump docker.io/daledavies/jump 
 ```
-This will start the service but you will have to run above command again in case of power cycle. To make this config more permanent do this
-1. Go to Systemd user directory usually located in `~/.config/systemd/user/`
-2. Generate Systemd unit file using `podman generate systemd --new --name jump > container-jump.service`
-3. Use `--user` attribute to run the service as a user service `systemd --user start container-jump.service`
+**Podman Setup**: If you prefer podman over docker you can replace `docker` with `podman` in above command and it should bring up jump.
 
 
 ### Without Docker
