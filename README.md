@@ -22,7 +22,7 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 
 ## Installation
 
-### Docker
+### Docker Compose
 
 Get the container image from Docker Hub (https://hub.docker.com/r/daledavies/jump).
 
@@ -62,6 +62,19 @@ You can use the following optional environment variables to configure/customise 
 #### Volume Mapping
 
 You can map the "backgrounds" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
+
+#### Docker
+
+If you prefer `docker run` you can run the following command and that's it.
+
+```
+docker run -d --volume <path/to/backgrounds>:/backgrounds \
+--volume <path/to/sites>:/sites -p 8123:8080 \
+--env SITENAME='Welcome' --env OWMAPIKEY='<open weather api key>' \
+--env LATLONG='<lat, lon>' --name jump docker.io/daledavies/jump 
+```
+**Podman Setup**: If you prefer podman over docker you can replace `docker` with `podman` in above command and it should bring up jump.
+
 
 ### Without Docker
 
