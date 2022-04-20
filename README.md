@@ -26,7 +26,7 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 
 Get the container image from Docker Hub (https://hub.docker.com/r/daledavies/jump).
 
-The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds" and "sites" directories to local directories on your machine...
+The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds" and "sites" directories to local directories on your machine (`OWMAPIKEY` and `LATLONG` values below are just for example)...
 
 ```yaml
 version: '3'
@@ -59,22 +59,25 @@ You can use the following optional environment variables to configure/customise 
 - `LATLONG` - A latitude and longitude for the default location (e.g. "51.509865,-0.118092").
 - `METRICTEMP: 'true'` - Metric (C) or imperial (F) temperature units.
 
+**NOTE:** The OWMAPIKEY and LATLONG config options must be defined together.
+
 #### Volume Mapping
 
 You can map the "backgrounds" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
 
 #### Docker
 
-If you prefer `docker run` you can run the following command and that's it.
+The same can be achieved just using Docker CLI...
 
+```bash
+docker run -d -p 8123:8080 \
+--volume <path/to/backgrounds>:/backgrounds \
+--volume <path/to/sites>:/sites \
+--env SITENAME='Custom site name' \
+--env OWMAPIKEY='<open weather api key>' \
+--env LATLONG='<lat,long>' \
+--name jump docker.io/daledavies/jump
 ```
-docker run -d --volume <path/to/backgrounds>:/backgrounds \
---volume <path/to/sites>:/sites -p 8123:8080 \
---env SITENAME='Welcome' --env OWMAPIKEY='<open weather api key>' \
---env LATLONG='<lat, lon>' --name jump docker.io/daledavies/jump 
-```
-**Podman Setup**: If you prefer podman over docker you can replace `docker` with `podman` in above command and it should bring up jump.
-
 
 ### Without Docker
 
