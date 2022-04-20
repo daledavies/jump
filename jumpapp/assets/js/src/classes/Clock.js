@@ -14,11 +14,12 @@ export default class Clock {
      * @param boolean ampm Return 12 hour format if true.
      * @param number utcshift Number of seconds to shift time from UTC.
      */
-    constructor(eventemitter, ampm = false) {
+    constructor(eventemitter, ampm = false, forcelocaltime = false) {
         this.set_utc_shift();
         this.contentintervalid = null;
         this.eventemitter = eventemitter;
         this.ampm = ampm;
+        this.forcelocaltime = forcelocaltime;
     }
 
     set_utc_shift(newutcshift = 0) {
@@ -37,7 +38,14 @@ export default class Clock {
         // the Date() object adjusting the returned time relative to the
         // browser's local timezone.
         let hour = this.shifteddate.getUTCHours();
-        const minutes = String(this.shifteddate.getUTCMinutes()).padStart(2, '0');
+        let minutes = String(this.shifteddate.getUTCMinutes()).padStart(2, '0');
+
+        // Completely ignore the shifted date and just return whatever happens to be
+        // in the local timezone.
+        if (this.forcelocaltime) {
+            hour = new Date().getHours();
+            minutes = String(new Date().getMinutes()).padStart(2, '0');
+        }
 
         if (!this.ampm) {
             return String(hour).padStart(2, '0') + ":" + minutes;
@@ -54,6 +62,9 @@ export default class Clock {
      * @returns number The hour.
      */
     get_hour() {
+        if (this.forcelocaltime) {
+            return new Date().getHours();
+        }
         return this.shifteddate.getUTCHours();
     }
 
