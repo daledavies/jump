@@ -30,7 +30,7 @@ export default class Main {
         }
         // Finally create instances of the classes we'll be using.
         this.eventemitter = new EventEmitter();
-        this.clock = new Clock(this.eventemitter, !!JUMP.ampmclock);
+        this.clock = new Clock(this.eventemitter, !!JUMP.ampmclock, !JUMP.owmapikey);
         this.weather = new Weather(this.eventemitter);
     }
 
