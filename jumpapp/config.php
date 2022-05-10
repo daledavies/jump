@@ -29,6 +29,8 @@ return [
     'bgblur'         => getenv('BGBLUR')         ?:   '70',
     // Background brightness percentage.
     'bgbright'       => getenv('BGBRIGHT')       ?:   '85',
+    // Display alternative layout of sites list.
+    'altlayout'     => getenv('ALTLAYOUT')     ?:   false,
 
     // Open Weather Map API key.
     'owmapikey'      => getenv('OWMAPIKEY')      ?:   '',

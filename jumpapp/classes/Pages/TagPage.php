@@ -35,6 +35,7 @@ class TagPage extends AbstractPage {
             return $template->render([
                 'hassites' => !empty($taggedsites),
                 'sites' => $taggedsites,
+                'altlayout' => $this->config->parse_bool($this->config->get('altlayout', false)),
             ]);
         });
     }

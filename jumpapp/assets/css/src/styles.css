@@ -251,6 +251,61 @@ body {
         white-space: nowrap;
     }
 
+    .sites.alternate {
+        width:100%;
+        margin-top: 20px;
+    }
+        .sites.alternate li {
+            float: left;
+            width: 50%;
+            text-align: left;
+            padding: 0 5px;
+            margin-bottom: 10px;
+        }
+            .sites.alternate li a {
+                background-color: rgba(255,255,255,0.8);
+                box-shadow: 0 1px 5px rgba(0,0,0,.3);
+                padding: 8px;
+                width: 100%;
+                transition: background-color .1s, box-shadow .1s;
+                position:relative;
+                overflow:hidden;
+            }
+                .sites.alternate li a:hover {
+                    background-color:#fff;
+                    box-shadow: 0 1px 5px rgba(0,0,0,.6);
+                }
+        .sites.alternate .icon {
+            width: 35px;
+            height:35px;
+            display:inline-block;
+            padding: 0;
+            border: none;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: none;
+            vertical-align: middle;
+            margin: 0 8px 0 0;
+        }
+        .sites.alternate .name {
+            width:auto;
+            display:inline-block;
+            vertical-align: middle;
+            text-shadow: none;
+            color: #202124;
+            position: absolute;
+            top: 50%;
+            height: 14px;
+            line-height: 14px;
+            margin-top: -7px;
+        }
+
+        @media (max-width: 500px) {
+            .sites.alternate li {
+                width: 100%;
+            }
+        }
+
 .tags {
     display:none;
     color: #202124;

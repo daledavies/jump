@@ -29,6 +29,7 @@ class HomePage extends AbstractPage {
             return $template->render([
                 'hassites' => !empty($sites->get_sites()),
                 'sites' => $sites->get_sites_by_tag('home'),
+                'altlayout' => $this->config->parse_bool($this->config->get('altlayout', false)),
             ]);
         });
     }
