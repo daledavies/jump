@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.4] - 2022-05-10
+### Added
+- New alternative layout for sites list, works better for sites with longer names (resolves issue #26).
+- Improved security and privacy: Local Google fonts, session handling for API and CSRF checks.
+
+### Fixed
+- Issue #27: Daylight Savings Not Showing (when OWM API is not used).
+- Improved API error reporting (Issue #25).
+- Generate unique hashes for JS/CSS filenames via webpack so updated assets are downloaded quickly after upgrading.
+
 ## [1.1.3] - 2022-03-23
 ### Added
 - Issue #20: Added option within sites.json to open links in a new tab.
