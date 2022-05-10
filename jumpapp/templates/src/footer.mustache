@@ -23,6 +23,6 @@
         </div>
         {{/ hastags}}
         <div class="background fixed"></div>
-        <script defer src="<%= htmlWebpackPlugin.files.js %>"></script>
+        <script defer src="/assets/js/<%= _.last(htmlWebpackPlugin.files.js[0].split('/')) %>"></script>
     </body>
 </html>
