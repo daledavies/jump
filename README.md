@@ -53,6 +53,7 @@ You can use the following optional environment variables to configure/customise 
 - `SHOWGREETING: 'true'` - Show a friendly greeting message rather than "#home".
 - `BGBLUR: 70` - Background image blur percentage.
 - `BGBRIGHT: 85` - Background image brightness percentage.
+- `ALTLAYOUT: 'true'` - Display list of sites using an alternative layout.
 - `NOINDEX: 'true'` - Include a robots noindex meta tag in site header
 - `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 - `OWMAPIKEY` - An API key for Open Weather Map, LATLONG (below) must also be defined.
