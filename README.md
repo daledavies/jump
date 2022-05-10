@@ -8,7 +8,7 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 
 ![screenshot](screenshot.png)
 
-<img src="screenshots/screenshot-tagselection.png" width="200" /> <img src="screenshots/screenshot-tagpage.png" width="200" />
+<img src="screenshots/screenshot-altlayout.png" width="190" /> <img src="screenshots/screenshot-tagselection.png" width="190" /> <img src="screenshots/screenshot-tagpage.png" width="190" />
 
 ### Features
 
