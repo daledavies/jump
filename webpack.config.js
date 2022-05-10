@@ -50,6 +50,7 @@ module.exports = {
         new MiniCssExtractPlugin({filename: '../css/[name].[contenthash].min.css'}),
         new RemoveEmptyScriptsPlugin(),
         new CleanWebpackPlugin({
+            dry: false,
             verbose: true,
             cleanStaleWebpackAssets: true,
             cleanOnceBeforeBuildPatterns: [
