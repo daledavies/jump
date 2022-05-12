@@ -1,0 +1,32 @@
+.header-bar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 15px 15px 0 15px;
+    overflow: hidden;
+    text-align: right;
+    z-index: 100;
+
+    .show-tags {
+        height: 55px;
+        width: 55px;
+        display: inline-block;
+        background-position: top 50% left 50%;
+        background-repeat: no-repeat;
+        background-image: url(../images/tags.svg);
+        background-size: 35px;
+        background-color: #ffffff15;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #ffffff20;
+
+        &:hover {
+            background-color: #fff;
+            box-shadow: 0 1px 5px rgba(0,0,0,.3);
+            background-image: url(../images/tags-dark.svg);
+            border: 2px solid #cecece;
+            transition: background-color, background-image .1s;
+        }
+    }
+}

@@ -10,7 +10,7 @@ module.exports = {
     mode: 'production',
     entry: {
         index: './jumpapp/assets/js/src/index.js',
-        styles: './jumpapp/assets/css/src/styles.css',
+        styles: './jumpapp/assets/css/src/index.scss',
     },
     output: {
         filename: '[name].[contenthash].min.js',
@@ -19,17 +19,18 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.(s(a|c)ss)$/,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader
                     },
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         options: {
                             url: false // Stop webpack emitting image/font from URLs found in CSS.
                         }
-                    }
+                    },
+                    'sass-loader',
                 ],
             }
         ]
