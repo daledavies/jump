@@ -55,7 +55,7 @@
     user-select: none;
     z-index:1000;
 
-    .clickable {
+    &.clickable {
         border-radius: 6px;
         cursor: pointer;
 
