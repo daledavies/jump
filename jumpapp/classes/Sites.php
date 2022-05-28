@@ -156,4 +156,17 @@ class Sites {
         return $found;
     }
 
+    public function get_sites_for_search(): array {
+        $searchlist = [];
+        foreach ($this->loadedsites as $loadedsite) {
+            $site = new \stdClass();
+            $site->name = $loadedsite->name;
+            $site->url = $loadedsite->url;
+            $site->tags = $loadedsite->tags;
+            $site->iconurl = '/api/icon.php?siteurl='.urlencode($loadedsite->url);
+            $searchlist[] = $site;
+        }
+        return $searchlist;
+    }
+
 }

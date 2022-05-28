@@ -30,7 +30,9 @@ return [
     // Background brightness percentage.
     'bgbright'       => getenv('BGBRIGHT')       ?:   '85',
     // Display alternative layout of sites list.
-    'altlayout'     => getenv('ALTLAYOUT')       ?:   false,
+    'altlayout'      => getenv('ALTLAYOUT')      ?:   false,
+    // Show the search bar, requires /search/searchengines.json etc.
+    'showsearch'     => getenv('SHOWSEARCH')     ?:   true,
 
     // Open Weather Map API key.
     'owmapikey'      => getenv('OWMAPIKEY')      ?:   '',

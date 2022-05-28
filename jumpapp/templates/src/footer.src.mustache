@@ -11,6 +11,15 @@
         </span>
         <span class="useclientlocation widget clickable"></span>
         <div class="header-bar">
+            {{# showsearch}}
+            <span class="search">
+                <span class="close"></span>
+                <form class="search-form">
+                    <input type="search">
+                </form>
+                <span class="suggestion-list"></span>
+            </span>
+            {{/ showsearch}}
            {{# hastags }}<a href="#tags" class="show-tags"></a>{{/ hastags }}
         </div>
         {{# hastags}}

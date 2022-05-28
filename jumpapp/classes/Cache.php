@@ -29,6 +29,11 @@ class Cache {
     public function __construct(private Config $config) {
         // Define the various caches used throughout the app.
         $this->caches = [
+            'searchengines' => [
+                'cache' => null,
+                'expirationtype' => Caching\Cache::FILES,
+                'expirationparams' => $config->get('searchenginesfile')
+            ],
             'sites' => [
                 'cache' => null,
                 'expirationtype' => Caching\Cache::FILES,

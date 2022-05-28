@@ -24,6 +24,7 @@ class Config {
     private const BASE_APPLICATION_PATHS = [
         'backgroundsdir' => '/assets/backgrounds',
         'defaulticonpath' => '/assets/images/default-icon.png',
+        'searchenginesfile' => '/search/searchengines.json',
         'sitesdir' => '/sites',
         'sitesfile' => '/sites/sites.json',
         'templatedir' => '/templates',

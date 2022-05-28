@@ -11,14 +11,20 @@ class TagPage extends AbstractPage {
         $greeting = $this->param;
         $title = 'Tag: '.$this->param;
         $csrfsection = $this->session->getSection('csrf');
-        return $template->render([
+        $templatecontext = [
             'csrftoken' => $csrfsection->get('token'),
             'greeting' => $greeting,
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'title' => $title,
             'owmapikey' => !!$this->config->get('owmapikey', false),
             'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
-        ]);
+        ];
+        if ($this->config->parse_bool($this->config->get('showsearch', false))) {
+            $templatecontext = array_merge($templatecontext,
+            ['searchengines' => json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines()),
+            'searchjson' => json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_search()),]);
+        }
+        return $template->render($templatecontext);
     }
 
     protected function render_content(): string {
@@ -48,7 +54,8 @@ class TagPage extends AbstractPage {
             return $template->render([
                 'hastags' => !empty($tags),
                 'tags' => $tags,
-                'showclock' => $this->config->parse_bool($this->config->get('showclock'))
+                'showclock' => $this->config->parse_bool($this->config->get('showclock')),
+                'showsearch' => $this->config->parse_bool($this->config->get('showsearch', false)),
             ]);
         });
     }

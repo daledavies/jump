@@ -38,13 +38,13 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, './jumpapp/templates/header.mustache'),
-            template: path.resolve(__dirname, './jumpapp/templates/src/header.mustache'),
+            template: path.resolve(__dirname, './jumpapp/templates/src/header.src.mustache'),
             inject: false,
             minify: false, // Required to prevent addition of closing tags like body and html.
         }),
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, './jumpapp/templates/footer.mustache'),
-            template: path.resolve(__dirname, './jumpapp/templates/src/footer.mustache'),
+            template: path.resolve(__dirname, './jumpapp/templates/src/footer.src.mustache'),
             inject: false,
             minify: false, // Required to prevent addition of closing tags like body and html.
         }),

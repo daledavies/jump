@@ -20,6 +20,7 @@
         "webpack-remove-empty-scripts": "^0.8.0"
     },
     "dependencies": {
-        "eventemitter3": "^4.0.7"
+        "eventemitter3": "^4.0.7",
+        "fuse.js": "^6.6.2"
     }
 }

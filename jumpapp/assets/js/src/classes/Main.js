@@ -1,6 +1,8 @@
 import Clock from './Clock';
 import EventEmitter from 'eventemitter3';
+import Fuse from 'fuse.js';
 import Greeting from './Greeting';
+import SearchSuggestions from './SearchSuggestions';
 import Weather from './Weather';
 
 export default class Main {
@@ -23,7 +25,8 @@ export default class Main {
         this.clientlocationelm = document.querySelector('.useclientlocation');
         this.showtagsbuttonelm = document.querySelector('.show-tags');
         this.tagselectorelm = document.querySelector('.tags');
-        this.tagsselectorclosebuttonelm = document.querySelector('.tags .close')
+        this.tagsselectorclosebuttonelm = document.querySelector('.tags .close');
+        this.showsearchbuttonelm = document.querySelector('.search');
         // If the user has previously asked for geolocation we will have stored the latlong.
         if (this.lastrequestedlocation = this.storage.getItem('lastrequestedlocation')){
             this.latlong = JSON.parse(this.lastrequestedlocation);
@@ -32,6 +35,14 @@ export default class Main {
         this.eventemitter = new EventEmitter();
         this.clock = new Clock(this.eventemitter, !!JUMP.ampmclock, !JUMP.owmapikey);
         this.weather = new Weather(this.eventemitter);
+
+        if (this.showsearchbuttonelm) {
+            this.searchclosebuttonelm = this.showsearchbuttonelm.querySelector('.close');
+            this.fuse = new Fuse(JSON.parse(JUMP.search), {
+                threshold: 0.3,
+                keys: ['name', 'tags']
+            });
+        }
     }
 
     /**
@@ -115,6 +126,76 @@ export default class Main {
             });
         }
 
+        if (this.showsearchbuttonelm) {
+            const searchinput = document.querySelector('.search-form input');
+            this.searchsuggestions = new SearchSuggestions(JSON.parse(JUMP.searchengines), searchinput, this.showsearchbuttonelm, this.eventemitter);
+
+            // When the search icon is licked, show the search bar and focus on it.
+            this.showsearchbuttonelm.addEventListener('click', e => {
+                if (!e.target.classList.contains('open')) {
+                    this.showsearchbuttonelm.classList.add('open');
+                    searchinput.focus();
+                }
+            });
+
+            // Listen for CTRL+/ key combo and open search bar.
+            document.addEventListener('keyup', e => {
+                if (e.ctrlKey && (e.code == 'Slash')) {
+                    if (!this.showsearchbuttonelm.classList.contains('open')) {
+                        this.showsearchbuttonelm.classList.add('open');
+                        searchinput.focus();
+                    } else {
+                        this.search_close();
+                    }
+                }
+            });
+
+            // Handle the close button.
+            this.searchclosebuttonelm.addEventListener('click', e => {
+                e.stopPropagation();
+                this.search_close();
+            });
+
+            // Listen for key events triggered by the searh bar and do stuff.
+            searchinput.addEventListener('keyup', e => {
+                // On arrow down, focus on the first search suggestion.
+                let suggestionslist = document.querySelector('.suggestion-list .searchproviders');
+                if (e.code === 'ArrowDown') {
+                    if (suggestionslist && suggestionslist.childNodes.length) {
+                        suggestionslist.firstChild.firstChild.focus();
+                    }
+                    return;
+                }
+                // Perform search and display suggestions on the page.
+                let results = [];
+                let siteresults = this.fuse.search(searchinput.value);
+                if (siteresults.length > 0) {
+                    siteresults.forEach((result) => {
+                        results.push(result.item);
+                    });
+                }
+                this.searchsuggestions.replace(results);
+            });
+
+            // If someone presses enter then open up the first link, this is the default seach engine
+            // purely because it is at the top of the list.
+            document.querySelector('.search-form').addEventListener('submit', e => {
+                e.preventDefault();
+                if (searchinput.value != '') {
+                    document.querySelector('.searchproviders li a').click();
+                }
+            });
+        }
+    }
+
+    search_close() {
+        let suggestions = this.showsearchbuttonelm.querySelector('.suggestionholder');
+        if (suggestions) {
+            suggestions.remove();
+        }
+        this.showsearchbuttonelm.classList.remove('suggestions');
+        document.querySelector('.search').classList.remove('open');
+        document.querySelector('.search-form input').value = '';
     }
 
     /**
