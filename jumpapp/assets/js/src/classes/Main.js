@@ -166,9 +166,11 @@ export default class Main {
                     }
                     return;
                 }
-                // Perform search and display suggestions on the page.
+                // Perform search, limit number of results, create new array containing only what
+                // we need and finally display the suggestions on the page.
                 let results = [];
                 let siteresults = this.fuse.search(searchinput.value);
+                siteresults.length = 8;
                 if (siteresults.length > 0) {
                     siteresults.forEach((result) => {
                         results.push(result.item);
