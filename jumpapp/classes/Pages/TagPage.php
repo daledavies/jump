@@ -18,11 +18,14 @@ class TagPage extends AbstractPage {
             'title' => $title,
             'owmapikey' => !!$this->config->get('owmapikey', false),
             'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
+            'ampmclock' => $this->config->parse_bool($this->config->get('ampmclock', false)),
+            'unsplash' => !!$this->config->get('unsplashapikey', false),
         ];
         if ($this->config->parse_bool($this->config->get('showsearch', false))) {
-            $templatecontext = array_merge($templatecontext,
-            ['searchengines' => json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines()),
-            'searchjson' => json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_search()),]);
+            $templatecontext = array_merge($templatecontext, [
+                'searchengines' => json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines()),
+                'searchjson' => json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_search()),
+            ]);
         }
         return $template->render($templatecontext);
     }

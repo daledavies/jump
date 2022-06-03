@@ -25,7 +25,7 @@ if (http_response_code() === false) {
 header('Content-Type: application/json; charset=utf-8');
 
 // Initialise a new session using the request object.
-$session = new \Nette\Http\Session((new \Nette\Http\RequestFactory)->fromGlobals(), new \Nette\Http\Response);
+$session = new Nette\Http\Session((new Nette\Http\RequestFactory)->fromGlobals(), new Nette\Http\Response);
 $session->setName($config->get('sessionname'));
 $session->setExpiration($config->get('sessiontimeout'));
 
@@ -56,24 +56,31 @@ function load_cache_unsplash_data() {
             'utmSource' => 'jump_startpage',
             'applicationId'	=> $config->get('unsplashapikey'),
         ]);
-        // Or apply some optional filters by passing a key value array of filters
-        $filters = [
-            'collections' => $config->get('unsplashcollections', false),
-        ];
-        $photo = Crew\Unsplash\Photo::random($filters);
+        // Try to get a random image via the API.
+        try {
+            $photo = Crew\Unsplash\Photo::random([
+                'collections' => $config->get('unsplashcollections', false),
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            die(json_encode(['error' => json_decode($e->getMessage())]));
+        }
         // Download the image data from Unsplash.
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $photo->urls['raw'] . '&auto=compress&w=1920');
+        curl_setopt($ch, CURLOPT_URL, $photo->urls['raw'].'&auto=compress&w=1920');
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_FAILONERROR, true);
         $response = curl_exec($ch);
-        $description = $photo->description?$photo->description:'Photo';
+        // Create the response and return it.
+        $description = 'Photo';
+        if ($photo->description !== null &&
+            strlen($photo->description) <= 45) {
+            $description = $photo->description;
+        }
         $unsplashdata = new stdClass();
-        $unsplashdata->cssimg = $photo->urls['raw'] . '&auto=compress&w=1920';
         $unsplashdata->attribution = '<a target="_blank" rel="noopener" href="'.$photo->links['html'].'">'.$description.'</a> by <a target="_blank" rel="noopener" href="'.$photo->user['links']['html'].'">'.$photo->user['name'].'</a>';
-        $unsplashdata->blurhash = $photo->blur_hash;
-        $unsplashdata->imagedatauri = 'data: '.(new \finfo(FILEINFO_MIME_TYPE))->buffer($response).';base64,'.base64_encode($response);
+        $unsplashdata->imagedatauri = 'data: '.(new finfo(FILEINFO_MIME_TYPE))->buffer($response).';base64,'.base64_encode($response);
         return $unsplashdata;
     });
 }
