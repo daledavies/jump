@@ -79,7 +79,7 @@ function load_cache_unsplash_data() {
             $description = $photo->description;
         }
         $unsplashdata = new stdClass();
-        $unsplashdata->attribution = '<a target="_blank" rel="noopener" href="'.$photo->links['html'].'">'.$description.'</a> by <a target="_blank" rel="noopener" href="'.$photo->user['links']['html'].'">'.$photo->user['name'].'</a>';
+        $unsplashdata->attribution = '<a target="_blank" rel="noopener" href="'.$photo->links['html'].'">'.$description.' by '.$photo->user['name'].'</a>';
         $unsplashdata->imagedatauri = 'data: '.(new finfo(FILEINFO_MIME_TYPE))->buffer($response).';base64,'.base64_encode($response);
         return $unsplashdata;
     });
