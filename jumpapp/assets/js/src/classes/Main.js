@@ -49,6 +49,20 @@ export default class Main {
      * Get data from OWM and do stuff with it.
      */
     init() {
+        // Let's display some images from unsplash then shall we...
+        if (JUMP.unsplash) {
+            fetch('/api/unsplashdata.php?token=' + JUMP.token)
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('JUMP ERROR: There was an issue with the Unsplash API... ' + data.error);
+                    return;
+                }
+                document.querySelector('.background').style.backgroundImage = 'url("' + data.imagedatauri + '")';
+                document.querySelector('.unsplash').innerHTML = data.attribution;
+            });
+        }
+
         // Start listening for events so we can do stuff when needed.
         this.add_event_listeners();
         // If there is no OWM API key provided then just update the greeting

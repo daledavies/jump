@@ -17,22 +17,27 @@ return [
     // Where is the cache storage directory, should not be public.
     'cachedir'       => getenv('CACHEDIR')       ?:   '/var/www/cache',
 
-    // Include the robots noindex meta tag in site header.
-    'noindex'        => getenv('NOINDEX')        ?:   true,
+    // Display alternative layout of sites list.
+    'altlayout'      => getenv('ALTLAYOUT')      ?:   false,
     // Should the clock be displayed?
     'showclock'      => getenv('SHOWCLOCK')      ?:   true,
     // 12 hour clock format?
     'ampmclock'      => getenv('AMPMCLOCK')      ?:   false,
     // Show a friendly greeting message rather than "#home".
     'showgreeting'   => getenv('SHOWGREETING')   ?:   true,
+    // Show the search bar, requires /search/searchengines.json etc.
+    'showsearch'     => getenv('SHOWSEARCH')     ?:   true,
+    // Include the robots noindex meta tag in site header.
+    'noindex'        => getenv('NOINDEX')        ?:   true,
+
     // Background blur percentage.
     'bgblur'         => getenv('BGBLUR')         ?:   '70',
     // Background brightness percentage.
     'bgbright'       => getenv('BGBRIGHT')       ?:   '85',
-    // Display alternative layout of sites list.
-    'altlayout'      => getenv('ALTLAYOUT')      ?:   false,
-    // Show the search bar, requires /search/searchengines.json etc.
-    'showsearch'     => getenv('SHOWSEARCH')     ?:   true,
+    // Unsplash API key, when added will use Unsplash background images.
+    'unsplashapikey' => getenv('UNSPLASHAPIKEY') ?:   false,
+    // Unsplash collection name to pick random image from.
+    'unsplashcollections' => getenv('UNSPLASHCOLLECTIONS') ?: '',
 
     // Open Weather Map API key.
     'owmapikey'      => getenv('OWMAPIKEY')      ?:   '',
