@@ -51,6 +51,10 @@ export default class Main {
     init() {
         // Let's display some images from unsplash then shall we...
         if (JUMP.unsplash) {
+            const backgroundelm = document.querySelector('.background');
+            if (JUMP.unsplashcolor) {
+                backgroundelm.style.backgroundColor = JUMP.unsplashcolor;
+            }
             fetch('/api/unsplashdata.php?token=' + JUMP.token)
             .then(response => response.json())
             .then(data => {
@@ -58,7 +62,7 @@ export default class Main {
                     console.error('JUMP ERROR: There was an issue with the Unsplash API... ' + data.error);
                     return;
                 }
-                document.querySelector('.background').style.backgroundImage = 'url("' + data.imagedatauri + '")';
+                backgroundelm.style.backgroundImage = 'url("' + data.imagedatauri + '")';
                 document.querySelector('.unsplash').innerHTML = data.attribution;
             });
         }

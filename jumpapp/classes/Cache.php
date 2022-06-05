@@ -102,14 +102,18 @@ class Cache {
      * @param callable $callback The code from which the result should be stored in cache.
      * @return mixed The result of callback function retreieved from cache.
      */
-    public function load(string $cachename, ?string $key = 'default', callable $callback): mixed {
+    public function load(string $cachename, ?string $key = 'default', callable $callback = null): mixed {
         // If cachebypass has been set in config.php then just execute the callback.
-        if ($this->config->parse_bool($this->config->get('cachebypass'))) {
+        if ($this->config->parse_bool($this->config->get('cachebypass')) && $callback !== null) {
             return $callback();
         }
         $this->init_cache($cachename, $key);
-        // Retrieve the initialised cache object from $caches, defines the caches expiry
-        // and executes the callback.
+        // Retrieve the initialised cache object from $caches.
+        if ($callback === null) {
+            return $this->caches[$cachename]['cache'][$key]->load($cachename.'/'.$key);
+        }
+        // If we have a callback supplied then get the cached object and also define the
+        // cache's expiry and execute the callback.
         return $this->caches[$cachename]['cache'][$key]->load($cachename.'/'.$key,
             function (&$dependencies) use ($callback, $cachename) {
                 $dependencies[$this->caches[$cachename]['expirationtype']] = $this->caches[$cachename]['expirationparams'];

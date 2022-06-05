@@ -11,6 +11,7 @@ class HomePage extends AbstractPage {
             $greeting = 'home';
         }
         $csrfsection = $this->session->getSection('csrf');
+        $unsplashdata = $this->cache->load('unsplash');
         $templatecontext = [
             'csrftoken' => $csrfsection->get('token'),
             'greeting' => $greeting,
@@ -20,6 +21,7 @@ class HomePage extends AbstractPage {
             'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp')),
             'ampmclock' => $this->config->parse_bool($this->config->get('ampmclock', false)),
             'unsplash' => !!$this->config->get('unsplashapikey', false),
+            'unsplashcolor' => $unsplashdata?->color,
         ];
         if ($this->config->parse_bool($this->config->get('showsearch', false))) {
             $templatecontext = array_merge($templatecontext, [

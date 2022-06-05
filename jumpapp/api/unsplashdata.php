@@ -46,8 +46,9 @@ if (!$token || !hash_equals($csrfsection->get('token'), $token)) {
 }
 
 $unsplashdata = load_cache_unsplash_data();
-shell_exec('/usr/bin/nohup /usr/bin/php -f unsplashdata.php >/dev/null 2>&1 &');
 echo json_encode($unsplashdata);
+
+shell_exec('/usr/bin/nohup /usr/bin/php -f unsplashdata.php >/dev/null 2>&1 &');
 
 function load_cache_unsplash_data() {
     global $cache, $config;
@@ -79,6 +80,7 @@ function load_cache_unsplash_data() {
             $description = $photo->description;
         }
         $unsplashdata = new stdClass();
+        $unsplashdata->color = $photo->color;
         $unsplashdata->attribution = '<a target="_blank" rel="noopener" href="'.$photo->links['html'].'">'.$description.' by '.$photo->user['name'].'</a>';
         $unsplashdata->imagedatauri = 'data: '.(new finfo(FILEINFO_MIME_TYPE))->buffer($response).';base64,'.base64_encode($response);
         return $unsplashdata;
