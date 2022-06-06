@@ -50,7 +50,7 @@ RUN apk add --no-cache \
   php8-zlib
 
 # Create symlink for anything expecting to use "php".
-RUN ln -s /usr/bin/php8 /usr/bin/php
+RUN ln -s -f /usr/bin/php8 /usr/bin/php
 
 # Nginx config.
 COPY docker/nginx.conf /etc/nginx/nginx.conf
