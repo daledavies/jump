@@ -6,17 +6,17 @@
 
 Jump is yet another self-hosted startpage for your server designed to be simple, stylish, fast and secure.
 
-![screenshot](screenshot.png)
-
-<img src="screenshots/screenshot-altlayout.png" width="190" /> <img src="screenshots/screenshot-tagselection.png" width="190" /> <img src="screenshots/screenshot-tagpage.png" width="190" />
+![screenshot](screenshots/screenshot-demo.gif)
 
 ### Features
 
 - Fast, easy to deploy, secure
 - Custom sites and icons
 - Categorise sites with tags
-- Fetch favicons for sites without custom icons
 - Custom background images
+- Unsplash integration (background images)
+- Search sites added to Jump, plus custom list of search engines 
+- Fetch favicons for sites without custom icons
 - Open Weather Map integration
 
 
@@ -37,6 +37,7 @@ services:
             - 8123:8080
         volumes:
             - ./backgrounds:/backgrounds
+            - ./search:/search
             - ./sites:/sites
         environment:
             SITENAME: 'Custom site name'
@@ -48,23 +49,26 @@ services:
 You can use the following optional environment variables to configure/customise your Jump site...
 
 - `SITENAME` - Custom site name.
-- `SHOWCLOCK: 'true'` - Show/hide the clock.
+- `SHOWCLOCK: 'false'` - Hide the clock.
 - `AMPMCLOCK: 'true'` - Show 12 hour clock format if true.
-- `SHOWGREETING: 'true'` - Show a friendly greeting message rather than "#home".
-- `BGBLUR: 70` - Background image blur percentage.
-- `BGBRIGHT: 85` - Background image brightness percentage.
-- `ALTLAYOUT: 'true'` - Display list of sites using an alternative layout.
-- `NOINDEX: 'true'` - Include a robots noindex meta tag in site header
-- `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
+- `SHOWGREETING: 'false'` - Show the label "#home" instead of a friendly greeting message.
+- `SHOWSEARCH : 'false'` - Hide the search button (disable search).
+- `ALTLAYOUT: 'true'` - Display list of sites using an [alternative layout](/screenshots/screenshot-altlayout.png).
+- `BGBLUR: 50` - Background image blur percentage.
+- `BGBRIGHT: 90` - Background image brightness percentage.
+- `UNSPLASHAPIKEY` - An API key for Unsplash, enables fetching random background images from Unsplash.
+- `UNSPLASHCOLLECTIONS` - List of Unsplash collection ID's (separated by commas) to select random images from.
 - `OWMAPIKEY` - An API key for Open Weather Map, LATLONG (below) must also be defined.
 - `LATLONG` - A latitude and longitude for the default location (e.g. "51.509865,-0.118092").
 - `METRICTEMP: 'true'` - Metric (C) or imperial (F) temperature units.
+- `NOINDEX: 'true'` - Include a robots noindex meta tag in site header
+- `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 
-**NOTE:** The OWMAPIKEY and LATLONG config options must be defined together.
+**NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together.
 
 #### Volume Mapping
 
-You can map the "backgrounds" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
+You can map the "backgrounds",  "search" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
 
 #### Docker
 
@@ -74,6 +78,7 @@ The same can be achieved just using Docker CLI...
 docker run -d -p 8123:8080 \
 --volume <path/to/backgrounds>:/backgrounds \
 --volume <path/to/sites>:/sites \
+--volume <path/to/search>:/search \
 --env SITENAME='Custom site name' \
 --env OWMAPIKEY='<open weather api key>' \
 --env LATLONG='<lat,long>' \
@@ -96,7 +101,7 @@ Make sure you have created a cache directory and given the web user permission t
 
 ### Open Weather Map
 
-You can configure Jump to get local time and weather updates by adding an Open Weather Map API key to `config.php` or passing the `OWMAPIKEY ` environment variable to the docker container (as described above).
+You can configure Jump to get local time and weather updates by adding an Open Weather Map API key to `config.php` or passing the `OWMAPIKEY ` environment variable to the Docker container (as described above).
 
 You will also need to provide a default `LATLONG` string (e.g. "51.509865,-0.118092"), Jump will use this  until you press the location button and allow permission to get your location from the web browser.
 
@@ -178,20 +183,45 @@ On a per-site basis use `"nofollow": true` to include `rel="nofollow"` on specif
 
 On a per-site basis use `"newtab": true` to open specific site links in a new browser tab.
 
+### Search
+
+Edit the `/search/searchengines.json` file to customise the list of search engines available from the search dropdown...
+
+```json
+[
+    {
+        "name": "Google",
+        "url": "https://www.google.co.uk/search?q="
+    },
+    {
+        "name": "DuckDuckGo",
+        "url": "https://duckduckgo.com/?q="
+    },
+    {
+        "name": "Bing",
+        "url": "https://www.bing.com/search?q="
+    }
+]
+```
+
+
+
 ### Background Images
 
-To use your own background images just copy them to the `/backgrounds/` directory, Jump will pick up on them automatically.
+To use your own background images just copy them to the `/backgrounds/` directory, Jump will pick up on them automatically ans show a random image every time the page loads.
+
+If instead you want to use Unsplash for random background images add an Unsplash API key to `config.php` or pass the `UNSPLASHAPIKEY ` environment variable to the Docker container. You can provide a comma separated list of collection ID's using the `unsplashcollections` option in `config.php` or by passing them to the Docker container via the `UNSPLASHCOLLECTIONS` environment variable.
 
 ## Development
 
-Patches, improvements and feature requests are welcomed although I want to avoid anything that requires a database, admin interface or user accounts.
+Patches, improvements and feature requests are welcomed although I want to avoid anything that requires an admin interface or user accounts.
 
 For development you will need to install composer dependencies by running `composer install` from within the `jumpapp` directory.
 
 Javascript is bundled using Webpack, so you will need to have installed Node.js. Then within the root project directory (the same level as webpack.config.js) you should run `npm install`.
 
-Before starting development you can run `npm run dev`, this will watch for changes to files within the `/assets/js/src/`directory and bundle them on the fly. The javascript bundle (`index.bundle.js`) created in development mode will not be minified and will contain source maps for debugging.
+Before starting development you can run `npm run dev`, this will watch for changes to files within the `/jumpapp/assets/js/src/`, `/jumpapp/assets/css/src/` and `/jumpapp/templates/src/` directories and bundle them on the fly. Javascript and CSS bundles created in development mode will not be minified and will contain source maps for debugging.
 
-You can test a production build using `npm run build`, this will bundle and minify the javascript source files without source maps.
+You can test a production build using `npm run build` which will bundle and minify the javascript and CSS source files without source maps, header and footer templates will be created containing the correct links to newly created javascript and CSS bundles.
 
-Please do not commit javascript bundles, only commit the patched source files.
+Please do not commit any generated files however, only commit the patched source files.
