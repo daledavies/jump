@@ -10,7 +10,7 @@ if [ -z "${DEVELOPMENT-}" ]; then
     fi
     cp /usr/src/jumpapp/* /var/www/html -r
 
-    echo >&2 "- Check if backgrounds or sites volumes have been mounted."
+    echo >&2 "- Check if backgrounds, search or sites volumes have been mounted."
     if [ -e "/backgrounds" ]; then
         echo >&2 "   - Backgrounds directory is mapped... symlinking."
         rm /var/www/html/assets/backgrounds -r
@@ -28,6 +28,16 @@ if [ -z "${DEVELOPMENT-}" ]; then
         if [ ! "$(ls -A /sites)" ]; then
             echo >&2 "     -- Empty so populating with default files."
             cp /usr/src/jumpapp/sites/* /sites -r
+        fi
+    fi
+
+    if [ -e "/search" ]; then
+        echo >&2 "   - Search directory is mapped... symlinking."
+        rm /var/www/html/search -r
+        ln -s /search /var/www/html/
+        if [ ! "$(ls -A /search)" ]; then
+            echo >&2 "     -- Empty so populating with default files."
+            cp /usr/src/jumpapp/search/* /search -r
         fi
     fi
 
