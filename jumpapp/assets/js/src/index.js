@@ -7,5 +7,16 @@
 
 import Main from './classes/Main';
 
+console.info(`%c
+     ██ ██    ██ ███    ███ ██████
+     ██ ██    ██ ████  ████ ██   ██
+     ██ ██    ██ ██ ████ ██ ██████
+██   ██ ██    ██ ██  ██  ██ ██
+ █████   ██████  ██      ██ ██
+
+https://github.com/daledavies/jump
+
+`, "font-family:monospace");
+
 let jumpapp = new Main();
 jumpapp.init();
