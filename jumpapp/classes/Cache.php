@@ -62,8 +62,10 @@ class Cache {
             ],
             'unsplash' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::EXPIRE,
-                'expirationparams' => '5 minutes'
+                'expirationtype' => Caching\Cache::FILES,
+                'expirationparams' => [
+                    __DIR__.'/../config.php',
+                ]
             ],
             'weatherdata' => [
                 'cache' => null,
