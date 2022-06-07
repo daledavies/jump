@@ -158,7 +158,7 @@ export default class Main {
 
             // Listen for CTRL+/ key combo and open search bar.
             document.addEventListener('keyup', e => {
-                if (e.ctrlKey && (e.code == 'Slash')) {
+                if (e.ctrlKey && e.shiftKey && e.code == 'Slash') {
                     if (!this.showsearchbuttonelm.classList.contains('open')) {
                         this.showsearchbuttonelm.classList.add('open');
                         searchinput.focus();
