@@ -185,7 +185,7 @@ On a per-site basis use `"newtab": true` to open specific site links in a new br
 
 ### Search
 
-Edit the `/search/searchengines.json` file to customise the list of search engines available from the search dropdown...
+Edit the `/search/searchengines.json` file to customise the list of search engines available from the search dropdown, the first search engine in the list will be the default...
 
 ```json
 [
@@ -204,7 +204,7 @@ Edit the `/search/searchengines.json` file to customise the list of search engin
 ]
 ```
 
-
+For quick access to the search from the keyboard you can open the search bar using the `ctrl-shift-/` keyboard shortcut and start typing straight away.
 
 ### Background Images
 
