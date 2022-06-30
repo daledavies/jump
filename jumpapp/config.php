@@ -38,6 +38,8 @@ return [
     'unsplashapikey' => getenv('UNSPLASHAPIKEY') ?:   false,
     // Unsplash collection name to pick random image from.
     'unsplashcollections' => getenv('UNSPLASHCOLLECTIONS') ?: '',
+    // Alternative background image provider.
+    'altbgprovider'  => getenv('ALTBGPROVIDER')  ?:   false,
 
     // Open Weather Map API key.
     'owmapikey'      => getenv('OWMAPIKEY')      ?:   '',

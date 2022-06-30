@@ -15,9 +15,16 @@ $blur = floor((int)$config->get('bgblur', false) / 100 * 15);
 $brightness = (int)$config->get('bgbright', false) ? (int)$config->get('bgbright', false) / 100 : 1;
 
 $bgurlstring = '';
+
+// Use unsplash API for background images if provided, otherwise use altbgprovider.
+// If none of the above have been provided then fall back to local image.
 if ($config->get('unsplashapikey', false) == null) {
-    $backgroundimgfile = (new Jump\Background($config))->get_random_background_file();
-    $bgurlstring = 'background-image: url("'.$backgroundimgfile.'");';
+    if ($config->get('altbgprovider', false) != null) {
+        $backgroundimageurl = $config->get('altbgprovider', false);
+    } else {
+        $backgroundimageurl = (new Jump\Background($config))->get_random_background_file();
+    }
+    $bgurlstring = 'background-image: url("'.$backgroundimageurl.'");';
 }
 
 header('Content-Type: text/css');
