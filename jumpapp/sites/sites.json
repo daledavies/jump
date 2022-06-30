@@ -8,6 +8,7 @@
         {
             "name": "Github",
             "url" : "https://github.com/daledavies/jump",
+            "description": "This is a test",
             "nofollow": false,
             "newtab": true
         },
@@ -18,6 +19,7 @@
         {
             "name": "Bitwarden",
             "url" : "https://bitwarden.example.com",
+            "description": "This is another test",
             "icon": "bitwarden.png",
             "tags": ["stuff"]
         },

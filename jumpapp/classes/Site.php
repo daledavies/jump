@@ -37,6 +37,7 @@ class Site {
         $this->newtab = isset($sitearray['newtab']) ? $sitearray['newtab'] : (isset($this->defaults['newtab']) ? $this->defaults['newtab'] : false);
         $this->iconname = $sitearray['icon'] ?? null;
         $this->tags = $sitearray['tags'] ?? $this->tags;
+        $this->description = isset($sitearray['description']) ? $sitearray['description'] : $sitearray['name'];
     }
 
     /**
