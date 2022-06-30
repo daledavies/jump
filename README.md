@@ -58,11 +58,13 @@ You can use the following optional environment variables to configure/customise 
 - `BGBRIGHT: 90` - Background image brightness percentage.
 - `UNSPLASHAPIKEY` - An API key for Unsplash, enables fetching random background images from Unsplash.
 - `UNSPLASHCOLLECTIONS` - List of Unsplash collection ID's (separated by commas) to select random images from.
+- `ALTBGPROVIDER` - An alternative background provider url.
 - `OWMAPIKEY` - An API key for Open Weather Map, LATLONG (below) must also be defined.
 - `LATLONG` - A latitude and longitude for the default location (e.g. "51.509865,-0.118092").
 - `METRICTEMP: 'true'` - Metric (C) or imperial (F) temperature units.
 - `NOINDEX: 'true'` - Include a robots noindex meta tag in site header
 - `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
+- `WWWURL` - Useful if Jump is hosted in a sub-directory.
 
 **NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together.
 
@@ -120,12 +122,18 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
         {
             "name": "Github",
             "url" : "https://github.com/daledavies/jump",
+            "description": "This is an example description",
             "nofollow": false,
             "newtab": true
         },
         {
+            "name": "Docker Hub",
+            "url" : "https://hub.docker.com/r/daledavies/jump"
+        },
+        {
             "name": "Bitwarden",
             "url" : "https://bitwarden.example.com",
+            "description": "This is another example of a site with a description",
             "icon": "bitwarden.png",
             "tags": ["stuff"]
         },
@@ -149,7 +157,8 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
         },
         {
             "name": "Google",
-            "url" : "https://www.google.com"
+            "url" : "https://www.google.com",
+            "nofollow": false
         }
     ]
 }
@@ -157,7 +166,7 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
 ```
 
 * `name` and `url` are mandatory.
-* `tags`, `nofollow`, `newtab` and `icon` are optional.
+* `description`, `tags`, `nofollow`, `newtab` and `icon` are optional.
 
 #### Tags
 
