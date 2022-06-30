@@ -14,7 +14,8 @@ class ErrorPage {
             $template = $this->mustache->loadTemplate('errorpage');
             return $template->render([
                 'code' => $httpcode,
-                'message' => $message
+                'message' => $message,
+                'wwwurl' => $this->config->get_wwwurl(),
             ]);
         });
     }

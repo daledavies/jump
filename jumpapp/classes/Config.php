@@ -120,4 +120,8 @@ class Config {
         return filter_var($input,FILTER_VALIDATE_BOOLEAN,FILTER_NULL_ON_FAILURE);
     }
 
+    public function get_wwwurl() {
+        return rtrim($this->config->get('wwwurl', false), '/');
+    }
+
 }

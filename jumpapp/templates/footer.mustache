@@ -26,13 +26,13 @@
         <div id="tags" class="tags">
             <span class="header">Tags<span class="close"></span></span>
             <ul>
-                <li><a href="/">home</a></li>
-                {{# tags}}<li><a href="/tag/{{.}}/">{{.}}</a></li>{{/ tags}}
+                <li><a href="{{{wwwurl}}}/">home</a></li>
+                {{# tags}}<li><a href="{{{wwwurl}}}/tag/{{.}}/">{{.}}</a></li>{{/ tags}}
             </ul>
         </div>
         {{/ hastags}}
         <span class="unsplash"></span>
         <div class="background fixed"></div>
-        <script defer src="/assets/js/index.c63595ee13b76dab6fb3.min.js"></script>
+        <script defer src="{{{wwwurl}}}/assets/js/index.c63595ee13b76dab6fb3.min.js"></script>
     </body>
 </html>

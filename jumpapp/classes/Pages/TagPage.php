@@ -22,6 +22,7 @@ class TagPage extends AbstractPage {
             'ampmclock' => $this->config->parse_bool($this->config->get('ampmclock', false)),
             'unsplash' => !!$this->config->get('unsplashapikey', false),
             'unsplashcolor' => $unsplashdata?->color,
+            'url' => $this->config->get('url', false),
         ];
         if ($this->config->parse_bool($this->config->get('showsearch', false))) {
             $templatecontext = array_merge($templatecontext, [
@@ -47,6 +48,7 @@ class TagPage extends AbstractPage {
                 'hassites' => !empty($taggedsites),
                 'sites' => $taggedsites,
                 'altlayout' => $this->config->parse_bool($this->config->get('altlayout', false)),
+                'wwwurl' => $this->config->get_wwwurl(),
             ]);
         });
     }
@@ -61,6 +63,7 @@ class TagPage extends AbstractPage {
                 'tags' => $tags,
                 'showclock' => $this->config->parse_bool($this->config->get('showclock')),
                 'showsearch' => $this->config->parse_bool($this->config->get('showsearch', false)),
+                'wwwurl' => $this->config->get_wwwurl(),
             ]);
         });
     }

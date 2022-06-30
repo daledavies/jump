@@ -22,6 +22,7 @@ class HomePage extends AbstractPage {
             'ampmclock' => $this->config->parse_bool($this->config->get('ampmclock', false)),
             'unsplash' => !!$this->config->get('unsplashapikey', false),
             'unsplashcolor' => $unsplashdata?->color,
+            'wwwurl' => $this->config->get_wwwurl(),
         ];
         if ($this->config->parse_bool($this->config->get('showsearch', false))) {
             $templatecontext = array_merge($templatecontext, [
@@ -40,6 +41,7 @@ class HomePage extends AbstractPage {
                 'hassites' => !empty($sites->get_sites()),
                 'sites' => $sites->get_sites_by_tag('home'),
                 'altlayout' => $this->config->parse_bool($this->config->get('altlayout', false)),
+                'wwwurl' => $this->config->get_wwwurl(),
             ]);
         });
     }
@@ -54,6 +56,7 @@ class HomePage extends AbstractPage {
                 'tags' => $tags,
                 'showclock' => $this->config->parse_bool($this->config->get('showclock')),
                 'showsearch' => $this->config->parse_bool($this->config->get('showsearch', false)),
+                'wwwurl' => $this->config->get_wwwurl(),
             ]);
         });
     }
