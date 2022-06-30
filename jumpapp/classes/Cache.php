@@ -125,6 +125,21 @@ class Cache {
     }
 
     /**
+     * Save data into the specified cache item.
+     *
+     * @param string $cachename The name of a cache, must match a key in $caches definition.
+     * @param string|null $key A key used to represent an object within a cache.
+     * @param mixed $data
+     * @return void
+     */
+    public function save(string $cachename, ?string $key = 'default', mixed $data) {
+        $this->init_cache($cachename, $key);
+        $dependencies = [$this->caches[$cachename]['expirationtype'] => $this->caches[$cachename]['expirationparams']];
+        // Retrieve the initialised cache object from $caches.
+        return $this->caches[$cachename]['cache'][$key]->save($cachename.'/'.$key, $data, $dependencies);
+    }
+
+    /**
      * Remove the specified item from the cache.
      *
      * @param string $cachename The name of a cache, must match a key in $caches definition.
