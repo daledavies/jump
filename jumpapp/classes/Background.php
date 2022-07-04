@@ -15,6 +15,7 @@ class Background {
     private array $backgroundfiles;
 
     public function __construct(private Config $config) {
+        $this->config = $config;
         $this->backgroundsdirectory = $config->get('backgroundsdir');
         $this->webaccessibledir = str_replace($config->get('wwwroot'), '', $config->get('backgroundsdir'));
         $this->enumerate_files();
@@ -38,7 +39,7 @@ class Background {
      * @return string The selected background image filename/, optionally including path.
      */
     public function get_random_background_file(bool $includepath = true): string {
-        return ($includepath ? $this->webaccessibledir : '')
+        return $this->config->get_wwwurl().($includepath ? $this->webaccessibledir : '')
             . '/'. $this->backgroundfiles[array_rand($this->backgroundfiles)];
     }
 

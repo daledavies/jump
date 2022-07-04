@@ -16,7 +16,7 @@ export default class Weather {
     fetch_owm_data(latlong) {
         // If we are provided with a latlong then the user must have cliecked on the location
         // button at some point, so let's use this in the api url...
-        let apiurl = '/api/weatherdata.php?token=' + JUMP.token;
+        let apiurl = JUMP.wwwurl + '/api/weatherdata.php?token=' + JUMP.token;
         if (latlong.length) {
             apiurl += ('&lat=' + latlong[0] + '&lon=' + latlong[1]);
         }

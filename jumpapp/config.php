@@ -11,8 +11,8 @@ return [
     'sitename'       => getenv('SITENAME')       ?:   'Jump',
     // Where on the this code is located.
     'wwwroot'        => getenv('WWWROOT')        ?:   '/var/www/html',
-    // URL - might help if just is hosted in a subdirectory.
-    'wwwurl'         => getenv('URL')            ?:   '',
+    // Site URL - might help if just is hosted in a subdirectory.
+    'wwwurl'         => getenv('WWWURL')         ?:   '',
 
     // Stop retrieving items from the cache, useful for testing.
     'cachebypass'    => getenv('CACHEBYPASS')    ?:   false,

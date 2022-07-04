@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {{# noindex}}<meta name="robots" content="noindex">{{/ noindex}}
-        <link rel="stylesheet" href="/assets/css/<%= _.last(htmlWebpackPlugin.files.css[0].split('/')) %>">
-        <link rel="stylesheet" href="/background-css.php">
-        <link rel="stylesheet" href="/assets/css/weather-icons.min.css">
-        <link rel="icon" type="image/png" href="/favicon.png">
+        <link rel="stylesheet" href="{{{wwwurl}}}/assets/css/<%= _.last(htmlWebpackPlugin.files.css[0].split('/')) %>">
+        <link rel="stylesheet" href="{{{wwwurl}}}/background-css.php">
+        <link rel="stylesheet" href="{{{wwwurl}}}/assets/css/weather-icons.min.css">
+        <link rel="icon" type="image/png" href="{{{wwwurl}}}/favicon.png">
         <title>{{title}}</title>
         <script>
             const JUMP = {
@@ -19,6 +19,7 @@
                 searchengines: '{{{searchengines}}}',
                 unsplash: '{{{unsplash}}}',
                 unsplashcolor: '{{unsplashcolor}}',
+                wwwurl: '{{{wwwurl}}}'
             };
         </script>
     </head>
