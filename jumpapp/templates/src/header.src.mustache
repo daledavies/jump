@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {{# noindex}}<meta name="robots" content="noindex">{{/ noindex}}
+        {{# unsplashcolor}}<meta name="theme-color" content="{{unsplashcolor}}">{{/ unsplashcolor}}
         <link rel="stylesheet" href="{{{wwwurl}}}/assets/css/<%= _.last(htmlWebpackPlugin.files.css[0].split('/')) %>">
         <link rel="stylesheet" href="{{{wwwurl}}}/background-css.php">
         <link rel="stylesheet" href="{{{wwwurl}}}/assets/css/weather-icons.min.css">
