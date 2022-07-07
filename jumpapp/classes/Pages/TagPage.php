@@ -22,7 +22,7 @@ class TagPage extends AbstractPage {
             'ampmclock' => $this->config->parse_bool($this->config->get('ampmclock', false)),
             'unsplash' => !!$this->config->get('unsplashapikey', false),
             'unsplashcolor' => $unsplashdata?->color,
-            'url' => $this->config->get('url', false),
+            'wwwurl' => $this->config->get_wwwurl(),
         ];
         if ($this->config->parse_bool($this->config->get('showsearch', false))) {
             $templatecontext = array_merge($templatecontext, [
