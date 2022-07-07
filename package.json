@@ -17,7 +17,8 @@
         "terser-webpack-plugin": "^5.3.1",
         "webpack": "^5.68.0",
         "webpack-cli": "^4.9.2",
-        "webpack-remove-empty-scripts": "^0.8.0"
+        "webpack-remove-empty-scripts": "^0.8.0",
+        "webpack-version-file": "^0.1.6"
     },
     "dependencies": {
         "eventemitter3": "^4.0.7",

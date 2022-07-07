@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const VersionFilePlugin = require('webpack-version-file');
 
 module.exports = {
     mode: 'production',
@@ -32,6 +33,10 @@ module.exports = {
                     },
                     'sass-loader',
                 ],
+            },
+            {
+                test: /\.jump-version/,
+                type: 'asset/source',
             }
         ]
     },
@@ -59,7 +64,14 @@ module.exports = {
                 path.resolve(__dirname, './jumpapp/assets/css/styles.*.min.css')
             ],
             dangerouslyAllowCleanPatternsOutsideProject: true,
-        })
+        }),
+        new VersionFilePlugin({
+            data: {
+                date: Math.floor(Date.now() / 1000),
+            },
+            output: './jumpapp/.jump-version',
+            templateString: 'v<%= version %> (<%= date %>)',
+        }),
     ],
     optimization: {
         minimizer: [

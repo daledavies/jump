@@ -6,8 +6,11 @@
  */
 
 import Main from './classes/Main';
+import version from '../../../.jump-version';
 
 console.info(`%c
+----------------------------------
+
      ██ ██    ██ ███    ███ ██████
      ██ ██    ██ ████  ████ ██   ██
      ██ ██    ██ ██ ████ ██ ██████
@@ -15,6 +18,12 @@ console.info(`%c
  █████   ██████  ██      ██ ██
 
 https://github.com/daledavies/jump
+
+----------------------------------
+
+     Jump ${version}
+
+----------------------------------
 
 `, "font-family:monospace");
 
