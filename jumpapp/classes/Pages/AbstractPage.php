@@ -32,24 +32,11 @@ abstract class AbstractPage {
 
     abstract protected function render_content(): string;
 
-    protected function render_header(): string {
-        $template = $this->mustache->loadTemplate('header');
-        return $template->render([
-            'noindex' => $this->config->parse_bool($this->config->get('noindex')),
-            'title' => $this->config->get('sitename'),
-            'owmapikey' => !!$this->config->get('owmapikey', false),
-            'metrictemp' => $this->config->parse_bool($this->config->get('metrictemp'))
-        ]);
-    }
+    abstract protected function render_header(): string;
 
-    protected function render_footer(): string {
-        $template = $this->mustache->loadTemplate('footer');
-        return $template->render([
-            'showclock' => $this->config->parse_bool($this->config->get('showclock'))
-        ]);
-    }
+    abstract protected function render_footer(): string;
 
-    protected function render_page(): void {
+    protected function build_page(): void {
         $this->outputarray = [
             $this->render_header(),
             $this->render_content(),
@@ -58,7 +45,7 @@ abstract class AbstractPage {
     }
 
     public function get_output(): string {
-        $this->render_page();
+        $this->build_page();
         return implode('', $this->outputarray);
     }
 
