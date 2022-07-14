@@ -23,7 +23,7 @@ class Main {
         $this->router = new RouteList;
 
         // Set up the routes that Jump expects.
-        $this->router->addRoute('/tag/<param>', [
+        $this->router->addRoute('/tag/<tag>', [
 			'class' => 'Jump\Pages\TagPage'
 		]);
     }
@@ -49,12 +49,11 @@ class Main {
         $matchedroute = $this->router->match($this->request);
 
         // If we do not have a matched route then just serve up the home page.
-        $pageclass = $matchedroute['class'] ?? 'Jump\Pages\HomePage';
-        $param = $matchedroute['param'] ?? null;
+        $outputclass = $matchedroute['class'] ?? 'Jump\Pages\HomePage';
 
         // Instantiate the correct class to build the requested page, get the
         // content and return it.
-        $page = new $pageclass($this->config, $this->cache, $this->session, $param ?? null);
+        $page = new $outputclass($this->config, $this->cache, $this->session, $matchedroute ?? null);
         return $page->get_output();
     }
 

@@ -18,7 +18,7 @@ abstract class AbstractPage {
         protected \Jump\Config $config,
         protected \Jump\Cache $cache,
         protected \Nette\Http\Session $session,
-        protected ?string $param = null
+        protected ?array $routeparams
     ){
         $this->hastags = false;
         $this->mustache = new \Mustache_Engine([

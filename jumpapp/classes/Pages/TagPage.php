@@ -8,13 +8,13 @@ class TagPage extends AbstractPage {
 
     protected function render_header(): string {
         $template = $this->mustache->loadTemplate('header');
-        $greeting = $this->param;
-        $title = 'Tag: '.$this->param;
+        $this->tagname = $this->routeparams['tag'];
+        $title = 'Tag: '.$this->tagname;
         $csrfsection = $this->session->getSection('csrf');
         $unsplashdata = $this->cache->load('unsplash');
         $templatecontext = [
             'csrftoken' => $csrfsection->get('token'),
-            'greeting' => $greeting,
+            'greeting' => $this->tagname,
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'title' => $title,
             'owmapikey' => !!$this->config->get('owmapikey', false),
@@ -34,11 +34,11 @@ class TagPage extends AbstractPage {
     }
 
     protected function render_content(): string {
-        $cachekey = isset($this->param) ? 'tag:'.$this->param : null;
+        $cachekey = isset($this->tagname) ? 'tag:'.$this->tagname : null;
         return $this->cache->load(cachename: 'templates/sites', key: $cachekey, callback: function() {
             $sites = new \Jump\Sites(config: $this->config, cache: $this->cache);
             try {
-                $taggedsites = $sites->get_sites_by_tag($this->param);
+                $taggedsites = $sites->get_sites_by_tag($this->tagname);
             }
             catch (TagNotFoundException) {
                 (new ErrorPage($this->cache, $this->config, 404, 'There are no sites with this tag.'))->init();
