@@ -15,7 +15,7 @@ class Weather extends AbstractAPI {
         // If we have either lat or lon query params then cast them to a float, if not then
         // set the values to zero.
         $lat = isset($this->routeparams['lat']) ? (float) $this->routeparams['lat'] : 0;
-        $lon = isset($this->routeparams['lat']) ? (float) $this->routeparams['lat'] : 0;
+        $lon = isset($this->routeparams['lon']) ? (float) $this->routeparams['lon'] : 0;
 
         // Use the lat and lon values provided unless they are zero, this might mean that
         // either they werent provided as query params or they couldn't be cast to a float.
