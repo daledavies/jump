@@ -55,7 +55,7 @@ export default class Main {
             if (JUMP.unsplashcolor) {
                 backgroundelm.style.backgroundColor = JUMP.unsplashcolor;
             }
-            fetch(JUMP.wwwurl + '/api/unsplashdata.php?token=' + JUMP.token)
+            fetch(JUMP.wwwurl + '/api/unsplash/' + JUMP.token + '/')
             .then(response => response.json())
             .then(data => {
                 if (data.error) {

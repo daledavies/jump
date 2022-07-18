@@ -26,6 +26,15 @@ class Main {
         $this->router->addRoute('/tag/<tag>', [
 			'class' => 'Jump\Pages\TagPage'
 		]);
+        $this->router->addRoute('/api/icon?siteurl=<siteurl>', [
+			'class' => 'Jump\API\Icon'
+		]);
+        $this->router->addRoute('/api/unsplash[/<token>]', [
+			'class' => 'Jump\API\Unsplash'
+		]);
+        $this->router->addRoute('/api/weather[/<token>[/<lat>[/<lon>]]]', [
+			'class' => 'Jump\API\Weather'
+		]);
     }
 
     function init() {
