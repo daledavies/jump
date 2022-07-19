@@ -1,3 +1,4 @@
 /node_modules
+/xdebug
 */vendor
 docker-compose.yaml

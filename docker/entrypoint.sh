@@ -64,6 +64,10 @@ if [ -z "${DEVELOPMENT-}" ]; then
     echo >&2 "";
     echo >&2 "-------------------------------------------------------------"
     echo >&2 "";
+
+else
+    echo >&2 "- Setting correct ownership of xdebug dir"
+    chown -R jumpapp:jumpapp /tmp/xdebug
 fi
 
 php-fpm8

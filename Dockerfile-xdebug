@@ -62,6 +62,9 @@ RUN mkdir -p /var/www/cache/application \
     /var/www/cache/application \
     && chmod +x /usr/local/bin/entrypoint.sh
 
+RUN mkdir -p /tmp/xdebug \
+    && chown -R jumpapp:jumpapp /tmp/xdebug
+
 # Expose the port we configured for nginx.
 EXPOSE 8080
 
