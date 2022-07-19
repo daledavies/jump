@@ -42,16 +42,16 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            filename: path.resolve(__dirname, './jumpapp/templates/header.mustache'),
-            template: path.resolve(__dirname, './jumpapp/templates/src/header.src.mustache'),
+            filename: path.resolve(__dirname, './jumpapp/templates/partials/cssbundle.mustache'),
+            template: path.resolve(__dirname, './jumpapp/templates/partials/src/cssbundle.src.mustache'),
             inject: false,
             minify: false, // Required to prevent addition of closing tags like body and html.
         }),
         new HtmlWebpackPlugin({
-            filename: path.resolve(__dirname, './jumpapp/templates/footer.mustache'),
-            template: path.resolve(__dirname, './jumpapp/templates/src/footer.src.mustache'),
+            filename: path.resolve(__dirname, './jumpapp/templates/partials/jsbundle.mustache'),
+            template: path.resolve(__dirname, './jumpapp/templates/partials/src/jsbundle.src.mustache'),
             inject: false,
-            minify: false, // Required to prevent addition of closing tags like body and html.
+            minify: false,
         }),
         new MiniCssExtractPlugin({filename: '../css/[name].[contenthash].min.css'}),
         new RemoveEmptyScriptsPlugin(),
