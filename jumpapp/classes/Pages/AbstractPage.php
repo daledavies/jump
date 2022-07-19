@@ -28,6 +28,12 @@ abstract class AbstractPage {
                 return urlencode($renderer($text));
             }),
         ]);
+        // Get a Nette session section for CSRF data.
+        $csrfsection = $this->session->getSection('csrf');
+        // Create a new CSRF token within the section if one doesn't exist already.
+        if (!$csrfsection->offsetExists('token')){
+            $csrfsection->set('token', bin2hex(random_bytes(32)));
+        }
     }
 
     abstract protected function render_content(): string;

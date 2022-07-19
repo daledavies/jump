@@ -23,6 +23,9 @@ class Main {
         $this->router = new RouteList;
 
         // Set up the routes that Jump expects.
+        $this->router->addRoute('/', [
+			'class' => 'Jump\Pages\HomePage'
+		]);
         $this->router->addRoute('/tag/<tag>', [
 			'class' => 'Jump\Pages\TagPage'
 		]);
@@ -45,14 +48,6 @@ class Main {
         $this->session = new \Nette\Http\Session($this->request, new \Nette\Http\Response);
         $this->session->setName($this->config->get('sessionname'));
         $this->session->setExpiration($this->config->get('sessiontimeout'));
-
-        // Get a Nette session section for CSRF data.
-        $csrfsection = $this->session->getSection('csrf');
-
-        // Create a new CSRF token within the section if one doesn't exist already.
-        if (!$csrfsection->offsetExists('token')){
-            $csrfsection->set('token', bin2hex(random_bytes(32)));
-        }
 
         // Try to match the correct route based on the HTTP request.
         $matchedroute = $this->router->match($this->request);
