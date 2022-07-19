@@ -26,7 +26,7 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 
 Get the container image from Docker Hub (https://hub.docker.com/r/daledavies/jump).
 
-The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds" and "sites" directories to local directories on your machine (`OWMAPIKEY` and `LATLONG` values below are just for example)...
+The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds", "favicon", "search" and "sites" directories to local directories on your machine (`OWMAPIKEY` and `LATLONG` values below are just for example)...
 
 ```yaml
 version: '3'
@@ -37,6 +37,7 @@ services:
             - 8123:8080
         volumes:
             - ./backgrounds:/backgrounds
+            - ./favicon:/favicon
             - ./search:/search
             - ./sites:/sites
         environment:
@@ -70,7 +71,7 @@ You can use the following optional environment variables to configure/customise 
 
 #### Volume Mapping
 
-You can map the "backgrounds",  "search" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
+You can map the "backgrounds",  "favicon", "search" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
 
 #### Docker
 
@@ -79,6 +80,7 @@ The same can be achieved just using Docker CLI...
 ```bash
 docker run -d -p 8123:8080 \
 --volume <path/to/backgrounds>:/backgrounds \
+--volume <path/to/favicon>:/favicon \
 --volume <path/to/sites>:/sites \
 --volume <path/to/search>:/search \
 --env SITENAME='Custom site name' \
@@ -220,6 +222,10 @@ For quick access to the search from the keyboard you can open the search bar usi
 To use your own background images just copy them to the `/backgrounds/` directory, Jump will pick up on them automatically ans show a random image every time the page loads.
 
 If instead you want to use Unsplash for random background images add an Unsplash API key to `config.php` or pass the `UNSPLASHAPIKEY ` environment variable to the Docker container. You can provide a comma separated list of collection ID's using the `unsplashcollections` option in `config.php` or by passing them to the Docker container via the `UNSPLASHCOLLECTIONS` environment variable.
+
+### Favicon
+
+After mapping the `favicon` directory as shown in the Docker Compose or Docker examples above, replace the default `icon.png` file with whatever PNG icon image you want (ensuring that the filename is always `icon.png`).
 
 ## Development
 

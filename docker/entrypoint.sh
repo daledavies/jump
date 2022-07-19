@@ -28,7 +28,7 @@ if [ -z "${DEVELOPMENT-}" ]; then
     echo >&2 "-------------------------------------------------------------"
     echo >&2 "";
 
-    echo >&2 "- Checking if backgrounds, search or sites volumes have been mounted."
+    echo >&2 "- Checking if backgrounds, favicon, search or sites volumes have been mounted."
     if [ -e "/backgrounds" ]; then
         echo >&2 "   - Backgrounds directory is mapped... symlinking."
         rm /var/www/html/assets/backgrounds -r
@@ -36,6 +36,16 @@ if [ -z "${DEVELOPMENT-}" ]; then
         if [ ! "$(ls -A /backgrounds)" ]; then
             echo >&2 "     -- Empty so populating with default files."
             cp /usr/src/jumpapp/assets/backgrounds/* /backgrounds -r
+        fi
+    fi
+
+    if [ -e "/favicon" ]; then
+        echo >&2 "   - Favicon directory is mapped... symlinking."
+        rm /var/www/html/assets/images/favicon -r
+        ln -s /favicon /var/www/html/assets/images/
+        if [ ! "$(ls -A /favicon)" ]; then
+            echo >&2 "     -- Empty so populating with default favicon image."
+            cp /usr/src/jumpapp/assets/images/favicon/* /favicon -r
         fi
     fi
 
