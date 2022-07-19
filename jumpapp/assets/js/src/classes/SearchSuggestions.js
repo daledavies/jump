@@ -1,10 +1,18 @@
 /**
- * Generate search suggestions.
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
  *
  * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
  * @license MIT
  */
 
+/**
+ * Generate search suggestions.
+ */
 export default class SearchSuggestions {
 
     constructor(searchengines, inputelm, containerelm, eventemitter) {

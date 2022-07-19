@@ -1,8 +1,17 @@
 /**
- * Do some fancy UI stuff in a rather unfancy way.
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
  *
  * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
  * @license MIT
+ */
+
+/**
+ * Do some fancy UI stuff in a rather unfancy way.
  */
 
 import Main from './classes/Main';

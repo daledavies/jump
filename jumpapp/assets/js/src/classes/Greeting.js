@@ -1,3 +1,15 @@
+/**
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
+ * @license MIT
+ */
+
 import Clock from "./Clock";
 
 export default class Greeting {

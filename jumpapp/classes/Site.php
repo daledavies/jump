@@ -1,4 +1,15 @@
 <?php
+/**
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
+ * @license MIT
+ */
 
 namespace Jump;
 
@@ -7,9 +18,6 @@ use stdClass;
 /**
  * Parse the data required to represent a site and provide method for generating
  * and/or retrieving the site's icon.
- *
- * @author Dale Davies <dale@daledavies.co.uk>
- * @license MIT
  */
 class Site {
 

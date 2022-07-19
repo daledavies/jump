@@ -1,4 +1,15 @@
 <?php
+/**
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
+ * @license MIT
+ */
 
 namespace Jump;
 
@@ -6,9 +17,6 @@ use \Exception;
 
 /**
  * Loads and validates the search engines defined in searchengines.json.
- *
- * @author Dale Davies <dale@daledavies.co.uk>
- * @license MIT
  */
 class SearchEngines {
     private array $default;

@@ -1,4 +1,15 @@
 <?php
+/**
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
+ * @license MIT
+ */
 
 namespace Jump;
 
@@ -8,11 +19,6 @@ use \Jump\Exceptions\TagNotFoundException;
 /**
  * Loads, validates and caches the site data defined in sites.json
  * into an array of Site objects.
- *
- * TO DO: Implement search() method.
- *
- * @author Dale Davies <dale@daledavies.co.uk>
- * @license MIT
  */
 class Sites {
 

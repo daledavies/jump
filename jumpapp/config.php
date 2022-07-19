@@ -1,11 +1,19 @@
 <?php
 /**
- * Edit the configuration below to suit your requirements.
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
  *
  * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
  * @license MIT
  */
 
+/**
+ * Edit the configuration below to suit your requirements.
+ */
 return [
     // The site name is displayed in the browser tab.
     'sitename'       => getenv('SITENAME')       ?:   'Jump',

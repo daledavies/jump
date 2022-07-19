@@ -1,12 +1,20 @@
 /**
- * Calculate the time, local to the requested location from
- * the OpenWeather API, by passing in the number of seconds
- * that location has shifted from UTC based on the timezones.
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
  *
  * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
  * @license MIT
  */
 
+/**
+ * Calculate the time, local to the requested location from
+ * the OpenWeather API, by passing in the number of seconds
+ * that location has shifted from UTC based on the timezones.
+ */
 export default class Clock {
     /**
      * Calculate the time shifted from UTC.

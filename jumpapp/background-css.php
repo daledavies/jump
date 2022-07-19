@@ -1,9 +1,18 @@
 <?php
 /**
- * Generate dynamic CSS for randomising the background image.
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
  *
  * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
  * @license MIT
+ */
+
+/**
+ * Generate dynamic CSS for randomising the background image.
  */
 
 // Provided by composer for psr-4 style autoloading.

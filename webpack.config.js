@@ -1,3 +1,15 @@
+/**
+ *      ██ ██    ██ ███    ███ ██████
+ *      ██ ██    ██ ████  ████ ██   ██
+ *      ██ ██    ██ ██ ████ ██ ██████
+ * ██   ██ ██    ██ ██  ██  ██ ██
+ *  █████   ██████  ██      ██ ██
+ *
+ * @author Dale Davies <dale@daledavies.co.uk>
+ * @copyright Copyright (c) 2022, Dale Davies
+ * @license MIT
+ */
+
 const path = require('path');
 const Terser = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
