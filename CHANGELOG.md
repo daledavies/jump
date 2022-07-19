@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4] - 2022-07-19
+### Added
+- Issue #41: Add support for a custom favicon.
+- Add new default favicon.
+
+### Fixed
+- Refactor API implementation.
+- Farious other code improvements.
+
 ## [1.2.3] - 2022-07-07
 ### Added
 - Android Chrome header colour now matches background colour when using unsplash.
@@ -11,21 +20,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Version number now displayed in docker logs.
 
 ### Fixed
-- Issue #35: Fixed issue with assets not loading correctly when hosted in sub-directory
+- Issue #35: Fixed issue with assets not loading correctly when hosted in sub-directory.
 
 ## [1.2.2] - 2022-06-30
 ### Added
-- Issue #35: Add optional WWWURL config param
-- Issue #37: Add ALTBGPROVIDER config option
-- Issue #38: Add optional description to sites
+- Issue #35: Add optional WWWURL config param.
+- Issue #37: Add ALTBGPROVIDER config option.
+- Issue #38: Add optional description to sites.
 
 ### Fixed
-- Issue #36: Improve use of cache to avoid waiting for lock timeout
+- Issue #36: Improve use of cache to avoid waiting for lock timeout.
 
 ## [1.2.1] - 2022-06-07
 ### Fixed
 - Fix incorrect keyup check for ctrl-shift-/
-- Fix wrong cache expiry for unsplash data
+- Fix wrong cache expiry for unsplash data.
 
 ## [1.2.0] - 2022-06-06
 ### Added
