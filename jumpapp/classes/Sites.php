@@ -163,7 +163,7 @@ class Sites {
             $site->name = $loadedsite->name;
             $site->url = $loadedsite->url;
             $site->tags = $loadedsite->tags;
-            $site->iconurl = '/api/icon.php?siteurl='.urlencode($loadedsite->url);
+            $site->iconurl = '/api/icon?siteurl='.urlencode($loadedsite->url);
             $searchlist[] = $site;
         }
         return $searchlist;
