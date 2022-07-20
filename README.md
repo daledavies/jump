@@ -8,6 +8,12 @@ Jump is yet another self-hosted startpage for your server designed to be simple,
 
 ![screenshot](screenshots/screenshot-demo.gif)
 
+### Demo
+
+Check it out here... https://jumpdemo.daledavies.co.uk
+
+Note the demo instance is hosted on a render.com free tier so may take a few seconds to wake up.
+
 ### Features
 
 - Fast, easy to deploy, secure
