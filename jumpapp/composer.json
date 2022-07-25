@@ -7,7 +7,7 @@
     "repositories": [
         {
           "type": "git",
-          "url": "git@github.com:unsplash/unsplash-php.git"
+          "url": "https://github.com/unsplash/unsplash-php.git"
         }
     ],
     "require": {

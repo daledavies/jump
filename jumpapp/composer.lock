@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d469bd507c305ca63425148ef3cfb4f",
+    "content-hash": "e91bcdf01a945f46bf29aa3a1cef02f5",
     "packages": [
         {
             "name": "arthurhoaro/favicon",
@@ -1464,7 +1464,7 @@
             "version": "3.2.1",
             "source": {
                 "type": "git",
-                "url": "git@github.com:unsplash/unsplash-php.git",
+                "url": "https://github.com/unsplash/unsplash-php.git",
                 "reference": "cdb174beaf62d187db1a777cf5fb11ee554d85cf"
             },
             "require": {
