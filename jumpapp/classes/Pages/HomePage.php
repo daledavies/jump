@@ -23,6 +23,8 @@ class HomePage extends AbstractPage {
         }
         $csrfsection = $this->session->getSection('csrf');
         $unsplashdata = $this->cache->load('unsplash');
+        $showsearch = $this->config->parse_bool($this->config->get('showsearch', false));
+        $checkstatus = $this->config->parse_bool($this->config->get('checkstatus', false));
         $templatecontext = [
             'csrftoken' => $csrfsection->get('token'),
             'greeting' => $greeting,
@@ -34,11 +36,9 @@ class HomePage extends AbstractPage {
             'unsplash' => !!$this->config->get('unsplashapikey', false),
             'unsplashcolor' => $unsplashdata?->color,
             'wwwurl' => $this->config->get_wwwurl(),
-            'checkstatus' => $this->config->parse_bool($this->config->get('checkstatus', false)),
+            'checkstatus' => $checkstatus,
         ];
-        $showsearch = $this->config->parse_bool($this->config->get('showsearch', false));
-        $showstatus = $this->config->parse_bool($this->config->get('showsearch', false));
-        if ($showsearch || $showstatus) {
+        if ($showsearch || $checkstatus) {
             $templatecontext['sitesjson'] = json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_frontend());
             if ($showsearch) {
                 $templatecontext['searchengines'] = json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines());

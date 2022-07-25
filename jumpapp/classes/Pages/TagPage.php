@@ -23,6 +23,8 @@ class TagPage extends AbstractPage {
         $title = 'Tag: '.$this->tagname;
         $csrfsection = $this->session->getSection('csrf');
         $unsplashdata = $this->cache->load('unsplash');
+        $showsearch = $this->config->parse_bool($this->config->get('showsearch', false));
+        $checkstatus = $this->config->parse_bool($this->config->get('checkstatus', false));
         $templatecontext = [
             'csrftoken' => $csrfsection->get('token'),
             'greeting' => $this->tagname,
@@ -34,12 +36,13 @@ class TagPage extends AbstractPage {
             'unsplash' => !!$this->config->get('unsplashapikey', false),
             'unsplashcolor' => $unsplashdata?->color,
             'wwwurl' => $this->config->get_wwwurl(),
+            'checkstatus' => $checkstatus,
         ];
-        if ($this->config->parse_bool($this->config->get('showsearch', false))) {
-            $templatecontext = array_merge($templatecontext, [
-                'searchengines' => json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines()),
-                'searchjson' => json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_search()),
-            ]);
+        if ($showsearch || $checkstatus) {
+            $templatecontext['sitesjson'] = json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_frontend());
+            if ($showsearch) {
+                $templatecontext['searchengines'] = json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines());
+            }
         }
         return $template->render($templatecontext);
     }
