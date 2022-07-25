@@ -50,9 +50,9 @@ export default class Main {
 
         if (this.showsearchbuttonelm) {
             this.searchclosebuttonelm = this.showsearchbuttonelm.querySelector('.close');
-            this.fuse = new Fuse(JSON.parse(JUMP.search), {
+            this.fuse = new Fuse(JSON.parse(JUMP.sites), {
                 threshold: 0.3,
-                keys: ['name', 'tags']
+                keys: ['name', 'tags', 'url']
             });
         }
     }
@@ -76,6 +76,24 @@ export default class Main {
                 }
                 backgroundelm.style.backgroundImage = 'url("' + data.imagedatauri + '")';
                 document.querySelector('.unsplash').innerHTML = data.attribution;
+            });
+        }
+
+        // If enables then check the status API and update the frontend according to result.
+        if (JUMP.checkstatus) {
+            fetch(JUMP.wwwurl + '/api/status/' + JUMP.token + '/')
+            .then(response => response.json())
+            .then(statuses => {
+                for (const [id, status] of Object.entries(statuses)) {
+                    const siteelm = document.querySelector('#'+id);
+                    if (siteelm) {
+                        siteelm.classList.add(status);
+                        if (status !== 'online') {
+                            const sitelinkelm = siteelm.querySelector('a');
+                            sitelinkelm.title = '(Status: ' + status + ') ' + sitelinkelm.title;
+                        }
+                    }
+                }
             });
         }
 

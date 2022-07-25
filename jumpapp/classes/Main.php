@@ -37,6 +37,9 @@ class Main {
         $this->router->addRoute('/api/icon?siteurl=<siteurl>', [
 			'class' => 'Jump\API\Icon'
 		]);
+        $this->router->addRoute('/api/status[/<token>]', [
+			'class' => 'Jump\API\Status'
+		]);
         $this->router->addRoute('/api/unsplash[/<token>]', [
 			'class' => 'Jump\API\Unsplash'
 		]);

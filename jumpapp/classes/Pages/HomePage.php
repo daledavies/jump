@@ -34,12 +34,15 @@ class HomePage extends AbstractPage {
             'unsplash' => !!$this->config->get('unsplashapikey', false),
             'unsplashcolor' => $unsplashdata?->color,
             'wwwurl' => $this->config->get_wwwurl(),
+            'checkstatus' => $this->config->parse_bool($this->config->get('checkstatus', false)),
         ];
-        if ($this->config->parse_bool($this->config->get('showsearch', false))) {
-            $templatecontext = array_merge($templatecontext, [
-                'searchengines' => json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines()),
-                'searchjson' => json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_search()),
-            ]);
+        $showsearch = $this->config->parse_bool($this->config->get('showsearch', false));
+        $showstatus = $this->config->parse_bool($this->config->get('showsearch', false));
+        if ($showsearch || $showstatus) {
+            $templatecontext['sitesjson'] = json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_frontend());
+            if ($showsearch) {
+                $templatecontext['searchengines'] = json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines());
+            }
         }
         return $template->render($templatecontext);
     }

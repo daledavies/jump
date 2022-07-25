@@ -1,6 +1,6 @@
 {{# hassites}}
 <ul class="sites {{# altlayout}}alternate{{/ altlayout}}">
-{{# sites}}<li><a {{# newtab}}target="_blank"{{/ newtab}} rel="{{# nofollow}}nofollow {{/ nofollow}}{{# newtab}}noopener{{/ newtab}}" title="{{description}}" href="{{url}}">
+{{# sites}}<li id="{{id}}"><a {{# newtab}}target="_blank"{{/ newtab}} rel="{{# nofollow}}nofollow {{/ nofollow}}{{# newtab}}noopener{{/ newtab}}" title="{{description}}" href="{{url}}">
     <span class="icon">
         <img src="{{{wwwurl}}}/api/icon?siteurl={{#urlencode}}{{url}}{{/urlencode}}">
     </span>

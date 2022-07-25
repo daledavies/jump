@@ -143,6 +143,21 @@ class Sites {
     }
 
     /**
+     * Given a Site ID, does that site exist in our list of sites?
+     *
+     * @param string $id The Site ID to search for.
+     * @return Site A matching Site object if found.
+     * @throws Exception If a site with given Site ID does not exist.
+     */
+    public function get_site_by_id(string $id): Site {
+        $found = array_search($id, array_column($this->get_sites(), 'id'));
+        if ($found === false) {
+            throw new Exception('The site could not be found ('.$id.')');
+        }
+        return $this->loadedsites[$found];
+    }
+
+    /**
      * Returns an array of Site objects with a given tag.
      *
      * @param string $tagname The tag to look look up sites.
@@ -162,14 +177,22 @@ class Sites {
         return $found;
     }
 
-    public function get_sites_for_search(): array {
+    /**
+     * Get a list of cached sites from for use in the front end via JS. Some extra details
+     * added to each site in the list may not be already saved in the main sites cache.
+     *
+     * @return array Array of stdClass objects containing required site details.
+     */
+    public function get_sites_for_frontend(): array {
         $searchlist = [];
         foreach ($this->loadedsites as $loadedsite) {
             $site = new \stdClass();
+            $site->id = $loadedsite->id;
             $site->name = $loadedsite->name;
             $site->url = $loadedsite->url;
             $site->tags = $loadedsite->tags;
             $site->iconurl = '/api/icon?siteurl='.urlencode($loadedsite->url);
+            $site->status = $this->cache->load(cachename: 'sites/status', key: $site->url) ?? null;
             $searchlist[] = $site;
         }
         return $searchlist;

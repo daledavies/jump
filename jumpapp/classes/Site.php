@@ -39,6 +39,7 @@ class Site {
         if (!isset($sitearray['name'], $sitearray['url'])) {
             throw new \Exception('The array passed to Site() must contain the keys "name" and "url"!');
         }
+        $this->id = preg_replace("/[^A-Za-z0-9 ]/", '', $sitearray['url']);
         $this->name = $sitearray['name'];
         $this->url = $sitearray['url'];
         $this->nofollow = isset($sitearray['nofollow']) ? $sitearray['nofollow'] : (isset($this->defaults['nofollow']) ? $this->defaults['nofollow'] : false);
@@ -91,4 +92,13 @@ class Site {
         return 'data:'.$imagedata->mimetype.';base64,'.base64_encode($imagedata->data);
     }
 
+    /**
+     * Get the online status of this site.
+     *
+     * @return string The site status.
+     */
+    public function get_status(): string {
+        $cache = new Cache($this->config);
+        return (new Status($cache, $this))->get_status();
+    }
 }

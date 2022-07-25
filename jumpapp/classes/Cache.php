@@ -24,7 +24,7 @@ use Nette\Caching;
  */
 class Cache {
 
-    private Caching\Storages\FileStorage $storage;
+    private Caching\Storages\FileStorage|Caching\Storages\DevNullStorage $storage;
 
     /**
      * The definition of various caches used throughout the application.
@@ -33,10 +33,12 @@ class Cache {
      */
     private array $caches;
 
-    /**
-     * Creates file storage for cache and initialises cache objects for each
-     * name/type specified in $caches definition.
-     */
+     /**
+      * Creates file storage for cache and initialises cache objects for each
+      * name/type specified in $caches definition.
+      *
+      * @param Config $config
+      */
     public function __construct(private Config $config) {
         // Define the various caches used throughout the app.
         $this->caches = [
@@ -49,6 +51,11 @@ class Cache {
                 'cache' => null,
                 'expirationtype' => Caching\Cache::FILES,
                 'expirationparams' => $config->get('sitesfile')
+            ],
+            'sites/status' => [
+                'cache' => null,
+                'expirationtype' => Caching\Cache::EXPIRE,
+                'expirationparams' => '5 minutes'
             ],
             'tags' => [
                 'cache' => null,
@@ -85,7 +92,12 @@ class Cache {
             ],
         ];
         // Inititalise file storage for cache using cachedir path from config.
-        $this->storage = new Caching\Storages\FileStorage($this->config->get('cachedir').'/application');
+        // If cachebypass has been set in config.php then use DevNullStorage instead.
+        if ($this->config->parse_bool($this->config->get('cachebypass'))) {
+            $this->storage = new Caching\Storages\DevNullStorage();
+        } else {
+            $this->storage = new Caching\Storages\FileStorage($this->config->get('cachedir').'/application');
+        }
     }
 
     /**
@@ -116,10 +128,6 @@ class Cache {
      * @return mixed The result of callback function retreieved from cache.
      */
     public function load(string $cachename, ?string $key = 'default', callable $callback = null): mixed {
-        // If cachebypass has been set in config.php then just execute the callback.
-        if ($this->config->parse_bool($this->config->get('cachebypass')) && $callback !== null) {
-            return $callback();
-        }
         $this->init_cache($cachename, $key);
         // Retrieve the initialised cache object from $caches.
         if ($callback === null) {
@@ -143,10 +151,9 @@ class Cache {
      * @param mixed $data
      * @return void
      */
-    public function save(string $cachename, ?string $key = 'default', mixed $data) {
+    public function save(string $cachename, ?string $key = 'default', mixed $data): mixed {
         $this->init_cache($cachename, $key);
         $dependencies = [$this->caches[$cachename]['expirationtype'] => $this->caches[$cachename]['expirationparams']];
-        // Retrieve the initialised cache object from $caches.
         return $this->caches[$cachename]['cache'][$key]->save($cachename.'/'.$key, $data, $dependencies);
     }
 

@@ -57,4 +57,6 @@ return [
     'latlong'        => getenv('LATLONG')        ?:   '',
     // Temperature unit: True = metric / False = imperial.
     'metrictemp'     => getenv('METRICTEMP')     ?:   true,
+
+    'checkstatus'    => getenv('CHECKSTATUS')    ?:   true,
 ];
