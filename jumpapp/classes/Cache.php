@@ -55,7 +55,7 @@ class Cache {
             'sites/status' => [
                 'cache' => null,
                 'expirationtype' => Caching\Cache::EXPIRE,
-                'expirationparams' => '5 minutes'
+                'expirationparams' => $config->get('statuscache').' minutes'
             ],
             'tags' => [
                 'cache' => null,

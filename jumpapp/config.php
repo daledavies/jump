@@ -58,5 +58,8 @@ return [
     // Temperature unit: True = metric / False = imperial.
     'metrictemp'     => getenv('METRICTEMP')     ?:   true,
 
+    // Ping sites to determine availability (e.g. online, offline, errors).
     'checkstatus'    => getenv('CHECKSTATUS')    ?:   true,
+    // Duration to cache status in minutes.
+    'statuscache'    => getenv('STATUSCACHE')    ?:   '5'
 ];
