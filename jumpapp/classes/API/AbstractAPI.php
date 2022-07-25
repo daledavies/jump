@@ -43,6 +43,8 @@ abstract class AbstractAPI {
             http_response_code(401);
             die(json_encode(['error' => 'API token is incorrect or missing']));
         }
+        // Close the session as soon as possible to avoid session lock blocking other scripts.
+        $this->session->close();
     }
 
     abstract protected function get_output(): string;

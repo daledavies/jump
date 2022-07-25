@@ -45,6 +45,8 @@ abstract class AbstractPage {
         if (!$csrfsection->offsetExists('token')){
             $csrfsection->set('token', bin2hex(random_bytes(32)));
         }
+        // Close the session as soon as possible to avoid session lock blocking other scripts.
+        $this->session->close();
     }
 
     abstract protected function render_content(): string;
