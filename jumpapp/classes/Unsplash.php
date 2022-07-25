@@ -16,13 +16,13 @@ namespace Jump;
 class Unsplash {
 
     public static function load_cache_unsplash_data($config) {
-        \Crew\Unsplash\HttpClient::init([
+        \Unsplash\HttpClient::init([
             'utmSource' => 'jump_startpage',
             'applicationId'	=> $config->get('unsplashapikey'),
         ]);
         // Try to get a random image via the API.
         try {
-            $photo = \Crew\Unsplash\Photo::random([
+            $photo = \Unsplash\Photo::random([
                 'collections' => $config->get('unsplashcollections', false),
             ]);
         } catch (\Exception $e) {

@@ -4,6 +4,12 @@
             "Jump\\": "classes/"
         }
     },
+    "repositories": [
+        {
+          "type": "git",
+          "url": "git@github.com:unsplash/unsplash-php.git"
+        }
+    ],
     "require": {
         "mustache/mustache": "~2.5",
         "arthurhoaro/favicon": "~1.0",
@@ -11,6 +17,7 @@
         "nette/routing": "^3.0.2",
         "phlak/config": "^7.0",
         "nette/http": "^3.1",
-        "unsplash/unsplash": "^2.5"
+        "guzzlehttp/guzzle": "^7.0",
+        "unsplash/unsplash": "3.2.1"
     }
 }
