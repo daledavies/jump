@@ -3,12 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{{wwwurl}}}/assets/css/styles.css">
-        <link rel="stylesheet" href="{{{wwwurl}}}/background-css.php">
-        <link rel="icon" type="image/png" href="/favicon.png">
+        {{> partials/cssbundle}}
+        <link rel="icon" type="image/png" href="{{{wwwurl}}}/assets/images/favicon/icon.png">
         <title>{{message}}</title>
     </head>
-    <body>
+    <body class="errorpage">
         <div class="content fixed">
         <div class="greeting">{{code}}</div>
         {{message}}
