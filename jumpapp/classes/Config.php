@@ -13,7 +13,7 @@
 
 namespace Jump;
 
-use Exception;
+use Jump\Exceptions\ConfigException;
 
 /**
  * Load, parse and enumerate all configuration paramaters requires throughout
@@ -67,7 +67,7 @@ class Config {
         $this->add_wwwroot_to_base_paths();
         $this->add_session_config();
         if ($this->config_params_missing()) {
-            throw new Exception('Config.php must always contain... '.implode(', ', self::CONFIG_PARAMS));
+            throw new ConfigException('Config.php must always contain... '.implode(', ', self::CONFIG_PARAMS));
         }
     }
 
@@ -115,7 +115,7 @@ class Config {
      */
     public function get(string $key, $strict = true): mixed {
         if (!$this->config->has($key) && $strict === true) {
-            throw new Exception('Config key does not exist... ('.$key.')');
+            throw new ConfigException('Config key does not exist... ('.$key.')');
         }
         return $this->config->get($key);
     }

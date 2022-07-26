@@ -13,11 +13,13 @@
 
 namespace Jump\API;
 
+use \Jump\Exceptions\APIException;
+
 class Icon extends AbstractAPI {
 
     public function get_output(): string {
         if (!isset($this->routeparams['siteurl']) || empty($this->routeparams['siteurl'])) {
-            throw new \Exception('The siteurl query parameter is not provided or empty');
+            throw new APIException('The siteurl query parameter is not provided or empty');
         }
 
         $sites = new \Jump\Sites($this->config, $this->cache);

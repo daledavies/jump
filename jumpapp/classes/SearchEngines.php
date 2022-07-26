@@ -13,7 +13,7 @@
 
 namespace Jump;
 
-use \Exception;
+use Jump\Exceptions\ConfigException;
 
 /**
  * Loads and validates the search engines defined in searchengines.json.
@@ -46,29 +46,29 @@ class SearchEngines {
      * be decoded to an array.
      *
      * @return array AArray of parsed/validated search engine information from searchengines.json
-     * @throws Exception If searchengines.json cannot be found.
+     * @throws ConfigException If searchengines.json cannot be found.
      */
     private function load_search_engines_from_json(): array {
         $searchengines = [];
         $rawjson = file_get_contents($this->searchfilelocation);
         if ($rawjson === false) {
-            throw new Exception('There was a problem loading the searchengines.json file');
+            throw new ConfigException('There was a problem loading the searchengines.json file');
         }
         if ($rawjson === '') {
-            throw new Exception('The searchengines.json file is empty');
+            throw new ConfigException('The searchengines.json file is empty');
         }
         // Do some checks to see if the JSON decodes into something
         // like what we expect to see...
         $decodedjson = json_decode($rawjson);
 
         if (!is_array($decodedjson)) {
-            throw new Exception('The searchengines.json file is invalid');
+            throw new ConfigException('The searchengines.json file is invalid');
         }
 
         // Build a new array using the values we need...
         foreach ($decodedjson as $item) {
             if (!isset($item->name, $item->url)) {
-                throw new Exception('The searchengines.json does not contain the "name" or "url" properties');
+                throw new ConfigException('The searchengines.json does not contain the "name" or "url" properties');
             }
             $searchengine = new \stdClass();
             $searchengine->name = $item->name;

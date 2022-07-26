@@ -13,8 +13,8 @@
 
 namespace Jump\Exceptions;
 
-class TagNotFoundException extends \Exception {
-    public function __construct(string $tagname) {
-        parent::__construct('No sites have been tagged with "' . $tagname . '"');
+class SiteNotFoundException extends \Exception {
+    public function __construct(string $ref) {
+        parent::__construct('The site could not be found (' . $ref . ')');
     }
 }

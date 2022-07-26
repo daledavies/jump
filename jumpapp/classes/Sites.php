@@ -13,7 +13,8 @@
 
 namespace Jump;
 
-use \Exception;
+use \Jump\Exceptions\ConfigException;
+use \Jump\Exceptions\SiteNotFoundException;
 use \Jump\Exceptions\TagNotFoundException;
 
 /**
@@ -67,16 +68,16 @@ class Sites {
      * be decoded to an array,
      *
      * @return array Array of Site objects sites loaded from sites.json
-     * @throws Exception If sites.json cannot be found.
+     * @throws ConfigException If sites.json cannot be found.
      */
     private function load_sites_from_json(): array {
         $allsites = [];
         $rawjson = file_get_contents($this->sitesfilelocation);
         if ($rawjson === false) {
-            throw new Exception('There was a problem loading the sites.json file');
+            throw new ConfigException('There was a problem loading the sites.json file');
         }
         if ($rawjson === '') {
-            throw new Exception('The sites.json file is empty');
+            throw new ConfigException('The sites.json file is empty');
         }
         // Do some checks to see if the JSON decodes into something
         // like what we expect to see...
@@ -132,12 +133,12 @@ class Sites {
      *
      * @param string $url The URL to search for.
      * @return Site A matching Site object if found.
-     * @throws Exception If a site with given URL does not exist.
+     * @throws SiteNotFoundException If a site with given URL does not exist.
      */
     public function get_site_by_url(string $url): Site {
         $found = array_search($url, array_column($this->get_sites(), 'url'));
         if ($found === false) {
-            throw new Exception('The site could not be found ('.$url.')');
+            throw new SiteNotFoundException($url);
         }
         return $this->loadedsites[$found];
     }
@@ -147,12 +148,12 @@ class Sites {
      *
      * @param string $id The Site ID to search for.
      * @return Site A matching Site object if found.
-     * @throws Exception If a site with given Site ID does not exist.
+     * @throws SiteNotFoundException If a site with given Site ID does not exist.
      */
     public function get_site_by_id(string $id): Site {
         $found = array_search($id, array_column($this->get_sites(), 'id'));
         if ($found === false) {
-            throw new Exception('The site could not be found ('.$id.')');
+            throw new SiteNotFoundException($id);
         }
         return $this->loadedsites[$found];
     }
@@ -162,11 +163,11 @@ class Sites {
      *
      * @param string $tagname The tag to look look up sites.
      * @return array Array of Site objects with the given tag.
-     * @throws Exception If there are no sites tagged with $tagname.
+     * @throws TagNotFoundException If there are no sites tagged with $tagname.
      */
     public function get_sites_by_tag(string $tagname): array {
         if (!in_array($tagname, $this->tags)) {
-            throw new TagNotFoundException('No sites have been tagged with "'.$tagname.'"');
+            throw new TagNotFoundException($tagname);
         }
         $found = [];
         foreach ($this->get_sites() as $site) {
