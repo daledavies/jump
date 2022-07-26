@@ -50,7 +50,7 @@ class Status {
             ]);
             // Try to connect to site and determine status.
             try {
-                if($client->request('GET', $this->site->url)) {
+                if ($client->request('HEAD', $this->site->url)) {
                     $status = self::STATUS_ONLINE;
                 }
             } catch (\GuzzleHttp\Exception\ConnectException) {
