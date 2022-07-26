@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Close session early to avoid session lock blocking API calls.
 - Updated composer packages, addresses several security alerts for older version of Guzzle.
 - Updated NPM packes, addresses vulverabilities in Terser and EJS.
+- Fix incorrect reference to CSS file in error page.
+- Various minor code improvements.
 
 ## [1.2.4] - 2022-07-19
 ### Added
