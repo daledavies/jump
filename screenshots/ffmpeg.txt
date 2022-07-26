@@ -1,0 +1,3 @@
+To create the webp demo animation from an mp4...
+
+ffmpeg -i input.mp4 -loop 0 screenshot-demo.webp

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2022-07-26
+### Added
+- Real-time status monitoring for each site. Jump can now ping your sites and report on their
+  availability (e.g. online, offline, error).
+
+### Fixed
+- Close session early to avoid session lock blocking API calls.
+- Updated composer packages, addresses several security alerts for older version of Guzzle.
+- Updated NPM packes, addresses vulverabilities in Terser and EJS.
+
 ## [1.2.4] - 2022-07-19
 ### Added
 - Issue #41: Add support for a custom favicon.

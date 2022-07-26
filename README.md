@@ -6,24 +6,26 @@
 
 Jump is yet another self-hosted startpage for your server designed to be simple, stylish, fast and secure.
 
-![screenshot](screenshots/screenshot-demo.gif)
-
-### Demo
-
-Check it out here... https://jumpdemo.daledavies.co.uk
-
-Note the demo instance is hosted on a render.com free tier so may take a few seconds to wake up.
+![screenshot](screenshots/screenshot-demo.webp)
 
 ### Features
 
-- Fast, easy to deploy, secure
-- Custom sites and icons
-- Categorise sites with tags
-- Custom background images
-- Unsplash integration (background images)
-- Search sites added to Jump, plus custom list of search engines 
-- Fetch favicons for sites without custom icons
-- Open Weather Map integration
+- Fast, easy to deploy, secure.
+- Easily add sites and use custom icons, or let Jump fetch their original favicons.
+- Categorise sites with tags across multiple pages.
+- Real-time status monitoring for each site.
+- Use your own background images or get random background images from Unsplash.
+- Fast search by name, tag, url with keyboard shortcut.
+- Custom list of search engines accessed via search box.
+- Open Weather Map integration for local time and weather.
+- Several layout options, including responsive UI for mobile devices.
+- Easily enable/disable all configuration options, tailor Jump to suit your needs.
+
+### Demo - [jumpdemo.daledavies.co.uk](https://jumpdemo.daledavies.co.uk)
+
+Note - the demo instance is hosted on a render.com free tier so may take a few seconds to wake up.
+
+
 
 
 ## Installation
@@ -69,7 +71,9 @@ You can use the following optional environment variables to configure/customise 
 - `OWMAPIKEY` - An API key for Open Weather Map, LATLONG (below) must also be defined.
 - `LATLONG` - A latitude and longitude for the default location (e.g. "51.509865,-0.118092").
 - `METRICTEMP: 'true'` - Metric (C) or imperial (F) temperature units.
-- `NOINDEX: 'true'` - Include a robots noindex meta tag in site header
+- `CHECKSTATUS: 'false'` - Disable checking site availability status.
+- `STATUSCACHE: 5` - Duration in minutes to cache site availability status.
+- `NOINDEX: 'true'` - Include a robots noindex meta tag in site header.
 - `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 - `WWWURL` - Useful if Jump is hosted in a sub-directory (e.g. "/startpage").
 
