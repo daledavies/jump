@@ -4,7 +4,7 @@
 ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D8.0-blue?style=flat)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/daledavies/jump?sort=date)
 
-Jump is yet another self-hosted startpage for your server designed to be simple, stylish, fast and secure.
+Jump is yet another self-hosted start page for your server designed to be simple, stylish, fast and secure.
 
 ![screenshot](screenshots/screenshot-demo.webp)
 
