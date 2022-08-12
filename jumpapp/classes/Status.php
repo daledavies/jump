@@ -31,6 +31,12 @@ class Status {
      */
     public function __construct(private Cache $cache, public Site $site) {
         $this->status = $this->cache->load(cachename: 'sites/status', key: $this->site->id);
+        // Create a new client with client config.
+        $this->client = new \GuzzleHttp\Client([
+            'connect_timeout' => $this->connectionTimeout,
+            'timeout' => $this->requestTimeout,
+            'allow_redirects' => true
+        ]);
     }
 
     /**
@@ -42,31 +48,36 @@ class Status {
         // If we haven't got a status already cachhed then try connecting to the site
         // and save the status to the cache.
         if (!$this->status) {
-            // Create a new client with client config.
-            $client = new \GuzzleHttp\Client([
-                'connect_timeout' => $this->connectionTimeout,
-                'timeout' => $this->requestTimeout,
-                'allow_redirects' => true
-            ]);
-            // Try to connect to site and determine status.
-            try {
-                if ($client->request('HEAD', $this->site->url)) {
-                    $status = self::STATUS_ONLINE;
-                }
-            } catch (\GuzzleHttp\Exception\ConnectException) {
-                // Catch instances where we cant connect.
-                $status =  self::STATUS_OFFLINE;
-            } catch (\GuzzleHttp\Exception\BadResponseException) {
-                // Catch 4xx and 5xx errors.
-                $status =  self::STATUS_ERROR;
-            } catch (\Exception) {
-                // If anything went wrong or we had some other status code.
-                $status =  self::STATUS_UNKNOWN;
-            }
             // Save the status to the cache.
-            $this->status = $this->cache->save(cachename: 'sites/status', key: $this->site->id, data: $status);
+            $this->status = $this->cache->save(
+                cachename: 'sites/status',
+                key: $this->site->id,
+                data: $this->do_request()
+            );
         }
         // Finally return the status.
         return $this->status;
+    }
+
+    /**
+     * Try to connect to site and return status.
+     *
+     * @return string
+     */
+    private function do_request(): string {
+        try {
+            if ($this->client->request('HEAD', $this->site->url)) {
+                return self::STATUS_ONLINE;
+            }
+        } catch (\GuzzleHttp\Exception\ConnectException) {
+            // Catch instances where we cant connect.
+            return self::STATUS_OFFLINE;
+        } catch (\GuzzleHttp\Exception\BadResponseException) {
+            // Catch 4xx and 5xx errors.
+            return self::STATUS_ERROR;
+        } catch (\Exception) {
+            // If anything went wrong or we had some other status code.
+            return self::STATUS_UNKNOWN;
+        }
     }
 }
