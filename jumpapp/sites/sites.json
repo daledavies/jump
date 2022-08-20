@@ -7,7 +7,7 @@
     "sites": [
         {
             "name": "Github",
-            "url" : "https://github.com/daledavies/jump",
+            "url" : "https://sevenbolds.github.io/jump/",
             "description": "This is an example description",
             "nofollow": false,
             "newtab": true
