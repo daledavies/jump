@@ -20,7 +20,7 @@ return [
     // Where on the this code is located.
     'wwwroot'        => getenv('WWWROOT')        ?:   '/var/www/html',
     // Site URL - might help if just is hosted in a subdirectory.
-    'wwwurl'         => getenv('WWWURL')         ?:   '',
+    'wwwurl'         => getenv('WWWURL')         ?:   'https://sevenbolds.github.io/jump/',
 
     // Stop retrieving items from the cache, useful for testing.
     'cachebypass'    => getenv('CACHEBYPASS')    ?:   false,
