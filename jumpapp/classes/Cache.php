@@ -151,7 +151,7 @@ class Cache {
      * @param mixed $data
      * @return void
      */
-    public function save(string $cachename, ?string $key = 'default', mixed $data): mixed {
+    public function save(string $cachename, mixed $data, ?string $key = 'default'): mixed {
         $this->init_cache($cachename, $key);
         $dependencies = [$this->caches[$cachename]['expirationtype'] => $this->caches[$cachename]['expirationparams']];
         return $this->caches[$cachename]['cache'][$key]->save($cachename.'/'.$key, $data, $dependencies);
