@@ -37,17 +37,17 @@ RUN apk add --no-cache \
   bash \
   curl \
   nginx \
-  php8 \
-  php8-curl \
-  php8-dom \
-  php8-fileinfo \
-  php8-fpm \
-  php8-json \
-  php8-opcache \
-  php8-openssl \
-  php8-session \
-  php8-xml \
-  php8-zlib
+  php81 \
+  php81-curl \
+  php81-dom \
+  php81-fileinfo \
+  php81-fpm \
+  php81-json \
+  php81-opcache \
+  php81-openssl \
+  php81-session \
+  php81-xml \
+  php81-zlib
 
 # Create symlink for anything expecting to use "php".
 RUN ln -s -f /usr/bin/php8 /usr/bin/php
@@ -56,8 +56,8 @@ RUN ln -s -f /usr/bin/php8 /usr/bin/php
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 # PHP/FPM config.
-COPY docker/fpm-pool.conf /etc/php8/php-fpm.d/www.conf
-COPY docker/php.ini /etc/php8/conf.d/custom.ini
+COPY docker/fpm-pool.conf /etc/php81/php-fpm.d/www.conf
+COPY docker/php.ini /etc/php81/conf.d/custom.ini
 
 COPY docker/entrypoint.sh /usr/local/bin/
 
