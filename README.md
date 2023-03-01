@@ -76,6 +76,7 @@ You can use the following optional environment variables to configure/customise 
 - `NOINDEX: 'true'` - Include a robots noindex meta tag in site header.
 - `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 - `WWWURL` - Useful if Jump is hosted in a sub-directory (e.g. "/startpage").
+- `DISABLEIPV6` - Disable IPV6 if required.
 
 **NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together.
 

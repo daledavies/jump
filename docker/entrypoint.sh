@@ -68,16 +68,27 @@ if [ -z "${DEVELOPMENT-}" ]; then
         fi
     fi
 
-    echo >&2 "";
-    echo >&2 "- All done! Starting nginx/php services now."
-    echo >&2 "";
-    echo >&2 "-------------------------------------------------------------"
-    echo >&2 "";
-
 else
+    echo >&2 "";
     echo >&2 "- Setting correct ownership of xdebug dir"
     chown -R jumpapp:jumpapp /tmp/xdebug
 fi
+
+DISABLEIPV6=$(echo "${DISABLEIPV6:-}" | tr '[:upper:]' '[:lower:]')
+
+if [ "$DISABLEIPV6" == "true" ] || [ "$DISABLEIPV6" == "1" ]; then
+    echo >&2 "";
+    echo >&2 "- Disabling IPv6 in nginx config"
+    sed -E -i 's/^([^#]*)listen \[::\]/\1#listen [::]/g' /etc/nginx/nginx.conf
+else
+    sed -E -i 's/^(\s*)#listen \[::\]/\1listen [::]/g' /etc/nginx/nginx.conf
+fi
+
+echo >&2 "";
+echo >&2 "- All done! Starting nginx/php services now."
+echo >&2 "";
+echo >&2 "-------------------------------------------------------------"
+echo >&2 "";
 
 php-fpm8
 nginx -g 'daemon off;'
