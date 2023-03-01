@@ -41,9 +41,9 @@ return [
     'noindex'        => getenv('NOINDEX')        ?:   true,
 
     // Background blur percentage.
-    'bgblur'         => getenv('BGBLUR')         ?:   '70',
+    'bgblur'         => (getenv('BGBLUR') !== false) ? getenv('BGBLUR') : '70',
     // Background brightness percentage.
-    'bgbright'       => getenv('BGBRIGHT')       ?:   '85',
+    'bgbright'       => (getenv('BGBRIGHT') !== false) ? getenv('BGBRIGHT') :   '85',
     // Unsplash API key, when added will use Unsplash background images.
     'unsplashapikey' => getenv('UNSPLASHAPIKEY') ?:   false,
     // Unsplash collection name to pick random image from.
