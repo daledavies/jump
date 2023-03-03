@@ -51,7 +51,18 @@
             "name": "Pi-hole",
             "url" : "https://pi-hole.net/",
             "nofollow": false,
-            "tags": ["stuff", "things"]
+            "tags": ["home", "things"]
+        },
+        {
+            "name": "Teapot",
+            "url" : "https://www.google.com/pagedoesnotexist",
+            "nofollow": false,
+            "tags": ["stuff", "things"],
+            "status": {
+                "allowed_status_codes": [418],
+                "request_method": "GET",
+                "url": "https://www.google.com/teapot"
+            }
         }
     ]
 }

@@ -65,15 +65,25 @@ class Status {
      * @return string
      */
     private function do_request(): string {
+        // Grab some details if they exist from the site options.
+        $url = $this->site->status->url ?? $this->site->url;
+        $method = !in_array(($this->site->status->request_method ?? null), ['HEAD', 'GET']) ? 'HEAD' : $this->site->status->request_method;
+        // Try to make a request and see what we get back.
         try {
-            if ($this->client->request('HEAD', $this->site->url)) {
+            if ($this->client->request($method, $url)) {
                 return self::STATUS_ONLINE;
             }
         } catch (\GuzzleHttp\Exception\ConnectException) {
             // Catch instances where we cant connect.
             return self::STATUS_OFFLINE;
-        } catch (\GuzzleHttp\Exception\BadResponseException) {
-            // Catch 4xx and 5xx errors.
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
+            // This exception is thrown on 4xx and 5xx errors, however we want to ensure we dont
+            // show an error status in the UI if the response code is in the list of allowed codes.
+            // E.g. the server response with "418 I'm a teapot".
+            $status = $e->getResponse()->getStatusCode();
+            if (in_array($status, ((array)$this->site->status->allowed_status_codes ?? []))) {
+                return self::STATUS_ONLINE;
+            }
             return self::STATUS_ERROR;
         } catch (\Exception) {
             // If anything went wrong or we had some other status code.
