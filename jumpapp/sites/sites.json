@@ -61,7 +61,8 @@
             "status": {
                 "allowed_status_codes": [418],
                 "request_method": "GET",
-                "url": "https://www.google.com/teapot"
+                "url": "https://www.google.com/teapot",
+                "verify_cert": false
             }
         }
     ]

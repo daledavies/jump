@@ -174,7 +174,8 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
             "status": {
                 "allowed_status_codes": [418],
                 "request_method": "GET",
-                "url": "https://www.google.com/teapot"
+                "url": "https://www.google.com/teapot",
+                "verify_cert": false
             }
         }
     ]
@@ -216,6 +217,7 @@ Options to control how status checking works can be defined for each site...
 - `allowed_status_codes`: A list of additional status codes (in the 4XX and 5XX ranges) that could represent the site is online, for example if the site responds with "418 I'm a teapot".
 - `request_method`: By default Jump will make a HEAD request when checking a site's status, you can use this option to specify `GET` instead.
 - `url`: An alternate status URL to check instead of the main site URL.
+- `verify_cert`: Disable SSL certificate verification, useful for sites with self-signed certs.
 
 ### Search
 

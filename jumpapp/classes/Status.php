@@ -31,11 +31,13 @@ class Status {
      */
     public function __construct(private Cache $cache, public Site $site) {
         $this->status = $this->cache->load(cachename: 'sites/status', key: $this->site->id);
+        $verify = (bool)($this->site->status->verify_cert ?? true);
         // Create a new client with client config.
         $this->client = new \GuzzleHttp\Client([
             'connect_timeout' => $this->connectionTimeout,
             'timeout' => $this->requestTimeout,
-            'allow_redirects' => true
+            'allow_redirects' => true,
+            'verify' => $verify
         ]);
     }
 
