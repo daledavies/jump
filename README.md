@@ -161,17 +161,20 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
             "url" : "https://cloud.example.com",
             "icon": "nextcloud.png",
             "tags": ["home", "stuff", "things"]
-        },
-        {
-            "name": "Paperless",
-            "url" : "https://paperless.example.com",
-            "icon": "paperless.jpg",
-            "tags": ["things", "home"]
-        },
+        }
         {
             "name": "Google",
             "url" : "https://www.google.com",
             "nofollow": false
+        },
+        {
+            "name": "Teapot",
+            "url" : "https://www.google.com/pagedoesnotexist",
+            "status": {
+                "allowed_status_codes": [418],
+                "request_method": "GET",
+                "url": "https://www.google.com/teapot"
+            }
         }
     ]
 }
@@ -204,6 +207,14 @@ On a per-site basis use `"nofollow": true` to include `rel="nofollow"` on specif
 #### newtab
 
 On a per-site basis use `"newtab": true` to open specific site links in a new browser tab.
+
+#### status
+
+Options to control how status checking works can be defined for each site...
+
+- `allowed_status_codes`: A list of additional status codes (in the 4XX and 5XX ranges) that could represent the site is online, for example if the site responds with "418 I'm a teapot".
+- `request_method`: By default Jump will make a HEAD request when checking a site's status, you can use this option to specify `GET` instead.
+- `url`: An alternate status URL to check instead of the main site URL.
 
 ### Search
 
