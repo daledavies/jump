@@ -63,6 +63,7 @@ You can use the following optional environment variables to configure/customise 
 - `SHOWGREETING: 'false'` - Show the label "#home" instead of a friendly greeting message.
 - `SHOWSEARCH : 'false'` - Hide the search button (disable search).
 - `ALTLAYOUT: 'true'` - Display list of sites using an [alternative layout](/screenshots/screenshot-altlayout.png).
+- `CUSTOMWIDTH: 1000` - Set a custom with for the page container/site list.
 - `BGBLUR: 50` - Background image blur percentage.
 - `BGBRIGHT: 90` - Background image brightness percentage.
 - `UNSPLASHAPIKEY` - An API key for Unsplash, enables fetching random background images from Unsplash.

@@ -50,6 +50,8 @@ return [
     'unsplashcollections' => getenv('UNSPLASHCOLLECTIONS') ?: '',
     // Alternative background image provider.
     'altbgprovider'  => getenv('ALTBGPROVIDER')  ?:   false,
+    // Custom page width.
+    'customwidth'    => getenv('CUSTOMWIDTH')    ?:   false,
 
     // Open Weather Map API key.
     'owmapikey'      => getenv('OWMAPIKEY')      ?:   '',
