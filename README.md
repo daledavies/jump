@@ -184,7 +184,7 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
 ```
 
 * `name` and `url` are mandatory.
-* `description`, `tags`, `nofollow`, `newtab` and `icon` are optional.
+* `description`, `tags`, `nofollow`, `newtab`, `icon` and `status` are optional.
 
 #### Tags
 
