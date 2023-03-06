@@ -83,7 +83,7 @@ class Status {
             // show an error status in the UI if the response code is in the list of allowed codes.
             // E.g. the server response with "418 I'm a teapot".
             $status = $e->getResponse()->getStatusCode();
-            if (in_array($status, ((array)$this->site->status->allowed_status_codes ?? []))) {
+            if (in_array($status, (array)($this->site->status->allowed_status_codes ?? []))) {
                 return self::STATUS_ONLINE;
             }
             return self::STATUS_ERROR;
