@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2023-03-06
+### Added
+- Issue #55: Add CUSTOMWIDTH option.
+- Issue #58: Add config option to disable IPv6 support in nginx.
+- Issue #68: Add per-site options for flexibility in checking status.
+- Issue #69: Add option to disable SSL cert verification for site status check.
+- Issue #74: Implement scrollable mobile site view.
+
+### Fixed
+- Issue #66: Allow for background blur of 0.
+- Fix incorrect order of arguments in Cache::save().
+- A few other minor code improvements.
+
 ## [1.3.0] - 2022-07-26
 ### Added
 - Real-time status monitoring for each site. Jump can now ping your sites and report on their
