@@ -40,7 +40,6 @@ class Sites {
             'nofollow' => false,
             'newtab' => false,
         ];
-        $this->tags = [];
 
         // Retrieve sites from cache. Load all sites from json file if not cached or
         // the cache has expired.
