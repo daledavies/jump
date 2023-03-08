@@ -88,7 +88,9 @@ class Sites {
         // Now check for the newer format.
         if (isset($decodedjson->sites) && is_array($decodedjson->sites)) {
             $allsites = $decodedjson->sites;
-            $this->default = (array) $decodedjson->default;
+            if (isset($decodedjson->default)) {
+                $this->default = (array) $decodedjson->default;
+            }
         }
 
         // Instantiate an actual Site() object for each element.
