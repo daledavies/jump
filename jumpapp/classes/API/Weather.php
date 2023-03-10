@@ -39,8 +39,8 @@ class Weather extends AbstractAPI {
         // This is the API endpoint and params we are using for the query,
         $url =  $owmapiurlbase
                 .'?units=' . $units
-                .'&lat=' . $latlong[0]
-                .'&lon=' . $latlong[1]
+                .'&lat=' . trim($latlong[0])
+                .'&lon=' . trim($latlong[1])
                 .'&appid=' . $this->config->get('owmapikey', false);
 
         // Use the cache to store/retrieve data, make an md5 hash of latlong so it is not possible
