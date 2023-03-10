@@ -117,7 +117,7 @@ class Config {
         if (!$this->config->has($key) && $strict === true) {
             throw new ConfigException('Config key does not exist... ('.$key.')');
         }
-        return $this->config->get($key);
+        return trim($this->config->get($key));
     }
 
     /**
