@@ -6,88 +6,88 @@ $unknown-color: #ccc;
 
 
 @mixin sites-alternate {
-		width: 100%;
-		margin-top: 20px;
+	width: 100%;
+	margin-top: 20px;
 
-		li {
-			float: left;
-			width: 50%;
-			text-align: left;
-			padding: 0 15px;
-			margin-bottom: 10px;
+	li {
+		float: left;
+		width: 50%;
+		text-align: left;
+		padding: 0 15px;
+		margin-bottom: 10px;
 
-			a {
-				background-color: rgba(255,255,255,0.8);
-				box-shadow: 0 1px 5px rgba(0,0,0,.3);
-				padding: 8px;
-				width: 100%;
-				transition: background-color .1s, box-shadow .1s;
-				position: relative;
-				overflow: hidden;
-
-				&:hover {
-					background-color: #fff;
-					box-shadow: 0 1px 5px rgba(0,0,0,.6);
-				}
-			}
-		}
-
-		.icon {
-			width: 35px;
-			height: 35px !important;
-			display: inline-block;
-			padding: 0;
-			border: none;
-			border-radius: 6px;
-			overflow: hidden;
-			box-shadow: none;
-			vertical-align: middle;
-			margin: 0 8px 0 0;
-		}
-
-		.name {
-			width: auto;
-			display: inline-block;
-			vertical-align: middle;
-			text-shadow: none;
-			color: #202124;
-			position: absolute;
-			top: 50%;
-			height: 14px;
-			line-height: 14px;
-			margin-top: -7px;
-		}
-	}
-
-	@mixin status-sites-alternate {
-		li {
-			a {
-			padding-left: 11px;
+		a {
+			background-color: rgba(255,255,255,0.8);
+			box-shadow: 0 1px 5px rgba(0,0,0,.3);
+			padding: 8px;
+			width: 100%;
+			transition: background-color .1s, box-shadow .1s;
 			position: relative;
+			overflow: hidden;
 
-				&::before {
-					content: '';
-					display: inline-block;
-					height: 100%;
-					width: 4px;
-					position: absolute;
-					left: 0;
-					top: 0;
-					background-color: $unknown-color;
-				}
-			}
-
-			&.online a::before {
-				background-color: $online-color;
-			}
-			&.offline a::before {
-				background-color: $offline-color;
-			}
-			&.error a::before {
-				background-color: $error-color;
+			&:hover {
+				background-color: #fff;
+				box-shadow: 0 1px 5px rgba(0,0,0,.6);
 			}
 		}
 	}
+
+	.icon {
+		width: 35px;
+		height: 35px !important;
+		display: inline-block;
+		padding: 0;
+		border: none;
+		border-radius: 6px;
+		overflow: hidden;
+		box-shadow: none;
+		vertical-align: middle;
+		margin: 0 8px 0 0;
+	}
+
+	.name {
+		width: auto;
+		display: inline-block;
+		vertical-align: middle;
+		text-shadow: none;
+		color: #202124;
+		position: absolute;
+		top: 50%;
+		height: 14px;
+		line-height: 14px;
+		margin-top: -7px;
+	}
+}
+
+@mixin status-sites-alternate {
+	li {
+		a {
+		padding-left: 11px;
+		position: relative;
+
+			&::before {
+				content: '';
+				display: inline-block;
+				height: 100%;
+				width: 4px;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background-color: $unknown-color;
+			}
+		}
+
+		&.online a::before {
+			background-color: $online-color;
+		}
+		&.offline a::before {
+			background-color: $offline-color;
+		}
+		&.error a::before {
+			background-color: $error-color;
+		}
+	}
+}
 
 .sites {
 	padding: 0;
@@ -129,10 +129,10 @@ $unknown-color: #ccc;
 		box-shadow: 0 1px 5px rgba(0,0,0,.3);
 		padding: 15px;
 		margin-bottom: 8px;
-		background-image: url(../images/loading.svg);
+		background-image: url(../images/loading-static.svg);
 		background-repeat: no-repeat;
 		background-position: 50%;
-		background-size: 20px;
+		background-size: 25px;
 
 		img {
 			width: 100%;
@@ -192,7 +192,6 @@ $unknown-color: #ccc;
 }
 
 @media (max-width: 500px) {
-
 	.sites {
 		@include sites-alternate();
 
@@ -221,5 +220,4 @@ $unknown-color: #ccc;
 			}
 		}
 	}
-
 }
