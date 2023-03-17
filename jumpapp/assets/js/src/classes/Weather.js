@@ -34,28 +34,32 @@ export default class Weather {
         }
         // Get some data from the weather api...
         fetch(apiurl)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error('JUMP ERROR: There was an issue with the OWM API... ' + data.error);
-                return;
-            }
-            if (data.cod === 401) {
+        .then(response => {
+            if (response.status === 401) {
                 console.error('JUMP ERROR: The OWM API key is invalid, check config.php');
+                this.eventemitter.emit('weather-error');
                 return;
             }
-            // Determine if we should use the day or night variant of our weather icon.
-            var daynightvariant = 'night';
-            if (data.dt > data.sys.sunrise && data.dt < data.sys.sunset) {
-                daynightvariant = 'day'
-            }
-            this.eventemitter.emit('weather-loaded', {
-                locationcode: data.id,
-                locationname: data.name,
-                temp: Math.ceil(data.main.temp) + '&deg;' + (JUMP.metrictemp ? 'C' : 'F'),
-                description: data.weather[0].main,
-                iconclass: 'wi-owm-' + daynightvariant + '-' + data.weather[0].id,
-                timezoneshift: data.timezone*1000,
+            response.json().then(data =>  {
+                console.log(data);
+                if (data.error) {
+                    console.error('JUMP ERROR: There was an issue with the OWM API... ' + data.error);
+                    this.eventemitter.emit('weather-error');
+                    return;
+                }
+                // Determine if we should use the day or night variant of our weather icon.
+                var daynightvariant = 'night';
+                if (data.dt > data.sys.sunrise && data.dt < data.sys.sunset) {
+                    daynightvariant = 'day'
+                }
+                this.eventemitter.emit('weather-loaded', {
+                    locationcode: data.id,
+                    locationname: data.name,
+                    temp: Math.ceil(data.main.temp) + '&deg;' + (JUMP.metrictemp ? 'C' : 'F'),
+                    description: data.weather[0].main,
+                    iconclass: 'wi-owm-' + daynightvariant + '-' + data.weather[0].id,
+                    timezoneshift: data.timezone*1000,
+                });
             });
         })
     }

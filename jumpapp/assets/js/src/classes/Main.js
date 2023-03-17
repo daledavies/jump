@@ -132,6 +132,10 @@ export default class Main {
             this.eventemitter.emit('show-content');
         });
 
+        this.eventemitter.on('weather-error', error => {
+            this.eventemitter.emit('show-content');
+        });
+
         this.eventemitter.on('clock-updated', clockdata => {
             if (this.timeelm != null) {
                 this.timeelm.innerHTML = clockdata.formatted_time;

@@ -61,7 +61,7 @@ class Weather extends AbstractAPI {
             curl_close($ch);
             // If we had an error then return the error message and exit, otherwise return the API response.
             if (isset($curlerror)) {
-                http_response_code(400);
+                http_response_code(curl_getinfo($ch)['http_code']);
                 die(json_encode(['error' => $curlerror]));
             }
             return $response;
