@@ -41,7 +41,6 @@ export default class Weather {
                 return;
             }
             response.json().then(data =>  {
-                console.log(data);
                 if (data.error) {
                     console.error('JUMP ERROR: There was an issue with the OWM API... ' + data.error);
                     this.eventemitter.emit('weather-error');
