@@ -97,8 +97,9 @@ body {
     flex-direction: column;
     justify-content:center;
     width: 100%;
-    max-width: 650px;
-    margin:-50px auto 0 auto;
+    max-width: 750px;
+    margin: -20px auto 0 auto;
+    height: calc(100% - 12px) /* 12px = roughly half the greeting height and border */
 }
 
 @media (max-width: 500px) {

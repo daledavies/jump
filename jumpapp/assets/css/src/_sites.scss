@@ -95,6 +95,20 @@ $unknown-color: #ccc;
 	list-style-type: none;
 	font-size: 14px;
 	user-select: none;
+	max-height: 60%;
+	overflow-y: auto;
+	scrollbar-width: auto;
+	scrollbar-color: #dddddd35 #66666620;
+
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: #dddddd35;
+	}
+	&::-webkit-scrollbar-track {
+		background: #66666620;
+	}
 
 	li {
 		padding: 0;
@@ -194,11 +208,9 @@ $unknown-color: #ccc;
 @media (max-width: 500px) {
 	.sites {
 		@include sites-alternate();
-
-		overflow-y: scroll;
 		-ms-overflow-style: none;  /* IE and Edge */
-  		scrollbar-width: none;  /* Firefox */
-		height: calc(100% - 65px);
+		scrollbar-width: none;  /* Firefox */
+		max-height: calc(100% - 65px);
 
 		li {
 			width: 100%;
