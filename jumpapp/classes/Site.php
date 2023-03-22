@@ -39,7 +39,7 @@ class Site {
         if (!isset($sitearray['name'], $sitearray['url'])) {
             throw new \Exception('The array passed to Site() must contain the keys "name" and "url"!');
         }
-        $this->id = preg_replace("/[^A-Za-z0-9 ]/", '', $sitearray['url']);
+        $this->id = 'site-'.md5($sitearray['url']);
         $this->name = $sitearray['name'];
         $this->url = $sitearray['url'];
         $this->nofollow = isset($sitearray['nofollow']) ? $sitearray['nofollow'] : (isset($this->defaults['nofollow']) ? $this->defaults['nofollow'] : false);
