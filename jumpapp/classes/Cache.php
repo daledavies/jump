@@ -44,27 +44,27 @@ class Cache {
         $this->caches = [
             'searchengines' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::FILES,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => $config->get('searchenginesfile')
             ],
             'sites' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::FILES,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => $config->get('sitesfile')
             ],
             'sites/status' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::EXPIRE,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => $config->get('statuscache').' minutes'
             ],
             'tags' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::FILES,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => $config->get('sitesfile')
             ],
             'templates/sites' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::FILES,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => [
                     __DIR__.'/../config.php',
                     $config->get('sitesfile'),
@@ -73,21 +73,21 @@ class Cache {
             ],
             'templates/errorpage' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::FILES,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => [
                     $config->get('templatedir').'/errorpage.mustache'
                 ]
             ],
             'unsplash' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::FILES,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => [
                     __DIR__.'/../config.php',
                 ]
             ],
             'weatherdata' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::EXPIRE,
+                'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => '5 minutes'
             ],
         ];
