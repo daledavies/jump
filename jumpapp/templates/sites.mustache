@@ -2,7 +2,7 @@
 <ul class="sites {{# altlayout}}alternate{{/ altlayout}}">
 {{# sites}}<li id="{{id}}"><a {{# newtab}}target="_blank"{{/ newtab}} rel="{{# nofollow}}nofollow {{/ nofollow}}{{# newtab}}noopener{{/ newtab}}" title="{{description}}" href="{{url}}">
     <span class="icon">
-        <img src="{{{wwwurl}}}/api/icon?siteurl={{#urlencode}}{{url}}{{/urlencode}}">
+        <img src="{{{wwwurl}}}/api/icon?siteid={{id}}">
     </span>
     <span class="name">{{name}}</span>
 </a></li>{{/ sites}}

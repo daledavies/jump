@@ -34,7 +34,7 @@ class Main {
         $this->router->addRoute('/tag/<tag>', [
 			'class' => 'Jump\Pages\TagPage'
 		]);
-        $this->router->addRoute('/api/icon?siteurl=<siteurl>', [
+        $this->router->addRoute('/api/icon?siteid=<siteid>', [
 			'class' => 'Jump\API\Icon'
 		]);
         $this->router->addRoute('/api/status[/<token>]', [
