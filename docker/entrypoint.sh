@@ -84,6 +84,31 @@ else
     sed -E -i 's/^(\s*)#listen \[::\]/\1listen [::]/g' /etc/nginx/nginx.conf
 fi
 
+# If we have been passed something in DOCKERSOCKET then check it
+# was actually mounted and is a socket, if so then create the docker group
+# with GID matching the docker socket file, then add jumpapp user to the
+# group. This is to give jumpapp permission to make requests to the API.
+if [ -n "${DOCKERSOCKET-}" ]; then
+    echo >&2 "";
+    echo >&2 "- Testing docker socket file was mounted correctly."
+    if [ -S "${DOCKERSOCKET}" ]; then
+        DOCKERGID=$(stat -c %g ${DOCKERSOCKET})
+        # Delete existing docker group if it exists.
+        if grep -q "docker" /etc/group; then
+            echo >&2 "-- Deleting existing docker group."
+            delgroup docker
+        fi
+        # Create a new one with correct GID.
+        echo >&2 "-- Creating docker group with correct GID."
+        addgroup -S docker -g $DOCKERGID
+        # Add jumpapp user to it.
+        echo >&2 "-- Adding jumpapp user to docker group."
+        addgroup jumpapp docker
+    else
+        echo >&2 "-- Docker socket file was either not mounted or is not a socket."
+    fi
+fi
+
 echo >&2 "";
 echo >&2 "- All done! Starting nginx/php services now."
 echo >&2 "";

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e91bcdf01a945f46bf29aa3a1cef02f5",
+    "content-hash": "8849ca2f3c80ed00c98055bf630ba1fb",
     "packages": [
         {
             "name": "arthurhoaro/favicon",
@@ -63,6 +63,50 @@
                 "sources": "https://github.com/ArthurHoaro/favicon"
             },
             "time": "2021-08-06T05:41:25+00:00"
+        },
+        {
+            "name": "divineomega/array_undot",
+            "version": "v4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DivineOmega/array_undot.git",
+                "reference": "44aed525e775718e3821d670b08046fd84914d10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DivineOmega/array_undot/zipball/44aed525e775718e3821d670b08046fd84914d10",
+                "reference": "44aed525e775718e3821d670b08046fd84914d10",
+                "shasum": ""
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^7.0 || ^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/array_undot.php"
+                ],
+                "psr-4": {
+                    "DivineOmega\\ArrayUndot\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Jordan Hall",
+                    "email": "jordan@hall05.co.uk"
+                }
+            ],
+            "description": "array_undot (the opposite of the array_dot helper function) expands a dot notation array into a full multi-dimensional array.",
+            "support": {
+                "issues": "https://github.com/DivineOmega/array_undot/issues",
+                "source": "https://github.com/DivineOmega/array_undot/tree/master"
+            },
+            "time": "2019-04-23T15:22:21+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

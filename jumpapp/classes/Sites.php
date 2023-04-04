@@ -13,6 +13,7 @@
 
 namespace Jump;
 
+use \divineomega\array_undot;
 use \Jump\Exceptions\ConfigException;
 use \Jump\Exceptions\SiteNotFoundException;
 use \Jump\Exceptions\TagNotFoundException;
@@ -26,6 +27,7 @@ class Sites {
     private array $default;
     private string $sitesfilelocation;
     private array $loadedsites;
+    public array $tags;
 
     /**
      * Automatically load sites.json on instantiation.
@@ -41,10 +43,10 @@ class Sites {
             'newtab' => false,
         ];
 
-        // Retrieve sites from cache. Load all sites from json file if not cached or
-        // the cache has expired.
+        // Retrieve sites from cache. Load all sites from json file and docker if not
+        // cached or the cache has expired.
         $this->loadedsites = $this->cache->load(cachename: 'sites', callback: function() {
-            return $this->load_sites_from_json();
+            return array_merge($this->load_sites_from_json(), $this->load_sites_from_docker());
         });
 
         // Enumerate a list of unique tags from loaded sites. Again will retrieve from
@@ -58,6 +60,80 @@ class Sites {
             }
             return array_values(array_unique($uniquetags));
         });
+    }
+
+    /**
+     * Try to find a list of sites from correctly labelled docker containers.
+     *
+     * Throws an exception if the json response from docker cannot be
+     * decoded.
+     *
+     * @return array Array of Site objects sites identified from docker.
+     * @throws ConfigException If invalid response from docker.
+     */
+    private function load_sites_from_docker(): array {
+        // Get either dockerproxy or dockersocket config and return early if
+        // neihter have been set.
+        $dockerproxy = $this->config->get('dockerproxyurl');
+        $dockersocket = $this->config->get('dockersocket');
+        if (!$dockerproxy && !$dockersocket) {
+            return [];
+        }
+
+        // Determine correct guzzle client and request options to use
+        // for either a docker proxy or connecting directly to the socket,
+        // prefer to use the proxy if both seem to have been given.
+        $clientopts = ['timeout' => 2.0];
+        $requestopts = [];
+        if ($dockerproxy) {
+            $clientopts['base_uri'] = 'http://'.rtrim($dockerproxy, '/');
+        } else if (file_exists($dockersocket)) {
+            $clientopts['base_uri'] = 'http://localhost';
+            $requestopts = [
+                'curl' => [CURLOPT_UNIX_SOCKET_PATH => '/var/run/docker.sock']
+            ];
+        }
+
+        // Make a request to docker for all containers.
+        try {
+            $response = (new \GuzzleHttp\Client($clientopts))->request('GET', '/containers/json', $requestopts);
+        } catch (\GuzzleHttp\Exception\ConnectException $e) {
+            throw new ConfigException('Did not get a response from Docker API endpoint');
+        }
+        $containers = json_decode($response->getBody());
+        if (is_null($containers)) {
+            throw new ConfigException('Docker returned an invalid json response for containers');
+        }
+
+        // Build a new array of Site() objects based on labels that have been added to
+        // containers returned by docker.
+        $sites = [];
+        foreach ($containers as $container) {
+            $labels = (array) $container->Labels;
+            // We can't build a Site() without at least a name and url.
+            if (!isset($labels['jump.name'], $labels['jump.url'])) {
+                continue;
+            }
+            // Convert dot-syntax labels into a proper multidimensional array
+            // and just use the top-level key "jump" as our site array.
+            $site = array_undot($labels)['jump'];
+            // jump.tags will have been given as a comma separated string so make this
+            // into an array.
+            if (isset($site['tags'])) {
+                // Explode the comma separated string into an array and trim any elements.
+                $site['tags'] = array_map('trim', explode(',', $site['tags']));
+            }
+            // Convert status array to an object and also explode list of allowed status codes to array.
+            if (isset($site['status'])) {
+                $site['status'] = (object) $site['status'];
+                if (isset($site['status']->allowed_status_codes)) {
+                    $site['status']->allowed_status_codes = array_map('trim', explode(',', $site['status']->allowed_status_codes));
+                }
+            }
+            // Finally add this to the list of sites we will return.
+            $sites[] = new Site($this->config, (array) $site, $this->default);
+        }
+        return $sites;
     }
 
     /**

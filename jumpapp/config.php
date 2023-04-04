@@ -63,5 +63,15 @@ return [
     // Ping sites to determine availability (e.g. online, offline, errors).
     'checkstatus'    => getenv('CHECKSTATUS')    ?:   true,
     // Duration to cache status in minutes.
-    'statuscache'    => getenv('STATUSCACHE')    ?:   '5'
+    'statuscache'    => getenv('STATUSCACHE')    ?:   '5',
+
+    // The URL and port on which a docker socket proxy is listening, for example
+    // if you have tecnativa/docker-socket-proxy named dockerproxy listening on
+    // port 2375 then this would be "dockerproxy:2375".
+    'dockerproxyurl' => getenv('DOCKERPROXYURL') ?:   false,
+    // Docker socket path. Note the host docker socket file must be mapped as
+    // a volume into the container, this must match the path it has been mapped to.
+    // If possible please don't use this as it can be insecure, use a docker socket
+    // proxy instead (see above).
+    'dockersocket'   => getenv('DOCKERSOCKET')   ?:   false
 ];

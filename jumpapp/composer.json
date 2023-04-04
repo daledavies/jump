@@ -18,6 +18,7 @@
         "phlak/config": "^7.0",
         "nette/http": "^3.1",
         "guzzlehttp/guzzle": "^7.0",
-        "unsplash/unsplash": "3.2.1"
+        "unsplash/unsplash": "3.2.1",
+        "divineomega/array_undot": "^4.1"
     }
 }
