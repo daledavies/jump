@@ -87,7 +87,7 @@ class Cache {
             ],
             'weatherdata' => [
                 'cache' => null,
-                'expirationtype' => Caching\Cache::Files,
+                'expirationtype' => Caching\Cache::Expire,
                 'expirationparams' => '5 minutes'
             ],
         ];
