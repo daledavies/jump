@@ -269,7 +269,7 @@ class Sites {
             $site->name = $loadedsite->name;
             $site->url = $loadedsite->url;
             $site->tags = $loadedsite->tags;
-            $site->iconurl = '/api/icon?siteurl='.urlencode($loadedsite->url);
+            $site->iconurl = '/api/icon?siteid='.$loadedsite->id;
             $site->status = $this->cache->load(cachename: 'sites/status', key: $site->url) ?? null;
             $searchlist[] = $site;
         }
