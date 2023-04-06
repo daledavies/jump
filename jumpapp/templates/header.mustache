@@ -22,7 +22,8 @@
                 searchengines: '{{{searchengines}}}',
                 unsplash: '{{{unsplash}}}',
                 unsplashcolor: '{{unsplashcolor}}',
-                wwwurl: '{{{wwwurl}}}'
+                wwwurl: '{{{wwwurl}}}',
+                strings: '{{{stringsforjs}}}'
             };
         </script>
     </head>
@@ -30,6 +31,6 @@
         <div class="content fixed hidden {{# checkstatus}}status{{/ checkstatus}}">
             <div class="greeting">
             {{# greeting}}<span class="tagname"><span>#</span>{{greeting}}</span>{{/ greeting}}
-            {{^ greeting}}Good <span class="chosen"></span>{{/ greeting}}
+            {{^ greeting}}<span class="chosen"></span>{{/ greeting}}
             </div>
 

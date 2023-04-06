@@ -26,7 +26,7 @@ class SearchEngines {
     /**
      * Automatically load searchengines.json on instantiation.
      */
-    public function __construct(private Config $config, private Cache $cache) {
+    public function __construct(private Config $config, private Cache $cache, private Language $language) {
         $this->config = $config;
         $this->loadedsearchengines = [];
         $this->searchfilelocation = $this->config->get('searchenginesfile');
@@ -86,5 +86,23 @@ class SearchEngines {
      */
     public function get_search_engines() {
         return $this->loadedsearchengines;
+    }
+
+    /**
+     * Return all the strings to be used by JS on the frontend.
+     *
+     * @return array
+     */
+    public function get_strings_for_js(): array {
+        $strings = [
+            'search' => [
+                'search' => $this->language->get('search.search'),
+                'sites' => $this->language->get('search.sites'),
+            ]
+        ];
+        foreach ($this->loadedsearchengines as $searchengine) {
+            $strings['search']['searchon'][$searchengine->name] = $this->language->get('search.searchon', ['searchprovider' => $searchengine->name]);
+        }
+        return $strings;
     }
 }

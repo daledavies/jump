@@ -38,12 +38,20 @@ class HomePage extends AbstractPage {
             'wwwurl' => $this->config->get_wwwurl(),
             'checkstatus' => $checkstatus,
         ];
+        $stringsforjs = \Jump\Status::get_strings_for_js($this->language);
+        $stringsforjs['greetings']['goodmorning'] = $this->language->get('greetings.goodmorning');
+        $stringsforjs['greetings']['goodafternoon'] = $this->language->get('greetings.goodafternoon');
+        $stringsforjs['greetings']['goodevening'] = $this->language->get('greetings.goodevening');
+        $stringsforjs['greetings']['goodnight'] = $this->language->get('greetings.goodnight');
         if ($showsearch || $checkstatus) {
             $templatecontext['sitesjson'] = json_encode((new \Jump\Sites($this->config, $this->cache))->get_sites_for_frontend());
             if ($showsearch) {
-                $templatecontext['searchengines'] = json_encode((new \Jump\SearchEngines($this->config, $this->cache))->get_search_engines());
+                $searchengines = new \Jump\SearchEngines($this->config, $this->cache, $this->language);
+                $templatecontext['searchengines'] = json_encode($searchengines->get_search_engines());
+                $stringsforjs += $searchengines->get_strings_for_js();
             }
         }
+        $templatecontext['stringsforjs'] = json_encode($stringsforjs);
         return $template->render($templatecontext);
     }
 

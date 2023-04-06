@@ -39,6 +39,7 @@ class Config {
         'sitesdir' => '/sites',
         'sitesfile' => '/sites/sites.json',
         'templatedir' => '/templates',
+        'translationsdir' => '/translations'
     ];
 
     /**

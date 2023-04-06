@@ -21,6 +21,8 @@ return [
     'wwwroot'        => getenv('WWWROOT')        ?:   '/var/www/html',
     // Site URL - might help if just is hosted in a subdirectory.
     'wwwurl'         => getenv('WWWURL')         ?:   '',
+    // The language Jump should use for strings, uses ISO 639-1 language codes.
+    'language'       => getenv('LANGUAGE')       ?:   'en-gb',
 
     // Stop retrieving items from the cache, useful for testing.
     'cachebypass'    => getenv('CACHEBYPASS')    ?:   false,

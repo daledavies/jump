@@ -19,6 +19,7 @@ abstract class AbstractAPI {
         protected \Jump\Config $config,
         protected \Jump\Cache $cache,
         protected \Nette\Http\Session $session,
+        protected \Jump\Language $language,
         protected ?array $routeparams
     ){}
 

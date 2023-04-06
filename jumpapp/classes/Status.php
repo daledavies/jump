@@ -92,4 +92,21 @@ class Status {
             return self::STATUS_UNKNOWN;
         }
     }
+
+    /**
+     * Return all the strings to be used by JS on the frontend.
+     *
+     * @return array
+     */
+    public static function get_strings_for_js(Language $language): array {
+        return [
+            'status' => [
+                'status' => $language->get('status.status'),
+                'error' => $language->get('status.error'),
+                'offline' => $language->get('status.offline'),
+                'online' => $language->get('status.online'),
+                'unknown' => $language->get('status.unknown'),
+            ]
+        ];
+    }
 }

@@ -22,7 +22,7 @@ class Unsplash extends AbstractAPI {
         $unsplashdata = $this->cache->load(cachename: 'unsplash');
 
         if ($unsplashdata == null) {
-            $unsplashdata = \Jump\Unsplash::load_cache_unsplash_data($this->config);
+            $unsplashdata = \Jump\Unsplash::load_cache_unsplash_data($this->config, $this->language);
             $this->cache->save(cachename: 'unsplash', data: $unsplashdata);
         }
 

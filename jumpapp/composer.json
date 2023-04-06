@@ -19,6 +19,7 @@
         "nette/http": "^3.1",
         "guzzlehttp/guzzle": "^7.0",
         "unsplash/unsplash": "3.2.1",
-        "divineomega/array_undot": "^4.1"
+        "divineomega/array_undot": "^4.1",
+        "utopia-php/locale": "^0.6.0"
     }
 }

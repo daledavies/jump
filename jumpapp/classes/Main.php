@@ -13,19 +13,20 @@
 
 namespace Jump;
 
-use Nette\Routing\RouteList;
-
 class Main {
 
     private Cache $cache;
     private Config $config;
+    private Language $language;
     private \Nette\Http\Request $request;
+    private \Nette\Routing\RouteList $router;
     private \Nette\Http\Session $session;
 
     public function __construct() {
         $this->config = new Config();
         $this->cache = new Cache($this->config);
-        $this->router = new RouteList;
+        $this->router = new \Nette\Routing\RouteList;
+        $this->language = new Language($this->config, $this->cache);
 
         // Set up the routes that Jump expects.
         $this->router->addRoute('/', [
@@ -65,7 +66,7 @@ class Main {
 
         // Instantiate the correct class to build the requested page, get the
         // content and return it.
-        $page = new $outputclass($this->config, $this->cache, $this->session, $matchedroute ?? null);
+        $page = new $outputclass($this->config, $this->cache, $this->session, $this->language, $matchedroute ?? null);
         return $page->get_output();
     }
 

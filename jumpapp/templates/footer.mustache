@@ -24,9 +24,9 @@
         </div>
         {{# hastags}}
         <div id="tags" class="tags">
-            <span class="header">Tags<span class="close"></span></span>
+            <span class="header">{{#language}}tags{{/language}}<span class="close"></span></span>
             <ul>
-                <li><a href="{{{wwwurl}}}/">home</a></li>
+                <li><a href="{{{wwwurl}}}/">{{#language}}tags.home{{/language}}</a></li>
                 {{# tags}}<li><a href="{{{wwwurl}}}/tag/{{.}}/">{{.}}</a></li>{{/ tags}}
             </ul>
         </div>

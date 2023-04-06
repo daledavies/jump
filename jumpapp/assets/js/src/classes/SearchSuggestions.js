@@ -15,13 +15,14 @@
  */
 export default class SearchSuggestions {
 
-    constructor(searchengines, inputelm, containerelm, eventemitter) {
+    constructor(searchengines, inputelm, containerelm, eventemitter, strings) {
         this.containerelm = containerelm;
         this.eventemitter = eventemitter;
         this.inputelm = inputelm;
         this.suggestionslistelm = containerelm.querySelector('.suggestion-list');
         this.searchproviderlist = null;
         this.searchengines = searchengines;
+        this.strings = strings;
     }
 
     build_searchprovider_list_elm(query) {
@@ -32,7 +33,7 @@ export default class SearchSuggestions {
             const searchprovider = document.createElement('li');
             searchprovider.setAttribute('tabindex', -1);
             searchprovider.innerHTML = '<a target="_blank" rel="noopener" \
-                href="'+provider.url+encodeURIComponent(query)+'"><span>Search on</span> '+provider.name+'</a>';
+                href="'+provider.url+encodeURIComponent(query)+'">'+this.strings.search.searchon[provider.name]+'</a>';
             searchproviderlist.appendChild(searchprovider);
         });
         searchproviderlist.addEventListener('keyup', e => {
@@ -102,7 +103,7 @@ export default class SearchSuggestions {
         if (this.inputelm.value !== '') {
             const searchtitle = document.createElement('span');
             searchtitle.classList.add('suggestiontitle');
-            searchtitle.innerHTML = 'Search';
+            searchtitle.innerHTML = this.strings.search.search;
             suggestionholder.appendChild(searchtitle);
             this.searchproviderlist = this.build_searchprovider_list_elm(this.inputelm.value);
             suggestionholder.appendChild(this.searchproviderlist);
@@ -111,7 +112,7 @@ export default class SearchSuggestions {
         if (newsuggestionslist.childNodes.length > 0) {
             const suggestiontitle = document.createElement('span');
             suggestiontitle.classList.add('suggestiontitle');
-            suggestiontitle.innerHTML = 'Sites';
+            suggestiontitle.innerHTML = this.strings.search.sites;
             suggestionholder.appendChild(suggestiontitle);
             suggestionholder.appendChild(newsuggestionslist)
         }

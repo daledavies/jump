@@ -55,6 +55,9 @@ export default class Main {
                 keys: ['name', 'tags', 'url']
             });
         }
+
+        // Parse stringsforjs JSON object.
+        this.strings = JSON.parse(JUMP.strings)
     }
 
     /**
@@ -90,7 +93,7 @@ export default class Main {
                         siteelm.classList.add(status);
                         if (status !== 'online') {
                             const sitelinkelm = siteelm.querySelector('a');
-                            sitelinkelm.title = '(Status: ' + status + ') ' + sitelinkelm.title;
+                            sitelinkelm.title = '('+this.strings.status.status+': ' + this.strings.status[status] + ') ' + sitelinkelm.title;
                         }
                     }
                 }
@@ -141,7 +144,7 @@ export default class Main {
                 this.timeelm.innerHTML = clockdata.formatted_time;
             }
             if (this.greetingelm != null) {
-                let greeting = new Greeting(clockdata.hour);
+                let greeting = new Greeting(clockdata.hour, this.strings);
                 this.greetingelm.innerHTML = greeting.get_greeting();
             }
         });
@@ -180,7 +183,7 @@ export default class Main {
 
         if (this.showsearchbuttonelm) {
             const searchinput = document.querySelector('.search-form input');
-            this.searchsuggestions = new SearchSuggestions(JSON.parse(JUMP.searchengines), searchinput, this.showsearchbuttonelm, this.eventemitter);
+            this.searchsuggestions = new SearchSuggestions(JSON.parse(JUMP.searchengines), searchinput, this.showsearchbuttonelm, this.eventemitter, this.strings);
 
             // When the search icon is licked, show the search bar and focus on it.
             this.showsearchbuttonelm.addEventListener('click', e => {

@@ -41,6 +41,7 @@ class Weather extends AbstractAPI {
                 .'?units=' . $units
                 .'&lat=' . trim($latlong[0])
                 .'&lon=' . trim($latlong[1])
+                .'&lang='. substr($this->config->get('language'), 0, 2)
                 .'&appid=' . $this->config->get('owmapikey', false);
 
         // Use the cache to store/retrieve data, make an md5 hash of latlong so it is not possible

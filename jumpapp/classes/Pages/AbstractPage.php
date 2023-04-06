@@ -29,15 +29,21 @@ abstract class AbstractPage {
         protected \Jump\Config $config,
         protected \Jump\Cache $cache,
         protected \Nette\Http\Session $session,
+        protected \Jump\Language $language,
         protected ?array $routeparams
     ){
         $this->hastags = false;
         $this->mustache = new \Mustache_Engine([
             'loader' => new \Mustache_Loader_FilesystemLoader($this->config->get('templatedir')),
             // Create a urlencodde helper for use in template. E.g. using siteurl in icon.php query param.
-            'helpers' => array('urlencode' => function($text, $renderer) {
-                return urlencode($renderer($text));
-            }),
+            'helpers' => [
+                'urlencode' => function($text, $renderer) {
+                    return urlencode($renderer($text));
+                },
+                'language' => function($text, $renderer) {
+                    return $this->language->get($text);
+                },
+            ],
         ]);
         // Get a Nette session section for CSRF data.
         $csrfsection = $this->session->getSection('csrf');

@@ -14,13 +14,13 @@ import Clock from "./Clock";
 
 export default class Greeting {
 
-    constructor(hour) {
+    constructor(hour, strings) {
         this.hour = hour;
         this.greetings = {
-            0  : 'morning',
-            12 : 'afternoon',
-            16 : 'evening',
-            19 : 'night'
+            0  : strings.greetings.goodmorning,
+            12 : strings.greetings.goodafternoon,
+            16 : strings.greetings.goodevening,
+            19 : strings.greetings.goodnight
         };
     }
 

@@ -15,7 +15,7 @@ namespace Jump;
 
 class Unsplash {
 
-    public static function load_cache_unsplash_data($config) {
+    public static function load_cache_unsplash_data($config, $language) {
         \Unsplash\HttpClient::init([
             'utmSource' => 'jump_startpage',
             'applicationId'	=> $config->get('unsplashapikey'),
@@ -37,14 +37,14 @@ class Unsplash {
         curl_setopt($ch, CURLOPT_FAILONERROR, true);
         $response = curl_exec($ch);
         // Create the response and return it.
-        $description = 'Photo';
+        $description = $language->get('unsplash.description.photoby', ['user' => $photo->user['name']]);
         if ($photo->description !== null &&
             strlen($photo->description) <= 45) {
-            $description = $photo->description;
+            $description = $language->get('unsplash.description.by', ['description' => $photo->description, 'user' => $photo->user['name']]);
         }
         $unsplashdata = new \stdClass();
         $unsplashdata->color = $photo->color;
-        $unsplashdata->attribution = '<a target="_blank" rel="noopener" href="'.$photo->links['html'].'">'.$description.' by '.$photo->user['name'].'</a>';
+        $unsplashdata->attribution = '<a target="_blank" rel="noopener" href="'.$photo->links['html'].'">'.$description.'</a>';
         $unsplashdata->imagedatauri = 'data: '.(new \finfo(FILEINFO_MIME_TYPE))->buffer($response).';base64,'.base64_encode($response);
         return $unsplashdata;
     }

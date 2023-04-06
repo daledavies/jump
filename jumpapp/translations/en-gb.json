@@ -1,0 +1,18 @@
+{
+    "greetings.goodafternoon": "Good afternoon",
+    "greetings.goodevening": "Good evening",
+    "greetings.goodmorning": "Good morning",
+    "greetings.goodnight": "Good night",
+    "search.search": "Search",
+    "search.searchon": "<span>Search on</span> {{searchprovider}}",
+    "search.sites": "Sites",
+    "status.status": "Status",
+    "status.error": "error",
+    "status.offline": "offline",
+    "status.online": "online",
+    "status.unknown": "unknown",
+    "tags": "Tags",
+    "tags.home": "home",
+    "unsplash.description.photoby": "Photo by {{user}}",
+    "unsplash.description.by": "{{description}} by {{user}}"
+}
