@@ -63,7 +63,7 @@ class TagPage extends AbstractPage {
                 $taggedsites = $sites->get_sites_by_tag($this->tagname);
             }
             catch (TagNotFoundException) {
-                (new ErrorPage($this->cache, $this->config, 404, 'There are no sites with this tag.'))->init();
+                ErrorPage::display($this->config, 404, 'There are no sites with this tag.');
             }
             $template = $this->mustache->loadTemplate('sites');
             return $template->render([

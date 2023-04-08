@@ -29,6 +29,10 @@ return [
     // Where is the cache storage directory, should not be public.
     'cachedir'       => getenv('CACHEDIR')       ?:   '/var/www/cache',
 
+    // Soemthing not working? Set this to "true" to display detailed
+    // debugging information.
+    'debug'          => getenv('DEBUG')          ?:   false,
+
     // Display alternative layout of sites list.
     'altlayout'      => getenv('ALTLAYOUT')      ?:   false,
     // Should the clock be displayed?

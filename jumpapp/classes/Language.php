@@ -14,6 +14,7 @@
 namespace Jump;
 
 use \Jump\Exceptions\ConfigException;
+use \Jump\Pages\ErrorPage;
 
 /**
  * Defines a class for loading language strings form available translations files, caching
@@ -64,7 +65,7 @@ class Language {
         try {
             $locale = new \Utopia\Locale\Locale($this->config->get('language'));
         } catch (\Exception) {
-            (new Pages\ErrorPage($this->cache, $this->config, 500, 'Provided language code has no corresponding translation file.'))->init();
+            ErrorPage::display($this->config, 500, 'Provided language code has no corresponding translation file.');
         }
 
         $this->locale = $locale;

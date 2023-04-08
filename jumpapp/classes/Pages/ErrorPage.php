@@ -14,26 +14,17 @@
 namespace Jump\Pages;
 
 class ErrorPage {
-
-    private string $content;
-
-    public function __construct(private \Jump\Cache $cache, private \Jump\Config $config, private int $httpcode, public string $message) {
-        $this->mustache = new \Mustache_Engine([
-            'loader' => new \Mustache_Loader_FilesystemLoader($this->config->get('templatedir'))
+    public static function display(\Jump\Config $config, int $httpcode, string $message) {
+        $mustache = new \Mustache_Engine([
+            'loader' => new \Mustache_Loader_FilesystemLoader($config->get('templatedir'))
         ]);
-        $this->content = $cache->load(cachename: 'templates/errorpage', key: $httpcode.md5($message), callback: function() use ($httpcode, $message) {
-            $template = $this->mustache->loadTemplate('errorpage');
-            return $template->render([
-                'code' => $httpcode,
-                'message' => $message,
-                'wwwurl' => $this->config->get_wwwurl(),
-            ]);
-        });
+        $template = $mustache->loadTemplate('errorpage');
+        $content = $template->render([
+            'code' => $httpcode,
+            'message' => $message,
+            'wwwurl' => $config->get_wwwurl(),
+        ]);
+        http_response_code($httpcode);
+        die($content);
     }
-
-    public function init() {
-        http_response_code($this->httpcode);
-        die($this->content);
-    }
-
 }

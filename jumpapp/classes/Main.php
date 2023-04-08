@@ -13,6 +13,9 @@
 
 namespace Jump;
 
+use \Jump\Pages\ErrorPage;
+use \Tracy\Debugger;
+
 class Main {
 
     private Cache $cache;
@@ -23,7 +26,18 @@ class Main {
     private \Nette\Http\Session $session;
 
     public function __construct() {
+        // We can't do anything without the config object.
         $this->config = new Config();
+
+        // Set something to either display detailed debugging info or handle exceptions
+        // as early as possible during initialisation.
+        if ($this->config->get('debug')) {
+            Debugger::enable(Debugger::Development);
+        } else {
+            set_exception_handler([$this, 'exception_handler']);
+        }
+
+        // Carry on setting things up.
         $this->cache = new Cache($this->config);
         $this->router = new \Nette\Routing\RouteList;
         $this->language = new Language($this->config, $this->cache);
@@ -49,7 +63,7 @@ class Main {
 		]);
     }
 
-    function init() {
+    public function init() {
         // Create a request object based on globals so we can utilise url rewriting etc.
         $this->request = (new \Nette\Http\RequestFactory)->fromGlobals();
 
@@ -68,6 +82,17 @@ class Main {
         // content and return it.
         $page = new $outputclass($this->config, $this->cache, $this->session, $this->language, $matchedroute ?? null);
         return $page->get_output();
+    }
+
+    /**
+     * Global exception handler, display friendly message if something goes wrong.
+     *
+     * @param $exception
+     * @return void
+     */
+    public function exception_handler($exception): void {
+        error_log($exception->getMessage());
+        ErrorPage::display($this->config, 500, 'Something went wrong, please use debug option to see details.');
     }
 
 }
