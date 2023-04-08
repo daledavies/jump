@@ -1,0 +1,18 @@
+{
+    "greetings.goodafternoon": "Laba diena",
+    "greetings.goodevening": "Labas vakaras",
+    "greetings.goodmorning": "Labas rytas",
+    "greetings.goodnight": "Labanaktis",
+    "search.search": "Paieška",
+    "search.searchon": "<span>Ieškoti</span> {{searchprovider}}",
+    "search.sites": "Svetainės",
+    "status.status": "Būsena",
+    "status.error": "klaida",
+    "status.offline": "neprisijungęs",
+    "status.online": "prisijungęs",
+    "status.unknown": "nežinoma",
+    "tags": "Žymos",
+    "tags.home": "namai",
+    "unsplash.description.photoby": "Nuotraukos autorius {{user}}",
+    "unsplash.description.by": "{{description}} - {{user}}"
+}
