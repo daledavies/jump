@@ -1,0 +1,18 @@
+{
+    "greetings.goodafternoon": "Добрый день",
+    "greetings.goodevening": "Добрый вечер",
+    "greetings.goodmorning": "Доброе утро",
+    "greetings.goodnight": "Спокойной ночи",
+    "search.search": "Поиск",
+    "search.searchon": "<span>Искать на</span> {{searchprovider}}",
+    "search.sites": "Сайты",
+    "status.status": "Статус",
+    "status.error": "ошибка",
+    "status.offline": "оффлайн",
+    "status.online": "онлайн",
+    "status.unknown": "неизвестный",
+    "tags": "Теги",
+    "tags.home": "Домашняя страница",
+    "unsplash.description.photoby": "Фото от {{user}}",
+    "unsplash.description.by": "{{description}} от {{user}}"
+}
