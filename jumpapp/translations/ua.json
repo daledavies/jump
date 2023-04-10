@@ -1,0 +1,18 @@
+{
+    "greetings.goodafternoon": "Доброго дня",
+    "greetings.goodevening": "Добрий вечір",
+    "greetings.goodmorning": "Доброго ранку",
+    "greetings.goodnight": "Добраніч",
+    "search.search": "Пошук",
+    "search.searchon": "<span>Пошук на</span> {{searchprovider}}",
+    "search.sites": "Сайти",
+    "status.status": "Статус",
+    "status.error": "помилка",
+    "status.offline": "офлайн",
+    "status.online": "онлайн",
+    "status.unknown": "невідомо",
+    "tags": "Теги",
+    "tags.home": "Домашня сторінка",
+    "unsplash.description.photoby": "Фото від {{user}}",
+    "unsplash.description.by": "{{description}} від {{user}}"
+}
