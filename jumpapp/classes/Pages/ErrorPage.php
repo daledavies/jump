@@ -24,7 +24,6 @@ class ErrorPage {
             'message' => $message,
             'wwwurl' => $config->get_wwwurl(),
         ]);
-        http_response_code($httpcode);
         die($content);
     }
 }

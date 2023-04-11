@@ -90,6 +90,7 @@ class Config {
             $this->config->set($key, $value);
         }
     }
+
     /**
      * Determine if any configuration params are missing in the list loaded
      * from the config.php.
@@ -119,6 +120,15 @@ class Config {
             throw new ConfigException('Config key does not exist... ('.$key.')');
         }
         return trim($this->config->get($key));
+    }
+
+    /**
+     * Get all config paramaters and values as an array.
+     *
+     * @return array Multidimensional array of config params.
+     */
+    public function get_all(): array {
+        return $this->config->toArray();
     }
 
     /**

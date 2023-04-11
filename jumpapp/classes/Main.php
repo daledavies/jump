@@ -26,16 +26,28 @@ class Main {
     private \Nette\Http\Session $session;
 
     public function __construct() {
-        // We can't do anything without the config object.
+
+        // Some initial configuration of Tracy for logging/debugging.
+        Debugger::$errorTemplate = __DIR__ . '/../templates/errorpage.php';
+        Debugger::setLogger(new \Jump\Debugger\ErrorLogger);
+        Debugger::getBlueScreen()->addPanel(
+            [\Jump\Debugger\JumpVersionPanel::class, 'panel']
+        );
+        Debugger::getBlueScreen()->addPanel(
+            [\Jump\Debugger\JumpConfigPanel::class, 'panel']
+        );
+        $debugmode = Debugger::Development;
+
+        // We can't do much without the config object so get that next.
         $this->config = new Config();
 
-        // Set something to either display detailed debugging info or handle exceptions
-        // as early as possible during initialisation.
-        if ($this->config->get('debug')) {
-            Debugger::enable(Debugger::Development);
-        } else {
-            set_exception_handler([$this, 'exception_handler']);
+        // Now we have config, enable detailed debugging info as early as possible
+        // during initialisation
+        if (!$this->config->get('debug')) {
+            $debugmode = Debugger::Production;
         }
+        // Tell Tracy to handle errors and exceptions.
+        Debugger::enable($debugmode);
 
         // Carry on setting things up.
         $this->cache = new Cache($this->config);
