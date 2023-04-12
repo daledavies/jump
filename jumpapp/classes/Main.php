@@ -29,6 +29,7 @@ class Main {
 
         // Some initial configuration of Tracy for logging/debugging.
         Debugger::$errorTemplate = __DIR__ . '/../templates/errorpage.php';
+        Debugger::$customCssFiles = [__DIR__ . '/../assets/css/debugger.css'];
         Debugger::setLogger(new \Jump\Debugger\ErrorLogger);
         Debugger::getBlueScreen()->addPanel(
             [\Jump\Debugger\JumpVersionPanel::class, 'panel']

@@ -1,0 +1,13 @@
+#tracy-bs .tracy-footer--sticky {
+    display: none !important;
+}
+
+#tracy-debug-logo:before {
+    content: "JUMP";
+    padding: 0 0px 0 7px;
+    font-weight: bold;
+}
+
+#tracy-debug-logo svg:first-of-type {
+    display: none;
+}
