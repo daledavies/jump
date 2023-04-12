@@ -46,6 +46,7 @@ class Sites {
         // Retrieve sites from cache. Load all sites from json file and docker if not
         // cached or the cache has expired.
         $this->loadedsites = $this->cache->load(cachename: 'sites', callback: function() {
+            // Load json file first to set defaults.
             return array_merge($this->load_sites_from_json(), $this->load_sites_from_docker());
         });
 
@@ -137,7 +138,8 @@ class Sites {
     }
 
     /**
-     * Try to load the list of sites from sites.json.
+     * Try to load the list of sites from sites.json. Sets defaults if any
+     * are found, which will then apply to any docker sites.
      *
      * Throws an exception if the file cannot be loaded, is empty, or cannot
      * be decoded to an array,
@@ -147,8 +149,18 @@ class Sites {
      */
     private function load_sites_from_json(): array {
         $allsites = [];
-        $rawjson = file_get_contents($this->sitesfilelocation);
+        $rawjson = @file_get_contents($this->sitesfilelocation);
         if ($rawjson === false) {
+            // If we have been instructed to look for docker sites then
+            // don't worry about not having a local sites.json file and just
+            // return an empty $allsites array.
+            $dockerproxy = $this->config->get('dockerproxyurl');
+            $dockersocket = $this->config->get('dockersocket');
+            if ($dockerproxy || $dockersocket) {
+                return $allsites;
+            }
+            // If we are not supposed to have docker sites then complau=in about
+            // not being able to load a sites.json.
             throw new ConfigException('There was a problem loading the sites.json file');
         }
         if ($rawjson === '') {
