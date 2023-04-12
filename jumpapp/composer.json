@@ -18,7 +18,7 @@
         "phlak/config": "^7.0",
         "nette/http": "^3.1",
         "guzzlehttp/guzzle": "^7.0",
-        "unsplash/unsplash": "3.2.1",
+        "unsplash/unsplash": "dev-master#429ad0daa4f498b9ed42fe4f0053a44fb47645b7",
         "divineomega/array_undot": "^4.1",
         "utopia-php/locale": "^0.6.0",
         "tracy/tracy": "^2.10"

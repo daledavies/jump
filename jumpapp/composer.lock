@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "124fb3f5325190e7a3c8284b42e9e304",
+    "content-hash": "2579931aa8a2775aff0582573b373730",
     "packages": [
         {
             "name": "arthurhoaro/favicon",
@@ -1578,11 +1578,11 @@
         },
         {
             "name": "unsplash/unsplash",
-            "version": "3.2.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/unsplash/unsplash-php.git",
-                "reference": "cdb174beaf62d187db1a777cf5fb11ee554d85cf"
+                "reference": "429ad0daa4f498b9ed42fe4f0053a44fb47645b7"
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.3.0|^7.0",
@@ -1597,6 +1597,7 @@
                 "phpunit/phpunit": "~9.0",
                 "vlucas/phpdotenv": "~4.1.4"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -1630,7 +1631,7 @@
                 }
             ],
             "description": "Wrapper to access the Unsplash API and photo library",
-            "time": "2022-01-17T20:32:58+00:00"
+            "time": "2022-04-11T18:52:56+00:00"
         },
         {
             "name": "utopia-php/locale",
@@ -1797,7 +1798,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "unsplash/unsplash": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
