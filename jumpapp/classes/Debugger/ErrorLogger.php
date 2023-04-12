@@ -39,15 +39,16 @@ class ErrorLogger implements \Tracy\ILogger {
         if (empty($callers)) {
             return '';
         }
+        $count = 1;
         $from = '';
         foreach ($callers as $caller) {
             if (!isset($caller['line'])) {
-                $caller['line'] = '?'; // probably call_user_func()
+                $caller['line'] = '?';
             }
             if (!isset($caller['file'])) {
-                $caller['file'] = 'unknownfile'; // probably call_user_func()
+                $caller['file'] = 'unknownfile';
             }
-            $from .= '* ';
+            $from .= '-  #'.$count.' ';
             $from .= 'line ' . $caller['line'] . ' of ' . str_replace(dirname(__DIR__), '', $caller['file']);
             if (isset($caller['function'])) {
                 $from .= ': call to ';
@@ -59,6 +60,7 @@ class ErrorLogger implements \Tracy\ILogger {
                 $from .= ': '.$caller['exception'].' thrown';
             }
             $from .= PHP_EOL;
+            $count ++;
         }
         $from .= '';
         return $from;
