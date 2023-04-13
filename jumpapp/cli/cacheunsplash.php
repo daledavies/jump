@@ -20,7 +20,7 @@ require __DIR__ .'/../vendor/autoload.php';
 
 $config = new Jump\Config();
 $cache = new Jump\Cache($config);
-$language = new Jump\Language($this->config, $this->cache);
+$language = new Jump\Language($config, $cache);
 
 // If this script is run via CLI then clear the cache and repopulate it,
 // otherwise if run via web then get image data from cache and run this
