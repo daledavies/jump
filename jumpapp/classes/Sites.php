@@ -148,15 +148,23 @@ class Sites {
      * @throws ConfigException If sites.json cannot be found.
      */
     private function load_sites_from_json(): array {
+
+        $docker = function() {
+            $dockerproxy = $this->config->get('dockerproxyurl');
+            $dockersocket = $this->config->get('dockersocket');
+            if ($dockerproxy || $dockersocket) {
+                return true;
+            }
+            return false;
+        };
+
         $allsites = [];
         $rawjson = @file_get_contents($this->sitesfilelocation);
         if ($rawjson === false) {
             // If we have been instructed to look for docker sites then
             // don't worry about not having a local sites.json file and just
             // return an empty $allsites array.
-            $dockerproxy = $this->config->get('dockerproxyurl');
-            $dockersocket = $this->config->get('dockersocket');
-            if ($dockerproxy || $dockersocket) {
+            if ($docker()) {
                 return $allsites;
             }
             // If we are not supposed to have docker sites then complau=in about
@@ -164,7 +172,7 @@ class Sites {
             throw new ConfigException('There was a problem loading the sites.json file');
         }
         if ($rawjson === '') {
-            throw new ConfigException('The sites.json file is empty');
+            throw new ConfigException('The sites.json file is empty, if this is intentional please delete it');
         }
         // Do some checks to see if the JSON decodes into something
         // like what we expect to see...
@@ -173,12 +181,19 @@ class Sites {
         if (is_array($decodedjson)) {
             $allsites = $decodedjson;
         }
-        // Now check for the newer format.
-        if (isset($decodedjson->sites) && is_array($decodedjson->sites)) {
-            $allsites = $decodedjson->sites;
-            if (isset($decodedjson->default)) {
-                $this->default = (array) $decodedjson->default;
+        // Handle not having any sites in sites.json or having docker integration set up.
+        if (!isset($decodedjson->sites)) {
+            if (!$docker()) {
+                throw new ConfigException('The sites.json file is empty and docker integration is not set up either');
             }
+        }
+        // Now check for the newer sites format from sites.json.
+        if (is_array($decodedjson->sites)) {
+            $allsites = $decodedjson->sites;
+        }
+        // Extract default site params into an array.
+        if (isset($decodedjson->default)) {
+            $this->default = (array) $decodedjson->default;
         }
 
         // Instantiate an actual Site() object for each element.
