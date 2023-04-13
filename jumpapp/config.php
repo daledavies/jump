@@ -39,8 +39,11 @@ return [
     'showclock'      => getenv('SHOWCLOCK')      ?:   true,
     // 12 hour clock format?
     'ampmclock'      => getenv('AMPMCLOCK')      ?:   false,
-    // Show a friendly greeting message rather than "#home".
+    // Show a friendly greeting message rather than "#home", defaults to a dynamic
+    // greeting based on time of day. E.g Good Morning.
     'showgreeting'   => getenv('SHOWGREETING')   ?:   true,
+    // Custom greeting string as alternative to built-in friendy greeting.
+    'customgreeting' => getenv('CUSTOMGREETING') ?:   '',
     // Show the search bar, requires /search/searchengines.json etc.
     'showsearch'     => getenv('SHOWSEARCH')     ?:   true,
     // Include the robots noindex meta tag in site header.

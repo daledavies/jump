@@ -20,6 +20,7 @@ class TagPage extends AbstractPage {
     protected function render_header(): string {
         $template = $this->mustache->loadTemplate('header');
         $this->tagname = $this->routeparams['tag'];
+        $greeting = '#'.$this->tagname;
         $title = 'Tag: '.$this->tagname;
         $csrfsection = $this->session->getSection('csrf');
         $unsplashdata = $this->cache->load('unsplash');
@@ -27,7 +28,7 @@ class TagPage extends AbstractPage {
         $checkstatus = $this->config->parse_bool($this->config->get('checkstatus', false));
         $templatecontext = [
             'csrftoken' => $csrfsection->get('token'),
-            'greeting' => $this->tagname,
+            'greeting' => $greeting,
             'noindex' => $this->config->parse_bool($this->config->get('noindex')),
             'title' => $title,
             'owmapikey' => !!$this->config->get('owmapikey', false),
