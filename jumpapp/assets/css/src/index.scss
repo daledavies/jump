@@ -14,6 +14,7 @@
 @use 'search';
 @use 'sites';
 @use 'tags';
+@use '../debugger.css';
 
 
 /* Some generic styles */
@@ -94,16 +95,6 @@ body {
     max-width: 750px;
     margin: -20px auto 0 auto;
     height: calc(100% - 12px) /* 12px = roughly half the greeting height and border */
-}
-
-#tracy-debug-logo:before {
-    content: "JUMP";
-    padding: 0 0px 0 7px;
-    font-weight: bold;
-}
-
-#tracy-debug-logo svg:first-of-type {
-    display: none !important;
 }
 
 @media (max-width: 850px) {
