@@ -19,7 +19,7 @@ class HomePage extends AbstractPage {
         $template = $this->mustache->loadTemplate('header');
         $greeting = null;
         if (!$this->config->parse_bool($this->config->get('showgreeting'))) {
-            $greeting = 'home';
+            $greeting = $this->language->get('tags.home');
         }
         $csrfsection = $this->session->getSection('csrf');
         $unsplashdata = $this->cache->load('unsplash');
