@@ -16,11 +16,16 @@ namespace Jump\Debugger;
 class JumpConfigPanel {
 	public static function panel(?\Throwable $e) {
 		if ($e === null) {
+			// Get all config params as an array and sort them by param name.
+			$configparams = (new \Jump\Config())->get_all();
+			ksort($configparams);
+			// Prepare the panel HTML, listing the config param key and value.
 			$content = '<pre>';
-			foreach ((new \Jump\Config())->get_all() as $param => $value) {
+			foreach ($configparams as $param => $value) {
 				$content .= '<b>'.$param.'</b> : '.$value.'<br>';
 			}
 			$content .= '</pre>';
+			// Return the panel items.
 			return [
 				'tab' => 'Jump Config',
 				'panel' => $content,
