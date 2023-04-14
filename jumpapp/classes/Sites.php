@@ -159,16 +159,18 @@ class Sites {
         };
 
         $allsites = [];
+        // If we have been instructed to only look for sites via docker then
+        // don't worry about loading a local sites.json file and just
+        // return an empty $allsites array.
+        if ($this->config->get('dockeronlysites')) {
+            if (!$docker()) {
+                throw new ConfigException('DOCKERONLYSITES is specified but no Docker endpoint has been provided');
+            }
+            return $allsites;
+        }
+        // Try to load the sites.json file.
         $rawjson = @file_get_contents($this->sitesfilelocation);
         if ($rawjson === false) {
-            // If we have been instructed to look for docker sites then
-            // don't worry about not having a local sites.json file and just
-            // return an empty $allsites array.
-            if ($docker()) {
-                return $allsites;
-            }
-            // If we are not supposed to have docker sites then complau=in about
-            // not being able to load a sites.json.
             throw new ConfigException('There was a problem loading the sites.json file');
         }
         if ($rawjson === '') {

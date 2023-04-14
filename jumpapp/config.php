@@ -74,6 +74,9 @@ return [
     // Duration to cache status in minutes.
     'statuscache'    => getenv('STATUSCACHE')    ?:   '5',
 
+    // Only try to look for sites via Docker rather than first trying to load
+    // the sites.json file.
+    'dockeronlysites' => getenv('DOCKERONLYSITES') ?: false,
     // The URL and port on which a docker socket proxy is listening, for example
     // if you have tecnativa/docker-socket-proxy named dockerproxy listening on
     // port 2375 then this would be "dockerproxy:2375".
