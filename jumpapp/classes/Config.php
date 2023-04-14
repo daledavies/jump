@@ -111,11 +111,12 @@ class Config {
      * Retrieves the config parameter provided in $key, first checks for its
      * existence.
      *
-     * @param string $key The requested config parameter key.
+     * @param string $key The requested config parameter key, not case sensitive.
      * @param bool $strict Throw exception if requested param is not found, or return null.
      * @return mixed The selected value from the configuration array.
      */
     public function get(string $key, $strict = true): mixed {
+        $key = strtolower($key);
         if (!$this->config->has($key) && $strict === true) {
             throw new ConfigException('Config key does not exist... ('.$key.')');
         }
