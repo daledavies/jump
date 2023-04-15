@@ -1,0 +1,18 @@
+{
+"greetings.goodafternoon": "Buenas tardes",
+"greetings.goodevening": "Buenas noches",
+"greetings.goodmorning": "Buenos días",
+"greetings.goodnight": "Buenas noches",
+"search.search": "Buscar",
+"search.searchon": "<span>Buscar en</span> {{searchprovider}}",
+"search.sites": "Sitios",
+"status.status": "Estado",
+"status.error": "error",
+"status.offline": "sin conexión",
+"status.online": "en línea",
+"status.unknown": "desconocido",
+"tags": "Etiquetas",
+"tags.home": "inicio",
+"unsplash.description.photoby": "Foto por {{user}}",
+"unsplash.description.by": "{{description}} por {{user}}"
+}
