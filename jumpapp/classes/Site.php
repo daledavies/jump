@@ -71,11 +71,20 @@ class Site {
                 'timeout' => 86400
             ]);
             $rawimage = $favicon->get($this->url, \Favicon\FaviconDLType::RAW_IMAGE);
-            if (!$rawimage) {
-                $rawimage = file_get_contents($defaulticon);
-            }
         } else {
-            $rawimage = file_get_contents($this->config->get('sitesdir').'/icons/'.$this->iconname);
+            // If the icon name has a file extension the n try to retrieve it locally, otherwise
+            // see if we can get it from Dashboard Icons.
+            if (pathinfo($this->iconname, PATHINFO_EXTENSION)) {
+                $file = $this->config->get('sitesdir').'/icons/'.$this->iconname;
+            } else {
+                $file = 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/svg/'.$this->iconname.'.svg';
+            }
+            $rawimage = file_get_contents($file);
+        }
+        // If we didnt manage to get any icon data from any of the above methods then return
+        // the default icon.
+        if (!$rawimage) {
+            $rawimage = file_get_contents($defaulticon);
         }
         $imagedata = new stdClass();
         $imagedata->mimetype = (new \finfo(FILEINFO_MIME_TYPE))->buffer($rawimage);

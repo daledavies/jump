@@ -5,27 +5,18 @@
         "newtab": false
     },
     "sites": [
-        {
-            "name": "Github",
-            "url" : "https://github.com/daledavies/jump",
-            "description": "This is an example description",
-            "nofollow": false,
-            "newtab": true
-        },
-        {
-            "name": "Docker Hub",
-            "url" : "https://hub.docker.com/r/daledavies/jump"
-        },
+
         {
             "name": "Bitwarden",
             "url" : "https://bitwarden.com/",
             "description": "This is another example of a site with a description",
-            "icon": "bitwarden.png",
+            "icon": "bitwarden",
             "tags": ["stuff"]
         },
         {
             "name": "Gitea",
             "url" : "https://git.example.com",
+            "description": "This uses an icon from the Dashboard Icons repository",
             "icon": "gitea.png",
             "tags": ["stuff"]
         },
