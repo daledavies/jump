@@ -1,0 +1,18 @@
+{
+    "greetings.goodafternoon": "Dobré odpoledne",
+    "greetings.goodevening": "Dobrý večer",
+    "greetings.goodmorning": "Dobré ráno",
+    "greetings.goodnight": "Dobrou noc",
+    "search.search": "Vyhledávání",
+    "search.searchon": "<span>Vyhledad pomocí</span> {{searchprovider}}",
+    "search.sites": "Stránky",
+    "status.status": "Status",
+    "status.error": "chyba",
+    "status.offline": "offline",
+    "status.online": "online",
+    "status.unknown": "neznámý",
+    "tags": "Tagy",
+    "tags.home": "Domovská obrazovka",
+    "unsplash.description.photoby": "Fotografie od {{user}}",
+    "unsplash.description.by": "{{description}} od {{user}}"
+}
