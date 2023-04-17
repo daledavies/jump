@@ -21,6 +21,7 @@ use stdClass;
  */
 class Site {
 
+    public string $id;
     public string $name;
     public bool $nofollow;
     public ?string $iconname;
@@ -35,7 +36,7 @@ class Site {
      * @param array $sitearray Array of options for this site from sites.json.
      * @param array $defaults Array of default values for this site to use, defined in sites.json.
      */
-    public function __construct(private Config $config, array $sitearray, private array $defaults) {
+    public function __construct(private Config $config, private Cache $cache, array $sitearray, private array $defaults) {
         if (!isset($sitearray['name'], $sitearray['url'])) {
             throw new \Exception('The array passed to Site() must contain the keys "name" and "url"!');
         }
@@ -57,39 +58,37 @@ class Site {
      * @return object Containing mimetype and raw image data.
      */
     public function get_favicon_image_data(): object {
-        // Use the applications own default icon unless one is supplied via the sites.json file.
-        $defaulticon = $this->config->get('defaulticonpath');
-        if (isset($this->defaults['icon'])) {
-            $defaulticon = $this->config->get('sitesdir').'/icons/'.$this->defaults['icon'];
-        }
-        // Did we have a supplied icon or are we going to try retrieving the favicon?
-        if ($this->iconname === null) {
-            // Go get the favicon, if there isnt one then use the default icon.
-            $favicon = new \Favicon\Favicon();
-            $favicon->cache([
-                'dir' => $this->config->get('cachedir').'/icons',
-                'timeout' => 86400
-            ]);
-            $rawimage = $favicon->get($this->url, \Favicon\FaviconDLType::RAW_IMAGE);
-        } else {
-            // If the icon name has a file extension the n try to retrieve it locally, otherwise
-            // see if we can get it from Dashboard Icons.
-            if (pathinfo($this->iconname, PATHINFO_EXTENSION)) {
-                $file = $this->config->get('sitesdir').'/icons/'.$this->iconname;
-            } else {
-                $file = 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/svg/'.$this->iconname.'.svg';
+        return $this->cache->load(cachename: 'sites/favicons', key: $this->id, callback: function() {
+            // Use the applications own default icon unless one is supplied via the sites.json file.
+            $defaulticon = $this->config->get('defaulticonpath');
+            if (isset($this->defaults['icon'])) {
+                $defaulticon = $this->config->get('sitesdir').'/icons/'.$this->defaults['icon'];
             }
-            $rawimage = file_get_contents($file);
-        }
-        // If we didnt manage to get any icon data from any of the above methods then return
-        // the default icon.
-        if (!$rawimage) {
-            $rawimage = file_get_contents($defaulticon);
-        }
-        $imagedata = new stdClass();
-        $imagedata->mimetype = (new \finfo(FILEINFO_MIME_TYPE))->buffer($rawimage);
-        $imagedata->data = $rawimage;
-        return $imagedata;
+            // Did we have a supplied icon or are we going to try retrieving the favicon?
+            if ($this->iconname === null) {
+                // Go get the favicon, if there isnt one then use the default icon.
+                $favicon = new \Favicon\Favicon();
+                $rawimage = $favicon->get($this->url, \Favicon\FaviconDLType::RAW_IMAGE);
+            } else {
+                // If the icon name has a file extension the n try to retrieve it locally, otherwise
+                // see if we can get it from Dashboard Icons.
+                if (pathinfo($this->iconname, PATHINFO_EXTENSION)) {
+                    $file = $this->config->get('sitesdir').'/icons/'.$this->iconname;
+                } else {
+                    $file = 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/svg/'.$this->iconname.'.svg';
+                }
+                $rawimage = file_get_contents($file);
+            }
+            // If we didnt manage to get any icon data from any of the above methods then return
+            // the default icon.
+            if (!$rawimage) {
+                $rawimage = file_get_contents($defaulticon);
+            }
+            $imagedata = new stdClass();
+            $imagedata->mimetype = (new \finfo(FILEINFO_MIME_TYPE))->buffer($rawimage);
+            $imagedata->data = $rawimage;
+            return $imagedata;
+        });
     }
 
     /**

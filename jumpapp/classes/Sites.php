@@ -132,7 +132,7 @@ class Sites {
                 }
             }
             // Finally add this to the list of sites we will return.
-            $sites[] = new Site($this->config, (array) $site, $this->default);
+            $sites[] = new Site($this->config, $this->cache, (array) $site, $this->default);
         }
         return $sites;
     }
@@ -200,7 +200,7 @@ class Sites {
 
         // Instantiate an actual Site() object for each element.
         foreach ($allsites as $key => $item) {
-            $allsites[$key] = new Site($this->config, (array) $item, $this->default);
+            $allsites[$key] = new Site($this->config, $this->cache, (array) $item, $this->default);
         }
 
         // Return the array of Site() objects, note we are in a callback

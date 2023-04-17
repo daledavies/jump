@@ -59,6 +59,11 @@ class Cache {
                 'expirationtype' => Caching\Cache::Files,
                 'expirationparams' => $config->get('sitesfile')
             ],
+            'sites/favicons' => [
+                'cache' => null,
+                'expirationtype' => Caching\Cache::Files,
+                'expirationparams' => $config->get('sitesfile')
+            ],
             'sites/status' => [
                 'cache' => null,
                 'expirationtype' => Caching\Cache::Files,

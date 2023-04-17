@@ -57,9 +57,7 @@ COPY docker/entrypoint.sh /usr/local/bin/
 
 # Create the cache directories and change owner of everything we need.
 RUN mkdir -p /var/www/cache/application \
-    && mkdir -p /var/www/cache/icons \
-    && chown -R jumpapp:jumpapp /var/www/html /var/www/cache/icons \
-    /var/www/cache/application \
+    && chown -R jumpapp:jumpapp /var/www/html /var/www/cache/application \
     && chmod +x /usr/local/bin/entrypoint.sh
 
 RUN mkdir -p /tmp/xdebug \
