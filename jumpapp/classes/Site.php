@@ -74,10 +74,15 @@ class Site {
                 // see if we can get it from Dashboard Icons.
                 if (pathinfo($this->iconname, PATHINFO_EXTENSION)) {
                     $file = $this->config->get('sitesdir').'/icons/'.$this->iconname;
+                    $errormessage = 'Icon file not found... '.$file;
                 } else {
                     $file = 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons@master/svg/'.$this->iconname.'.svg';
+                    $errormessage = 'Dashboard icon does not exist... '.$this->iconname;
                 }
-                $rawimage = file_get_contents($file);
+                $rawimage = @file_get_contents($file);
+                if (!$rawimage) {
+                    error_log($errormessage);
+                }
             }
             // If we didnt manage to get any icon data from any of the above methods then return
             // the default icon.
