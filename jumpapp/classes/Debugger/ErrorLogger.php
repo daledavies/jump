@@ -16,7 +16,7 @@ namespace Jump\Debugger;
 class ErrorLogger implements \Tracy\ILogger {
     public function log($message, $priority = self::INFO): void {
         $logmessage = $this->format_message($message) . PHP_EOL;
-        $logmessage .= $this->format_backtrace($message->getTrace(), true) . PHP_EOL;
+        $logmessage .= $this->format_backtrace($message, true) . PHP_EOL;
         error_log($logmessage);
     }
 
@@ -35,13 +35,13 @@ class ErrorLogger implements \Tracy\ILogger {
         return trim($message);
     }
 
-    public function format_backtrace($callers) {
-        if (empty($callers)) {
+    public function format_backtrace($message) {
+        if (empty($message) || !$message instanceof \Throwable) {
             return '';
         }
         $count = 1;
         $from = '';
-        foreach ($callers as $caller) {
+        foreach ($message->getTrace() as $caller) {
             if (!isset($caller['line'])) {
                 $caller['line'] = '?';
             }
