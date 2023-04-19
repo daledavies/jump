@@ -44,7 +44,8 @@ class Unsplash {
         }
         $unsplashdata = new \stdClass();
         $unsplashdata->color = $photo->color;
-        $unsplashdata->attribution = '<a target="_blank" rel="noopener" href="'.$photo->links['html'].'">'.$description.'</a>';
+        $unsplashdata->attribution = htmlentities($description);
+        $unsplashdata->link = strip_tags($photo->links['html']);
         $unsplashdata->imagedatauri = 'data: '.(new \finfo(FILEINFO_MIME_TYPE))->buffer($response).';base64,'.base64_encode($response);
         return $unsplashdata;
     }

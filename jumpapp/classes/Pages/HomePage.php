@@ -81,6 +81,7 @@ class HomePage extends AbstractPage {
                 'showclock' => $this->config->parse_bool($this->config->get('showclock')),
                 'showsearch' => $this->config->parse_bool($this->config->get('showsearch', false)),
                 'wwwurl' => $this->config->get_wwwurl(),
+                'unsplash' => !!$this->config->get('unsplashapikey', false),
             ]);
         });
     }

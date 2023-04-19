@@ -78,7 +78,9 @@ export default class Main {
                     return;
                 }
                 backgroundelm.style.backgroundImage = 'url("' + data.imagedatauri + '")';
-                document.querySelector('.unsplash').innerHTML = data.attribution;
+                let unsplashlink = document.querySelector('.unsplash a');
+                unsplashlink.textContent = data.attribution;
+                unsplashlink.href = data.link;
             });
         }
 
