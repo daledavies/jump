@@ -108,6 +108,12 @@ class Cache {
         if ($this->config->parse_bool($this->config->get('cachebypass'))) {
             $this->storage = new Caching\Storages\DevNullStorage();
         } else {
+            if (!is_dir($this->config->get('cachedir').'/application')) {
+                mkdir($this->config->get('cachedir').'/application', 0755, true);
+            }
+            if (!is_dir($this->config->get('cachedir').'/favicon')) {
+                mkdir($this->config->get('cachedir').'/favicon', 0755, true);
+            }
             $this->storage = new Caching\Storages\FileStorage($this->config->get('cachedir').'/application');
         }
     }
