@@ -68,6 +68,9 @@ class Site {
             if ($this->iconname === null) {
                 // Go get the favicon, if there isnt one then use the default icon.
                 $favicon = new \Favicon\Favicon();
+                if (!$this->config->parse_bool($this->config->get('cachebypass'))) {
+                    $favicon->cache(['dir' => $this->config->get('cachedir').'/favicon']);
+                }
                 $rawimage = $favicon->get($this->url, \Favicon\FaviconDLType::RAW_IMAGE);
             } else {
                 // If the icon name has a file extension the n try to retrieve it locally, otherwise
