@@ -1,5 +1,5 @@
-
 # Jump
+
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/daledavies/jump)
 ![PHP Version](https://img.shields.io/badge/PHP-%3E%3D8.1-blue?style=flat)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/daledavies/jump?sort=date)
@@ -25,9 +25,6 @@ Jump is a self-hosted startpage and real-time status page for your server design
 
 Note - the demo instance is hosted on a render.com free tier so may take a few seconds to wake up.
 
-
-
-
 ## Installation
 
 ### Docker Compose
@@ -52,7 +49,6 @@ services:
             SITENAME: 'Custom site name'
             OWMAPIKEY: '0a1b2c3d4e5f6a7b8c9d0a1b'
             LATLONG: '51.509865,-0.118092'
-
 ```
 
 You can use the following optional environment variables to configure/customise your Jump site...
@@ -78,8 +74,11 @@ You can use the following optional environment variables to configure/customise 
 - `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 - `WWWURL` - Useful if Jump is hosted in a sub-directory (e.g. "/startpage").
 - `DISABLEIPV6` - Disable IPV6 if required.
+- `DOCKERSOCKET` -  Docker host socket location, for Docker integration without a proxy (e.g "/var/run/docker.sock").
+- `DOCKERPROXYURL` - Docker proxy URL, for Docker integration with a proxy (e.g. "dockerproxy:2375").
+- `DOCKERONLYSITES: 'false'`  -  Set to true if you want to only use docker integration and not define a `sites.json`.
 
-**NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together.
+**NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together. `DOCKERSOCKET` and `DOCKERPROXYURL` are mutually exclusive.
 
 #### Volume Mapping
 
@@ -122,6 +121,12 @@ You can configure Jump to get local time and weather updates by adding an Open W
 You will also need to provide a default `LATLONG` string (e.g. "51.509865,-0.118092"), Jump will use this  until you press the location button and allow permission to get your location from the web browser.
 
 ### Sites
+
+The `sites.json` file is where you can define default configuration for sites and add a list of sites manually to the startpage, this is great for adding sites that are hosted anywhere on the web. 
+
+Jump can also integrate with Docker to automatically list any sites you have running on the same Docker host.
+
+#### Site defaults and manual configuration
 
 Edit the `/sites/sites.json` file to include your own sites on the startpage...
 
@@ -180,33 +185,32 @@ Edit the `/sites/sites.json` file to include your own sites on the startpage...
         }
     ]
 }
-
 ```
 
 * `name` and `url` are mandatory.
 * `description`, `tags`, `nofollow`, `newtab`, `icon` and `status` are optional.
 
-#### Tags
+##### Tags
 
 Sites can be categorised using tags, for each site in your `sites.json` file you can list multiple tags as shown in the example above. Sites that have no tags are included on the home screen, however for sites with multiple tags you can specify the "home" tag to include them on the home screen.
 
 The tag selector button will only appear in the top right of the page if you have tagged sites, clicking this will open a popup menu showing all the tags referenced in your `sites.json` file.
 
-#### Default Options
+##### Default Options
 
 Jump has a built-in default icon for sites that do not specify their own although you can override this and specify your own as shown above in the `default` section.
 
 You can also override `nofollow` and `newtab` to be `true` for all sites.
 
-#### Icons
+##### Icons
 
 You can provide custom icons for your sites by placing them in the `/sites/icons/` directory and referencing the filename in `sites.json` using the `icon` option. If you do not provide a custom icon for a site then Jump will attempt to retrieve that site's favicon, if it can't find one then the default icon will be shown.
 
-#### nofollow
+##### nofollow
 
 On a per-site basis use `"nofollow": true` to include `rel="nofollow"` on specific site links, if this is set as a global default then `"nofollow": false` can be used to remove `rel="nofollow"` for individual sites.
 
-#### newtab
+##### newtab
 
 On a per-site basis use `"newtab": true` to open specific site links in a new browser tab.
 
@@ -218,6 +222,58 @@ Options to control how status checking works can be defined for each site...
 - `request_method`: By default Jump will make a HEAD request when checking a site's status, you can use this option to specify `GET` instead.
 - `url`: An alternate status URL to check instead of the main site URL.
 - `verify_cert`: Disable SSL certificate verification, useful for sites with self-signed certs.
+
+#### Docker Integration
+
+It is highly recommended to use a [docker socket proxy](https://github.com/Tecnativa/docker-socket-proxy) when setting up Docker integration, this does not directly expose your host's docker API to Jump.
+
+#### Using a proxy
+
+```yaml
+# Configure docker socket proxy container
+dockerproxy:
+    image: tecnativa/docker-socket-proxy:latest
+    environment:
+        - CONTAINERS=1 # Allow access to view containers
+        - POST=0 # Make the connection read only
+    ports:
+        - 2375:2375
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro # Read only mount for local socket
+
+# Configure Jump to use docker socket proxy
+web:
+    image: daledavies/jump
+    ports:
+        - 8123:8080
+    volumes:
+        - ./backgrounds:/backgrounds
+        - ./favicon:/favicon
+        - ./search:/search
+        - ./sites:/sites
+    environment:
+        SITENAME: 'Custom site name'
+        DOCKERPROXYURL: 'dockerproxy:2375' # Matches proxy hostname and ports from above
+```
+
+
+
+#### Configuring docker sites for Jump
+
+Then each for each docker service you with to list on your startpage, configure labels as follows. Each label below matches the options found in the  manual configuration section above...
+
+```yaml
+somesite:
+    image: dockerimage
+    labels:
+        jump.name: 'Test Site'
+        jump.url: 'https://test.site'
+        jump.description: 'This is a site for testing'
+        jump.tags: 'home, stuff, things'
+        jump.status.allowed_status_codes: '418, 500'
+        jump.status.request_method: 'GET'
+        jump.status.verify_cert: false
+```
 
 ### Search
 
