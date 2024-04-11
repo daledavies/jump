@@ -57,6 +57,7 @@ You can use the following optional environment variables to configure/customise 
 - `SHOWCLOCK: 'false'` - Hide the clock.
 - `AMPMCLOCK: 'true'` - Show 12 hour clock format if true.
 - `SHOWGREETING: 'false'` - Show the label "#home" instead of a friendly greeting message.
+- `CUSTOMGREETING: 'Some other greeting message'` - Show a custom greeting message instead.
 - `SHOWSEARCH : 'false'` - Hide the search button (disable search).
 - `ALTLAYOUT: 'true'` - Display list of sites using an [alternative layout](/screenshots/screenshot-altlayout.png).
 - `CUSTOMWIDTH: 1000` - Set a custom with for the page container/site list.
@@ -255,8 +256,6 @@ web:
         SITENAME: 'Custom site name'
         DOCKERPROXYURL: 'dockerproxy:2375' # Matches proxy hostname and ports from above
 ```
-
-
 
 #### Configuring docker sites for Jump
 
