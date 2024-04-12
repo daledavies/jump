@@ -215,7 +215,7 @@ On a per-site basis use `"nofollow": true` to include `rel="nofollow"` on specif
 
 On a per-site basis use `"newtab": true` to open specific site links in a new browser tab.
 
-#### status
+##### status
 
 Options to control how status checking works can be defined for each site...
 
@@ -228,7 +228,7 @@ Options to control how status checking works can be defined for each site...
 
 It is highly recommended to use a [docker socket proxy](https://github.com/Tecnativa/docker-socket-proxy) when setting up Docker integration, this does not directly expose your host's docker API to Jump.
 
-#### Using a proxy
+##### Using a proxy
 
 ```yaml
 # Configure docker socket proxy container
@@ -257,7 +257,7 @@ web:
         DOCKERPROXYURL: 'dockerproxy:2375' # Matches proxy hostname and ports from above
 ```
 
-#### Configuring docker sites for Jump
+##### Configuring docker sites for Jump
 
 Then each for each docker service you with to list on your startpage, configure labels as follows. Each label below matches the options found in the  manual configuration section above...
 
