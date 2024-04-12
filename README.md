@@ -75,9 +75,10 @@ You can use the following optional environment variables to configure/customise 
 - `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 - `WWWURL` - Useful if Jump is hosted in a sub-directory (e.g. "/startpage").
 - `DISABLEIPV6` - Disable IPV6 if required.
-- `DOCKERSOCKET` -  Docker host socket location, for Docker integration without a proxy (e.g "/var/run/docker.sock").
+- `DOCKERSOCKET` -  Mounted docker socket location, for Docker integration without a proxy (e.g "/var/run/docker.sock").
 - `DOCKERPROXYURL` - Docker proxy URL, for Docker integration with a proxy (e.g. "dockerproxy:2375").
 - `DOCKERONLYSITES: 'false'`  -  Set to true if you want to only use docker integration and not define a `sites.json`.
+- `LANGUAGE: 'en'` - Set to your chosen [language code](#language).
 
 **NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together. `DOCKERSOCKET` and `DOCKERPROXYURL` are mutually exclusive.
 
@@ -306,6 +307,28 @@ If instead you want to use Unsplash for random background images add an Unsplash
 ### Favicon
 
 After mapping the `favicon` directory as shown in the Docker Compose or Docker examples above, replace the default `icon.png` file with whatever PNG icon image you want (ensuring that the filename is always `icon.png`).
+
+### Language
+
+Jump has been translated into the following languages so far, to use one of these languages just pass the appropriate language code from the list below via the `language` option in `config.php` or the `LANGUAGE` environment variable...
+
+- `cs` - Czech
+
+- `de` - German
+
+- `es` - Spanish
+
+- `it` - Italian
+
+- `nl` - Dutch
+
+- `pt` - Portuguese
+
+- `ru` - Russian
+
+- `ua` - Ukrainian
+
+More translations are always welcome! If you'd like to contribute please see the existing [examples](https://github.com/daledavies/jump/tree/main/jumpapp/translations) and create a pull request.
 
 ## Development
 
