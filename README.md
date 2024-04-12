@@ -237,8 +237,6 @@ dockerproxy:
     environment:
         - CONTAINERS=1 # Allow access to view containers
         - POST=0 # Make the connection read only
-    ports:
-        - 2375:2375
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock:ro # Read only mount for local socket
 
@@ -255,6 +253,8 @@ web:
     environment:
         SITENAME: 'Custom site name'
         DOCKERPROXYURL: 'dockerproxy:2375' # Matches proxy hostname and ports from above
+    depends_on:
+        - dockerproxy # Ensure dockerproxy is available before starting jump
 ```
 
 ##### Configuring docker sites for Jump
