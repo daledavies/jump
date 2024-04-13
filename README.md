@@ -209,6 +209,8 @@ You can also override `nofollow` and `newtab` to be `true` for all sites.
 
 You can provide custom icons for your sites by placing them in the `/sites/icons/` directory and referencing the filename in `sites.json` using the `icon` option. If you do not provide a custom icon for a site then Jump will attempt to retrieve that site's favicon, if it can't find one then the default icon will be shown.
 
+Jump also supports [Dashboard Icons](https://github.com/walkxcode/dashboard-icons). To use these pick the icon you wish to use from the [Dashboard Icons repository](https://github.com/walkxcode/dashboard-icons/tree/main/svg) and add it's file name using the `icon` option, removing the file extension. For example... `adguard-home`.
+
 ##### nofollow
 
 On a per-site basis use `"nofollow": true` to include `rel="nofollow"` on specific site links, if this is set as a global default then `"nofollow": false` can be used to remove `rel="nofollow"` for individual sites.
