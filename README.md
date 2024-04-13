@@ -72,13 +72,14 @@ You can use the following optional environment variables to configure/customise 
 - `CHECKSTATUS: 'false'` - Disable checking site availability status.
 - `STATUSCACHE: 5` - Duration in minutes to cache site availability status.
 - `NOINDEX: 'true'` - Include a robots noindex meta tag in site header.
-- `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
 - `WWWURL` - Useful if Jump is hosted in a sub-directory (e.g. "/startpage").
 - `DISABLEIPV6` - Disable IPV6 if required.
 - `DOCKERSOCKET` -  Mounted docker socket location, for Docker integration without a proxy (e.g "/var/run/docker.sock").
 - `DOCKERPROXYURL` - Docker proxy URL, for Docker integration with a proxy (e.g. "dockerproxy:2375").
 - `DOCKERONLYSITES: 'false'`  -  Set to true if you want to only use docker integration and not define a `sites.json`.
 - `LANGUAGE: 'en'` - Set to your chosen [language code](#language).
+- `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
+- `DEBUG: 'true'` - Enable debug mode.
 
 **NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together. `DOCKERSOCKET` and `DOCKERPROXYURL` are mutually exclusive.
 
@@ -313,22 +314,21 @@ After mapping the `favicon` directory as shown in the Docker Compose or Docker e
 Jump has been translated into the following languages so far, to use one of these languages just pass the appropriate language code from the list below via the `language` option in `config.php` or the `LANGUAGE` environment variable...
 
 - `cs` - Czech
-
 - `de` - German
-
 - `es` - Spanish
-
 - `it` - Italian
-
 - `nl` - Dutch
-
 - `pt` - Portuguese
-
 - `ru` - Russian
-
 - `ua` - Ukrainian
 
 More translations are always welcome! If you'd like to contribute please see the existing [examples](https://github.com/daledavies/jump/tree/main/jumpapp/translations) and create a pull request.
+
+### Debugging
+
+Occasionally things don't work out as expected! If you get an error and want to find out a bit more information you can use the built in debug option.  To enable this set `debug` to `true` in `config.php` or via the `DEBUG` environment variable.
+
+When resolving problems it can also help to use the `cachebypass` option, this will disable all caching in Jump.
 
 ## Development
 
