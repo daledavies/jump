@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2024-04-15
+### Added
+- Support for auto-discovery of sites from docker.
+- Language/translation support and several translations.
+- Integration of Dasboard Icons support (https://github.com/walkxcode/dashboard-icons).
+- Detailed debug option and much improved error handling.
+- Discussion #81: Add meta tags for mobile compatibility.
+- Discussion #78: Add option for custom greeting message.
+- Universal caching for all site icon types, removes previous favicon cache mechanism.
+
+### Fixed
+- Issue #82: Ampersand in url in sites.json breaks icon.
+- Issue #110: Fix styling of site name when using alt layout.
+- Make sites list scrollable if large number of sites.
+- Fix broken forward caching of Unspash images, images were not rotating.
+- Fix double logging of PHP error by nginx in docker container.
+- Fix potential XSS issue from unsplash data.
+- Fix broken site image in search results.
+- Remove unnecessary console.log() in Weather.js.
+
 ## [1.3.2] - 2023-03-17
 ### Fixed
 - Issue #59: Show content on weather API error.
