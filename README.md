@@ -54,32 +54,32 @@ services:
 You can use the following optional environment variables to configure/customise your Jump site...
 
 - `SITENAME` - Custom site name.
-- `SHOWCLOCK: 'false'` - Hide the clock.
-- `AMPMCLOCK: 'true'` - Show 12 hour clock format if true.
-- `SHOWGREETING: 'false'` - Show the label "#home" instead of a friendly greeting message.
+- `SHOWCLOCK` - Show the clock (default: 'true').
+- `AMPMCLOCK` - Show 12 hour clock format(default: 'false').
+- `SHOWGREETING` - If false show the label "#home" instead of "good morning/evening" (default: 'true').
 - `CUSTOMGREETING: 'Some other greeting message'` - Show a custom greeting message instead.
-- `SHOWSEARCH : 'false'` - Hide the search button (disable search).
-- `ALTLAYOUT: 'true'` - Display list of sites using an [alternative layout](/screenshots/screenshot-altlayout.png).
-- `CUSTOMWIDTH: 1000` - Set a custom with for the page container/site list.
-- `BGBLUR: 50` - Background image blur percentage.
-- `BGBRIGHT: 90` - Background image brightness percentage.
+- `SHOWSEARCH` - Show the search button, enable/disable search (default: 'true').
+- `ALTLAYOUT` - Display list of sites using an [alternative layout](/screenshots/screenshot-altlayout.png) (default: 'false').
+- `CUSTOMWIDTH` - Set a custom with in px for the page container/site list.
+- `BGBLUR` - Background image blur percentage (e.g. 50).
+- `BGBRIGHT` - Background image brightness percentage (e.g. 90).
 - `UNSPLASHAPIKEY` - An API key for Unsplash, enables fetching random background images from Unsplash.
 - `UNSPLASHCOLLECTIONS` - List of Unsplash collection ID's (separated by commas) to select random images from.
 - `ALTBGPROVIDER` - An alternative background provider url.
 - `OWMAPIKEY` - An API key for Open Weather Map, LATLONG (below) must also be defined.
 - `LATLONG` - A latitude and longitude for the default location (e.g. "51.509865,-0.118092").
-- `METRICTEMP: 'true'` - Metric (C) or imperial (F) temperature units.
-- `CHECKSTATUS: 'false'` - Disable checking site availability status.
-- `STATUSCACHE: 5` - Duration in minutes to cache site availability status.
-- `NOINDEX: 'true'` - Include a robots noindex meta tag in site header.
+- `METRICTEMP:` - Metric (C) or imperial (F) temperature units (default: 'true').
+- `CHECKSTATUS` - Enable/disable checking site availability status (default: 'true').
+- `STATUSCACHE` - Duration in minutes to cache site availability status.
+- `NOINDEX` - Include a robots noindex meta tag in site header (default: 'true').
 - `WWWURL` - Useful if Jump is hosted in a sub-directory (e.g. "/startpage").
-- `DISABLEIPV6` - Disable IPV6 if required.
+- `DISABLEIPV6` - Disable IPV6 if required (default: 'false').
 - `DOCKERSOCKET` -  Mounted docker socket location, for Docker integration without a proxy (e.g "/var/run/docker.sock").
 - `DOCKERPROXYURL` - Docker proxy URL, for Docker integration with a proxy (e.g. "dockerproxy:2375").
-- `DOCKERONLYSITES: 'false'`  -  Set to true if you want to only use docker integration and not define a `sites.json`.
-- `LANGUAGE: 'en'` - Set to your chosen [language code](#language).
-- `CACHEBYPASS: 'true'` - Bypass all caches, useful for testing changes.
-- `DEBUG: 'true'` - Enable debug mode.
+- `DOCKERONLYSITES`  - Set to true if you want to only use docker integration and not define a `sites.json` (default: 'false').
+- `LANGUAGE` - Set to your chosen [language code](#language) (default: 'en').
+- `CACHEBYPASS` - Bypass all caches, useful for testing changes (default: 'false').
+- `DEBUG` - Enable debug mode (default: 'false').
 
 **NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together. `DOCKERSOCKET` and `DOCKERPROXYURL` are mutually exclusive.
 
