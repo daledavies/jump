@@ -108,7 +108,7 @@ class Cache {
         if ($this->config->parse_bool($this->config->get('cachebypass'))) {
             $this->storage = new Caching\Storages\DevNullStorage();
         } else {
-            $this->storage = new Caching\Storages\FileStorage($this->config->get('cachedir').'/application');
+            $this->storage = new Caching\Storages\FileStorage($this->config->get('cachedir'));
         }
     }
 

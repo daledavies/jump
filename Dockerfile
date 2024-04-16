@@ -62,8 +62,8 @@ COPY docker/php.ini /etc/php81/conf.d/custom.ini
 COPY docker/entrypoint.sh /usr/local/bin/
 
 # Create the cache directories and change owner of everything we need.
-RUN mkdir -p /var/www/cache/application \
-    && chown -R jumpapp:jumpapp /var/www/html /var/www/cache/application \
+RUN mkdir /var/www/cache \
+    && chown -R jumpapp:jumpapp /var/www/html /var/www/cache \
     && chmod +x /usr/local/bin/entrypoint.sh
 
 # Expose the port we configured for nginx.
