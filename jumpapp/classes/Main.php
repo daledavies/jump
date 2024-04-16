@@ -44,7 +44,7 @@ class Main {
 
         // Now we have config, enable detailed debugging info as early as possible
         // during initialisation
-        if (!$this->config->get('debug')) {
+        if (!$this->config->parse_bool($this->config->get('debug'))) {
             $debugmode = Debugger::Production;
         }
         // Tell Tracy to handle errors and exceptions.
