@@ -31,7 +31,8 @@ Note - the demo instance is hosted on a render.com free tier so may take a few s
 
 Get the container image from Docker Hub (https://hub.docker.com/r/daledavies/jump).
 
-The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds", "favicon", "search" and "sites" directories to local directories on your machine (`OWMAPIKEY` and `LATLONG` values below are just for example)...
+The following will start Jump and serve the page at http://localhost:8123 with a custom site name, Open Weather Map support, and volumes to map Jump's "backgrounds", "favicon", "search" and "sites" directories to local directories on your machine.
+`OWMAPIKEY` and `LATLONG` values below are just for example - refer to the [environment variables](https://github.com/daledavies/jump?tab=readme-ov-file#environment-variables).
 
 ```yaml
 version: '3'
@@ -50,6 +51,66 @@ services:
             OWMAPIKEY: '0a1b2c3d4e5f6a7b8c9d0a1b'
             LATLONG: '51.509865,-0.118092'
 ```
+
+#### Volume Mapping
+
+You can map the "backgrounds",  "favicon", "search" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
+
+#### Docker
+
+The same can be achieved just using Docker CLI...
+
+```bash
+docker run -d -p 8123:8080 \
+--volume <path/to/backgrounds>:/backgrounds \
+--volume <path/to/favicon>:/favicon \
+--volume <path/to/sites>:/sites \
+--volume <path/to/search>:/search \
+--env SITENAME='Custom site name' \
+--env OWMAPIKEY='<open weather api key>' \
+--env LATLONG='<lat,long>' \
+--name jump docker.io/daledavies/jump
+```
+
+### Kubernetes
+
+There is a [Helm chart for Jump](https://artifacthub.io/packages/helm/djjudas21/jump), provided by @djjudas21.
+
+Enable the Helm repo:
+
+```sh
+helm repo add djjudas21 https://djjudas21.github.io/charts/
+```
+
+Check out the default [values.yaml](https://github.com/djjudas21/charts/blob/main/charts/jump/values.yaml) and make your own copy,
+overriding the values are necessary. All the same [environment variables](https://github.com/daledavies/jump?tab=readme-ov-file#environment-variables)
+are supported.
+
+The key difference is that there is no need to create and mount `sites.json` and `search.json`. Enter your sites and search engines config
+as YAML in `values.yaml` and Helm will create Kubernetes [ConfigMap](https://kubernetes.io/docs/concepts/configuration/configmap/) resources
+and mount them into the container as virtual files.
+
+Finally, install Jump with Helm:
+
+```sh
+helm install my-jump djjudas21/jump -f values.yaml
+```
+
+### Without Docker
+
+Clone this repository and copy everything within the `jumpapp` directory to your server, edit `config.php` accordingly.
+
+Install dependencies via composer by running the following command within the web root...
+
+```bash
+composer install --no-dev
+```
+
+Make sure you have created a cache directory and given the web user permission to write to it, the cache directory should match your `config.php` entry for `cachedir`.
+
+## Configuration
+
+### Environment variables
 
 You can use the following optional environment variables to configure/customise your Jump site...
 
@@ -82,40 +143,6 @@ You can use the following optional environment variables to configure/customise 
 - `DEBUG` - Enable debug mode (default: 'false').
 
 **NOTE:** The `OWMAPIKEY` and `LATLONG` config options must be defined together. `DOCKERSOCKET` and `DOCKERPROXYURL` are mutually exclusive.
-
-#### Volume Mapping
-
-You can map the "backgrounds",  "favicon", "search" and "sites" directories to local directories as shown in the Docker Compose example above. Your local directories will be populated with Jump's default files when the container is next started unless the local directories already contain files, in which case the local files will be used by Jump instead.
-
-#### Docker
-
-The same can be achieved just using Docker CLI...
-
-```bash
-docker run -d -p 8123:8080 \
---volume <path/to/backgrounds>:/backgrounds \
---volume <path/to/favicon>:/favicon \
---volume <path/to/sites>:/sites \
---volume <path/to/search>:/search \
---env SITENAME='Custom site name' \
---env OWMAPIKEY='<open weather api key>' \
---env LATLONG='<lat,long>' \
---name jump docker.io/daledavies/jump
-```
-
-### Without Docker
-
-Clone this repository and copy everything within the `jumpapp` directory to your server, edit `config.php` accordingly.
-
-Install dependencies via composer by running the following command within the web root...
-
-```bash
-composer install --no-dev
-```
-
-Make sure you have created a cache directory and given the web user permission to write to it, the cache directory should match your `config.php` entry for `cachedir`.
-
-## Configuration
 
 ### Open Weather Map
 
