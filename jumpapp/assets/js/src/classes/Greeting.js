@@ -19,8 +19,8 @@ export default class Greeting {
         this.greetings = {
             0  : strings.greetings.goodmorning,
             12 : strings.greetings.goodafternoon,
-            16 : strings.greetings.goodevening,
-            19 : strings.greetings.goodnight
+            17 : strings.greetings.goodevening,
+            21 : strings.greetings.goodnight
         };
     }
 
