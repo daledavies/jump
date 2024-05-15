@@ -121,7 +121,7 @@ You can use the following optional environment variables to configure/customise 
 - `CUSTOMGREETING: 'Some other greeting message'` - Show a custom greeting message instead.
 - `SHOWSEARCH` - Show the search button, enable/disable search (default: 'true').
 - `ALTLAYOUT` - Display list of sites using an [alternative layout](/screenshots/screenshot-altlayout.png) (default: 'false').
-- `CUSTOMWIDTH` - Set a custom with in px for the page container/site list.
+- `CUSTOMWIDTH` - Set a custom max width in px for the page container/site list.
 - `BGBLUR` - Background image blur percentage (e.g. 50).
 - `BGBRIGHT` - Background image brightness percentage (e.g. 90).
 - `UNSPLASHAPIKEY` - An API key for Unsplash, enables fetching random background images from Unsplash.
