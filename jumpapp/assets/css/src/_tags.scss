@@ -70,7 +70,7 @@
                 margin-left: 1px;
                 border-radius: 4px;
 
-                &:hover {
+                &:hover, &.active {
                     background-color: #f3f3f3;
                     transition: background-color .1s;
                 }

@@ -25,7 +25,7 @@ $unknown-color: #ccc;
 			position: relative;
 			overflow: hidden;
 
-			&:hover {
+			&:hover, &.active {
 				background-color: #fff;
 				box-shadow: 0 1px 5px rgba(0,0,0,.6);
 			}
@@ -125,7 +125,7 @@ $unknown-color: #ccc;
 			padding: 12px;
 			border-radius: 6px;
 
-			&:hover {
+			&:hover, &.active {
 				background-color: #ffffff15;
 				transition: background-color .1s;
 			}

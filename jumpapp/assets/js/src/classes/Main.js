@@ -14,6 +14,7 @@ import Clock from './Clock';
 import EventEmitter from 'eventemitter3';
 import Fuse from 'fuse.js';
 import Greeting from './Greeting';
+import KeyBinds from './KeyBinds';
 import SearchSuggestions from './SearchSuggestions';
 import Weather from './Weather';
 
@@ -47,6 +48,7 @@ export default class Main {
         this.eventemitter = new EventEmitter();
         this.clock = new Clock(this.eventemitter, !!JUMP.ampmclock, !JUMP.owmapikey);
         this.weather = new Weather(this.eventemitter);
+        this.keyBinds = new KeyBinds();
 
         if (this.showsearchbuttonelm) {
             this.searchclosebuttonelm = this.showsearchbuttonelm.querySelector('.close');
@@ -245,6 +247,8 @@ export default class Main {
                 }
             });
         }
+
+        this.keyBinds.init();
     }
 
     search_close() {
