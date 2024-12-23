@@ -34,7 +34,7 @@
         },
         {
             "name": "Matomo",
-            "url" : "https://matomo.org/pagedoesnotexist",
+            "url" : "https://matomo.org/",
             "nofollow": false,
             "tags": ["home", "stuff"]
         },
