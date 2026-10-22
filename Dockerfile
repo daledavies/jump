@@ -8,7 +8,7 @@
 
 # Start with the official composer image, copy application files and install
 # dependencies.
-FROM --platform=$BUILDPLATFORM composer AS builder
+FROM --platform=$BUILDPLATFORM composer:2.7 AS builder
 COPY jumpapp/ /app
 RUN composer install --no-dev \
   --optimize-autoloader \
@@ -37,27 +37,27 @@ RUN apk add --no-cache \
   bash \
   curl \
   nginx \
-  php84 \
-  php84-curl \
-  php84-dom \
-  php84-fileinfo \
-  php84-fpm \
-  php84-json \
-  php84-opcache \
-  php84-openssl \
-  php84-session \
-  php84-xml \
-  php84-zlib
+  php83 \
+  php83-curl \
+  php83-dom \
+  php83-fileinfo \
+  php83-fpm \
+  php83-json \
+  php83-opcache \
+  php83-openssl \
+  php83-session \
+  php83-xml \
+  php83-zlib
 
 # Create symlink for anything expecting to use "php".
-RUN ln -s -f /usr/bin/php84 /usr/bin/php
+RUN ln -s -f /usr/bin/php83 /usr/bin/php
 
 # Nginx config.
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 # PHP/FPM config.
-COPY docker/fpm-pool.conf /etc/php84/php-fpm.d/www.conf
-COPY docker/php.ini /etc/php84/conf.d/custom.ini
+COPY docker/fpm-pool.conf /etc/php83/php-fpm.d/www.conf
+COPY docker/php.ini /etc/php83/conf.d/custom.ini
 
 COPY docker/entrypoint.sh /usr/local/bin/
 

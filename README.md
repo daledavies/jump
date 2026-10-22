@@ -1,7 +1,7 @@
 # Jump
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/daledavies/jump)
-![PHP Version](https://img.shields.io/badge/PHP-%3E%3D8.4-blue?style=flat)
+![PHP Version](https://img.shields.io/badge/PHP-%3E%3D8.3-blue?style=flat)
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/daledavies/jump?sort=date)
 
 Jump is a self-hosted startpage and real-time status page for your server designed to be simple, stylish, fast and secure.
