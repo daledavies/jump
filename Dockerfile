@@ -37,27 +37,27 @@ RUN apk add --no-cache \
   bash \
   curl \
   nginx \
-  php81 \
-  php81-curl \
-  php81-dom \
-  php81-fileinfo \
-  php81-fpm \
-  php81-json \
-  php81-opcache \
-  php81-openssl \
-  php81-session \
-  php81-xml \
-  php81-zlib
+  php84 \
+  php84-curl \
+  php84-dom \
+  php84-fileinfo \
+  php84-fpm \
+  php84-json \
+  php84-opcache \
+  php84-openssl \
+  php84-session \
+  php84-xml \
+  php84-zlib
 
 # Create symlink for anything expecting to use "php".
-RUN ln -s -f /usr/bin/php81 /usr/bin/php
+RUN ln -s -f /usr/bin/php84 /usr/bin/php
 
 # Nginx config.
 COPY docker/nginx.conf /etc/nginx/nginx.conf
 
 # PHP/FPM config.
-COPY docker/fpm-pool.conf /etc/php81/php-fpm.d/www.conf
-COPY docker/php.ini /etc/php81/conf.d/custom.ini
+COPY docker/fpm-pool.conf /etc/php84/php-fpm.d/www.conf
+COPY docker/php.ini /etc/php84/conf.d/custom.ini
 
 COPY docker/entrypoint.sh /usr/local/bin/
 
